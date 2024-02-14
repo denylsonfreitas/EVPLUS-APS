@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'eventos/css/eventos.css' %}">
+    <div class="main-title">
+        <h1>Crie seu evento</h1>
+    </div>
+{% endblock %}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md form-evento">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Nome do evento</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nome do evento">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Descrição do evento</label>
+                        <textarea class="form-control" id="exampleFormControlInput1" placeholder="Descrição do evento"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Local do evento</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Local do evento">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Data do evento</label>
+                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Data do evento">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Horário do evento</label>
+                        <input type="time" class="form-control" id="exampleFormControlInput1" placeholder="Horário do evento">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Categoria</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>Escolha uma categoria</option>
+                            <option>Tecnologia</option>
+                            <option>Esportes</option>
+                            <option>Artes</option>
+                            <option>Educação</option>
+                            <option>Outros</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md title-banner-evento">
+                <div class="banner-form">
+                    <label for="exampleFormControlInput1">Insira seu banner</label>
+                    <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="Imagem do evento">
+                    <i class='bx bxs-camera-plus' ></i>
+                </div>
+            </div>
+
+            <br>
+            <input type="submit" class="btn-criar-evento" value="Criar evento">
+
+        </div>
+        <script src="{% static 'eventos/js/eventos.js' %}"></script>
+{% endblock %}

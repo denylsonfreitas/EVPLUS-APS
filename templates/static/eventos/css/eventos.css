@@ -1,0 +1,58 @@
+.form-evento{
+    background-color: var(rgba(255, 255, 255, 0));
+    width: 100%;
+    margin-left: 30px;
+    margin-right: -45px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: var(--dark-color);
+    display: block;
+}
+
+.banner-form {
+    width: 495px;
+    height: 270px;
+    position: center;
+}
+
+.banner-form label {
+    position: relative;
+    top: 102px;
+    right: -135px;
+    font-size: 18px;
+    color: var(--dark-color);
+}
+
+.banner-form i {
+    position: relative;
+    top: -400px;
+    right: -100px;
+    font-size: 24px;
+    color: var(--dark-color);
+}
+
+.banner-form input[type="file"] {
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin: 100px ;
+}
+
+.form-control{
+    border: 2px solid #21325E;
+}
+
+.btn-criar-evento{
+    background-color: var(--main-color);
+    background-color: var(--contrast-color);
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 490px;
+    margin-bottom: 70px;
+    margin-left: -30px;
+    margin-right: 20px;
+    color: white;
+}

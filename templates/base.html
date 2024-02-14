@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>EVPLUS</title>
+    <link rel="icon" href="{% static 'images/LOGO_16x16.png' %}" type="image/png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'general/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    {% block 'head' %}{% endblock %}
+
+    <title>{% block 'title' %}{% endblock %}</title>
+  </head>
+  <body> 
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="{% static 'images/LOGO.png' %}" alt="Logo" class="logo">
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="#">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Página inicial</span>
+            </a>
+            <span class="tooltip">Página inicial</span>
+          </li>
+          <li>
+            <a href="#">
+                <i class='bx bx-search-alt-2'></i>
+              <span class="links_name">Buscar</span>
+            </a>
+            <span class="tooltip">Buscar</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-plus-circle' ></i>
+              <span class="links_name">Crie seu evento</span>
+            </a>
+            <span class="tooltip">Crie seu evento</span>
+          </li>
+          <li>
+          <a href="#">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Minha Conta</span>
+          </a>
+          <span class="tooltip">Minha Conta</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bxs-calendar' ></i>
+            <span class="links_name">Meus Eventos</span>
+          </a>
+          <span class="tooltip">Meus Eventos</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-file-find'></i>
+            <span class="links_name">Certificados</span>
+          </a>
+          <span class="tooltip">Certificados</span>
+        </li>
+        </ul>
+      </div>
+      
+      <section class="home-section">
+          {% block 'dashboard'%}
+          {% endblock %}
+
+      </section>
+      <div class="banner"></div>
+
+    {% block 'body' %}
+    {% endblock %}
+    <script src="{% static 'general/js/base.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

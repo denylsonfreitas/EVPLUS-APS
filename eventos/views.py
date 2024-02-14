@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Evento
 
 def eventos(request):
     if request.method == 'GET':

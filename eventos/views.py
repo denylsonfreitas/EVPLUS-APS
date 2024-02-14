@@ -13,4 +13,16 @@ def eventos(request):
         categoria = request.POST.get('category')
         banner = request.FILES.get('banner')
 
+        evento = Evento(
+            nome=nome,
+            descricao=descricao,
+            local=local,
+            data=data,
+            hora=hora,
+            categoria=categoria,
+            banner=banner
+        )
+
+        evento.save()
+
         return HttpResponse('Evento cadastrado com sucesso!')

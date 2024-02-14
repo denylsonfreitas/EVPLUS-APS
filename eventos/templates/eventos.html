@@ -14,23 +14,23 @@
             <div class="col-md form-evento">
                 <form action="{% url 'eventos' %}" method="POST">{% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Nome do evento</label>
+                        <label for="exampleFormControlInput1">Nome</label>
                         <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Nome do evento" name="name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Descrição do evento</label>
+                        <label for="exampleFormControlInput1">Descrição</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descrição do evento" name="discription">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Local do evento</label>
+                        <label for="exampleFormControlInput1">Local</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Local do evento" name="local">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Data do evento</label>
+                        <label for="exampleFormControlInput1">Data</label>
                         <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Data do evento" name="date">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Horário do evento</label>
+                        <label for="exampleFormControlInput1">Horário</label>
                         <input type="time" class="form-control" id="exampleFormControlInput1" placeholder="Horário do evento" name="time">
                     </div>
                     <div class="form-group">

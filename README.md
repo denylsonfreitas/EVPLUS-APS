@@ -3,20 +3,20 @@
 O EV+ é um sistema projetado em - e com objetivo de organização, criação e divulgação de eventos.
 
 ## 📜 Documentação
-- [PDF](https://github.com/)
+- [PDF]()
 
 ## 💻 Sistema
-- [EV+](https://github.com/)
+- [EV+]()
 
 ## 📌 Requisitos 
-- [Funcionais](https://github.com/)
-- [Não Funcionais](https://github.com/)
+- [Funcionais]()
+- [Não Funcionais]()
 
 ## 📉 Diagrama de Classe
-![Diagrama de Classe](Diagramas/)
+![Diagrama de Classe]()
 
 ## 📈 Diagrama de Caso de Uso
-![Diagrama de Caso de Uso](Diagramas/)
+![Diagrama de Caso de Uso]()
 
 ## 🤓 Membros
   - Denylson de Freitas Feitoza
@@ -25,4 +25,4 @@ O EV+ é um sistema projetado em - e com objetivo de organização, criação e 
   - Rafaela Queiroz de Souza
 
 ## 👨‍🏫 Professor
-  - JOSE FERDINANDY SILVA CHAGAS
+  - Jose Ferdinandy Silva Chagas

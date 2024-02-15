@@ -1,0 +1,24 @@
+.banner-container {
+    width: 100%; /* largura total da tela */
+    height: 350px; /* altura do container */
+    overflow-x: auto; /* habilita a rolagem horizontal */
+    white-space: nowrap; /* impede que os banners quebrem em várias linhas */
+    border: 1px solid #ccc; /* borda para visualização */
+}
+
+.banner {
+    display: inline-block; /* permite que os banners fiquem lado a lado */
+    width: 500px; /* largura do banner */
+    height: 350px; /* altura do banner */
+    background-color: #5f2e5b; /* cor de fundo */
+    margin-right: 10px; /* espaço entre os banners */
+}
+
+.banner-t{
+    background-color: var(rgba(255, 255, 255, 0));
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    color: var(--dark-color);
+    display: block;
+}

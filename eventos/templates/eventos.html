@@ -3,9 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/eventos.css' %}">
-    <div class="main-title">
-        <h1>Crie seu evento</h1>
-    </div>
 {% endblock %}
 
 {% block 'dashboard' %}
@@ -45,21 +42,20 @@
                         </select>
                     </div>
                 </div>
-                    <div class="row">
-                        <div class="col-md title-banner-evento">
-                            <div class="banner-form">
-                                <label for="exampleFormControlInput1">Insira seu banner</label>
-                                <input type="file" class="form-control" id="banner-evento" name="banner">
-                                <i class='bx bxs-camera-plus' ></i>
-                            </div>
-                        </div>
-                    <div id="form-criar-evento">
+                <div class="col-md title-banner-evento">
+                    <div class="banner-form">
+                        <i class='bx bxs-camera-plus' ></i>
+                        <label for="exampleFormControlInput1">Insira seu banner</label>
+                        <input type="file" class="form-control" id="banner-evento" name="banner">
+                    </div>
                 </div>
-
-                <br>
-                <input type="submit" class="btn-criar-evento" value="Criar evento">
-            </form>
-        </div>
-        
-        <script src="{% static 'eventos/js/eventos.js' %}"></script>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn-criar-evento" value="Criar evento">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'eventos/js/eventos.js' %}"></script>
 {% endblock %}

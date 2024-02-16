@@ -29,6 +29,10 @@ INSTALLED_APPS = [
 
     'home',
     'eventos',
+    'conta',
+    'meuseventos',
+    'certificado',
+    
 ]
 
 MIDDLEWARE = [

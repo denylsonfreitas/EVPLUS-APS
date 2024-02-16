@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.meuseventos, name='meuseventos'),
 
 ]
+
+# Esta sendo chamado en conta/meuseventos/

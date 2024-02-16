@@ -1,4 +1,3 @@
 from django.shortcuts import render
 
-def certificado(request):
-    return render(request, 'certificado.html')
+# Esta sendo chamado en conta/certificado/

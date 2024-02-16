@@ -34,7 +34,7 @@
 
 .btn-criar-evento{
     height: 50px;
-    width: 500px;
+    width: 46%;
     background-color: var(--contrast-color);
     padding: 10px;
     font-weight: bold;

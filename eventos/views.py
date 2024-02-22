@@ -6,21 +6,21 @@ def eventos(request):
     if request.method == 'GET':
         return render(request, 'eventos.html')
     elif request.method == 'POST':
-        nome = request.POST.get('name')
-        descricao = request.POST.get('discription')
+        name = request.POST.get('name')
+        discription = request.POST.get('discription')
         local = request.POST.get('local')
-        data = request.POST.get('date')
-        hora = request.POST.get('time')
-        categoria = request.POST.get('category')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        category = request.POST.get('category')
         banner = request.FILES.get('banner')
 
         evento = Evento(
-            nome=nome,
-            descricao=descricao,
+            name=name,
+            discription=discription,
             local=local,
-            data=data,
-            hora=hora,
-            categoria=categoria,
+            date=date,
+            time=time,
+            category=category,
             banner=banner
         )
 

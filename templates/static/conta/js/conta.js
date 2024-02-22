@@ -1,5 +1,5 @@
 function salvar_perfil(){
-    form = document.getElementById('form-criar-evento');
+    form = document.getElementById('form-salvar-perfil');
     form.submit();
 }
 

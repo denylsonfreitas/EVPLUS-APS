@@ -22,7 +22,7 @@ def conta(request):
 
         conta.save()
 
-        return HttpResponse('Conta cadastrada com sucesso!')
+        return HttpResponse('Conta alterada com sucesso!')
 
 def certificado(request):
     return render(request, 'certificado.html')

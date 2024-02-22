@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from .models import Conta
 
 def conta(request):
@@ -22,7 +21,7 @@ def conta(request):
 
         conta.save()
 
-        return HttpResponse('Conta alterada com sucesso!')
+        return redirect('home')
 
 def certificado(request):
     return render(request, 'certificado.html')

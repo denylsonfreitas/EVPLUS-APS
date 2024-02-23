@@ -30,7 +30,7 @@
         <ul class="nav-list">
           <li>
             <a href="{% url 'home' %}">
-              <i class='bx bx-grid-alt'></i>
+              <i class='bx bx-home'></i>
               <span class="links_name">Página inicial</span>
             </a>
             <span class="tooltip">Página inicial</span>
@@ -56,7 +56,8 @@
           </a>
           <span class="tooltip">Minha Conta</span>
         </li>
-    
+
+        {% if user.is_authenticated %}
         <li>
           <a href="{% url 'meuseventos' %}">
             <i class='bx bxs-calendar' ></i>
@@ -71,6 +72,14 @@
           </a>
           <span class="tooltip">Certificados</span>
         </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-log-out' ></i>
+            <span class="links_name">Sair</span>
+          </a>
+          <span class="tooltip">Sair</span>
+        </li>
+        {% endif %}
         
         </ul>
       </div>
@@ -94,6 +103,6 @@
       var pageTitle = document.title;
       var bannerTitle = document.getElementById("page-topo-title");
       bannerTitle.textContent = pageTitle;
-      </script>
+    </script>
   </body>
 </html>

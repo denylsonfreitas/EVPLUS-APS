@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'conta',
     'meuseventos',
     'certificado',
+    'login',
+    'cadastro',
     
 ]
 

@@ -8,4 +8,6 @@ urlpatterns = [
     path('conta/', include('conta.urls')),
     path('conta/meuseventos/', include('meuseventos.urls')),
     path('conta/certificado/', include('certificado.urls')),
+    path('login/', include('login.urls')),
+    path('cadastro/', include('cadastro.urls')),
 ]

@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Evento
 
 def eventos(request):
+    exibir_sidebar = True
     if request.method == 'GET':
-        return render(request, 'eventos.html')
+        return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
         name = request.POST.get('name')
         discription = request.POST.get('discription')
@@ -26,4 +26,4 @@ def eventos(request):
 
         evento.save()
 
-        return HttpResponse('Evento cadastrado com sucesso!')
+        return render(request, 'home.html')

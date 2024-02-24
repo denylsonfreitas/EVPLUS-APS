@@ -19,4 +19,3 @@ if(sidebar.classList.contains("open")){
     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
 }
 }
-

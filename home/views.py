@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home.html')
+    exibir_sidebar = True
+    return render(request, 'home.html', {'exibir_sidebar': exibir_sidebar})

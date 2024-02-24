@@ -1,0 +1,16 @@
+.card{
+    margin-top: 0%;
+    margin-bottom: 10%;
+    margin-left: 3%;
+    margin-right: 17%;
+    background-color: transparent;
+    border: none;
+}
+
+.form-control{
+    border: 2px solid #21325E;
+}
+
+.card .form-group label { 
+    color: #21325E;
+}

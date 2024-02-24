@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from .models import Conta
 
 def conta(request):
+    exibir_sidebar = True
     if request.method == 'GET':
-        return render(request, 'conta.html')
+        return render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -21,10 +22,11 @@ def conta(request):
 
         conta.save()
 
-        return redirect('home')
+        return render(request, 'home.html')
+
 
 def certificado(request):
-    return render(request, 'certificado.html')
+    return render(request, 'certificado.html', {'exibir_sidebar': True})
 
 def meuseventos(request):
-    return render(request, 'meuseventos.html')
+    return render(request, 'meuseventos.html', {'exibir_sidebar': True})

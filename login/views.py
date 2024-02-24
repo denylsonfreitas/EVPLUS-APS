@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
 def login(request):
-    return render(request, 'login.html')
+    exibir_sidebar = False
+    return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar})
 
-# Create your views here.

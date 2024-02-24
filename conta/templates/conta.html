@@ -13,8 +13,8 @@
             <div class="col-md form-conta">
                 <form action="{% url 'conta' %}" method="POST" onsubmit="exibirPopup()">{% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleFormControlInput2">Alterar Nome</label>
-                        <input type="name" class="form-control" id="exampleFormControlInput2" placeholder="Nome" name="name">
+                        <label for="exampleFormControlInput1">Alterar Usuário</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Usuário" name="username">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput3">Alterar E-mail</label>
@@ -27,6 +27,10 @@
                 </div>
 
                  <div class="col-md form-conta">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput2">Alterar Nome</label>
+                        <input type="name" class="form-control" id="exampleFormControlInput2" placeholder="Nome" name="name">
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput5">Telefone</label>
                         <input type="phone" class="form-control" id="exampleFormControlInput5" placeholder="(xx)xxxxx-xxxx" name="phone">

@@ -1,5 +1,5 @@
 .card{
-    margin-top: 10%;
+    margin-top: 25%;
     margin-bottom: 10%;
     margin-left: 3%;
     margin-right: 17%;
@@ -17,10 +17,12 @@
 }
 
 .img-fluid{
-    width: 100%;
+    width: 82%;
     height: auto;
-    position: left;
+    position: absolute;
     display: block;
+    right: 131px;
+    top: -67px;
 }
 
 .form-group-fg{

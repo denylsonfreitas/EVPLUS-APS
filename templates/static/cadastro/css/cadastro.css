@@ -1,3 +1,11 @@
+.logo {
+    max-height: 28px;
+    position: absolute;
+    top: -70px;
+    left: -40px;
+    z-index: 999;
+}
+
 .card{
     margin-top: 10%;
     margin-bottom: 10%;

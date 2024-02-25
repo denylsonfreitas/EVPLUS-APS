@@ -276,13 +276,13 @@
     padding: 5px 14px 25px 10px;
     z-index: 1000; 
 }
-  
-.sidebar {
-    padding-top: 15px; 
-}
 
 .logo {
     max-height: 20px;
+}
+
+.sidebar {
+  padding-top: 15px; 
 }
 
 .sidebar .logo-details #btn {

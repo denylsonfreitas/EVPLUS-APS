@@ -1,5 +1,5 @@
 .card{
-    margin-top: 0%;
+    margin-top: 10%;
     margin-bottom: 10%;
     margin-left: 3%;
     margin-right: 17%;
@@ -9,8 +9,23 @@
 
 .form-control{
     border: 2px solid #21325E;
+    background: #fcf8f8;
 }
 
 .card .form-group label { 
     color: #21325E;
+}
+
+.img-fluid{
+    width: 100%;
+    height: auto;
+    position: left;
+    display: block;
+}
+
+.form-group-fg{
+    margin-left: 66%;
+    margin-bottom: 2%;
+    background-color: transparent;
+    border: none;
 }

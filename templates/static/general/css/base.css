@@ -20,7 +20,7 @@
   position: relative;
   width: 100%;
   height: 100px;
-  background-image: linear-gradient(to bottom, #E4B615, #F3F3F3); 
+  background-image: linear-gradient(to bottom, #E4B615, white); 
   z-index: 2;
 }
 
@@ -245,7 +245,7 @@
   position: relative;
   min-height: 80vh;
   top: 0;
-  background: #F3F3F3;
+  background: white;
   left: 78px;
   width: calc(100% - 78px);
   transition: all 0.5s ease;

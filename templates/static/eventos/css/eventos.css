@@ -30,12 +30,13 @@
 
 .form-control{
     border: 2px solid #21325E;
+    background: #fcf8f8;
 }
 
 .btn-criar-evento{
     height: 50px;
     width: 45%;
-    background-color: var(--contrast-color);
+    background-color: var(--dark-color);
     padding: 10px;
     font-weight: bold;
     cursor: pointer;

@@ -1,5 +1,5 @@
 .card{
-    margin-top: 15%;
+    margin-top: 10%;
     margin-bottom: 10%;
     margin-left: 3%;
     margin-right: 17%;
@@ -23,4 +23,16 @@
     display: block;
     top: -77px;
     right: 60px;
+}
+
+.form-group-nc{
+    margin-left: 60%;
+    background-color: transparent;
+    border: none;
+}
+
+.form-group-lg{
+    margin-top: 5%;
+    background-color: transparent;
+    border: none;
 }

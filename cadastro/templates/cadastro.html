@@ -34,7 +34,15 @@
                                 <label for="password2">Confirme a senha*</label>
                                 <input type="password" class="form-control" id="password2" name="password2" required>
                             </div>
+                            <div class="form-group">
+                                <label class="form-group-nc">* Campos obrigatórios</label>
+                            </div>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+                            <div class="form-group-lg">
+                                <a>Possui uma conta?</a>
+                                <a href="{% url 'login' %}">Entre aqui.</a>
+                            </div>
                         </form>
                     </div>
                 </div>

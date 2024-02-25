@@ -28,12 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'home',
+    'login',
+    'cadastro',
     'eventos',
     'conta',
     'meuseventos',
     'certificado',
-    'login',
-    'cadastro',
     
 ]
 

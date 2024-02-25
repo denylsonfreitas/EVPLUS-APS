@@ -14,3 +14,10 @@
 .card .form-group label { 
     color: #21325E;
 }
+
+.img-fluid{
+    width: 100%;
+    height: auto;
+    position: left;
+    display: block;
+}

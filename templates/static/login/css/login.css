@@ -17,12 +17,13 @@
 }
 
 .img-fluid{
-    width: 82%;
+    width: 86.2%;
     height: auto;
-    position: absolute;
+    position: static;
     display: block;
-    right: 131px;
-    top: -67px;
+    margin-top: -12%;
+    margin-left: -5%;
+    margin-bottom: -17%;
 }
 
 .form-group-fg{

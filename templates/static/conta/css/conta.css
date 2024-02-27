@@ -24,7 +24,7 @@
     cursor: pointer;
     border-radius: 5px;
     color: white;
-    margin-top: 18px;
+    margin-top: 10px;
     margin-left: 3px;
     margin-right: 18px;
     margin-bottom: 40px;
@@ -36,9 +36,6 @@
 
 .profile-picture-container {
     position: relative;
-    right: -1%;
-    margin-top: 15px;
-    margin-bottom: 10px;
 }
 
 .profile-picture {
@@ -46,7 +43,10 @@
     height: 150px;
     overflow: hidden;
     border-radius: 50%;
-    border: 2px solid #21325E; /* Estilo da borda do círculo */
+    border: 2px solid #21325E;
+    margin-left: 40%;
+    margin-top: 15px;
+    margin-bottom: -15px;
 }
 
 .profile-picture img {
@@ -57,9 +57,7 @@
 
 .btn-alterar-foto {
     position: static;
-    margin-top: 15px;
-    margin-left: 20px;
-    background-color: #21325E; /* Cor de fundo do botão */
+    background-color: #21325E;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -67,6 +65,9 @@
     border-radius: 5px;
     font-size: 14px;
     font-weight: bold;
+    margin-left: 42%;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 .btn-alterar-foto:hover {

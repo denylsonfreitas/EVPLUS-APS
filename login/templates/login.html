@@ -5,11 +5,13 @@
     <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
 {% endblock %}
 
-{% block 'title' %}Entre na sua conta{% endblock %}
+{% block 'title' %}
+    Entre na sua conta
+{% endblock %}
 
 {% block 'dashboard' %}
     <a href="{% url 'home' %}">
-    <img src="{% static 'images/LOGO-blue.png' %}" alt="Logo" class="logo">
+        <img src="{% static 'images/LOGO-blue.png' %}" alt="Logo" class="logo">
     </a>
     <div class="container">
         <div class="row">

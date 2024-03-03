@@ -6,17 +6,17 @@
     z-index: 999;
 }
 
-
-.card{
-    margin-top: 25%;
+.card {
+    margin-right: 15%;
+    margin-left: 0%;
+    margin-top: 7%;
     margin-bottom: 10%;
-    margin-left: 3%;
-    margin-right: 17%;
-    background-color: transparent;
-    border: none;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-control{
+.form-control {
     border: 2px solid #21325E;
     background: #fcf8f8;
 }
@@ -25,25 +25,11 @@
     color: #21325E;
 }
 
-.img-fluid{
-    width: 86.2%;
-    height: auto;
-    position: static;
-    display: block;
-    margin-top: -12%;
-    margin-left: -5%;
-    margin-bottom: -17%;
+.form-group-fg {
+    margin-bottom: 10px;
 }
 
-.form-group-fg{
-    margin-left: 66%;
-    margin-bottom: 2%;
-    background-color: transparent;
-    border: none;
-}
-
-.form-group-cd{
-    margin-top: 5%;
-    background-color: transparent;
-    border: none;
+.form-group-cd {
+    margin-top: 10px;
+    text-align: center;
 }

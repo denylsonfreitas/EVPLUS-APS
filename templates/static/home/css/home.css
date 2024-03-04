@@ -1,42 +1,31 @@
 .banner-container-g {
-    width: 97%; 
-    height: 400px; 
-    overflow-x: auto; 
-    white-space: nowrap; 
-    margin-left: 30px;
-    margin-right: 30px;
+    width: 75%;
+    height: 350px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    margin-left: 185px;
     margin-bottom: 20px;
 }
-
-.banner {
-    display: inline-block; 
-    width: 500px; 
-    height: 375px; 
-    background-color: #000000; 
+.banner-container-g.draggable {
+    cursor: grab;
+}
+.banner{
+    display: inline-block;
+    width: 525px;
+    height: 325px;
+    background-color: #000000;
     margin-right: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
 .banner-g label{
-    font-size: 20px; 
-    color: #21325E; 
-    margin-left: 30px; 
+    font-size: 20px;
+    color: #21325E;
+    margin-left: 185px;
     margin-top: 20px;
     font-weight: bold;
 }
-
-.banner-container-p {
-    width: 97%; 
-    height: 125px; 
-    overflow-x: auto; 
-    white-space: nowrap; 
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 20px;
-}
-
-.banner-cat {
+.banner-cat{
     display: inline-block; 
     width: 150px; 
     height: 100px; 
@@ -45,11 +34,22 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
+.banner-container-p {
+    width: 75%;
+    height: 125px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    right: 98px;
+    margin-left: 185px;
+    margin-bottom: 20px;
+}
 .banner-p label{
-    font-size: 20px; 
-    color: #21325E; 
-    margin-left: 30px; 
+    font-size: 20px;
+    color: #21325E;
+    margin-left: 180px;
     margin-top: 20px;
     font-weight: bold;
+}
+.banner-container-p.draggable {
+    cursor: grab;
 }

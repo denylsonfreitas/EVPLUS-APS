@@ -10,7 +10,7 @@
 {% block 'dashboard' %}
     <div class="banner-g">
         <label for="title-home-1">Eventos em destaque</label>
-        <div class="banner-container-g" id="banner-img">
+        <div class="banner-container-g" id="banner-img" onmousedown="startDrag(event)">
             <div class="banner"></div>
             <div class="banner"></div>
             <div class="banner"></div>
@@ -21,7 +21,7 @@
 
     <div class="banner-p">
         <label for="title-home-2">Eventos por Categoria</label>
-        <div class="banner-container-p" id="banner-cat">
+        <div class="banner-container-p" id="banner-cat" onmousedown="startDragP(event)">
             <div class="banner-cat"></div>
             <div class="banner-cat"></div>
             <div class="banner-cat"></div>
@@ -37,7 +37,7 @@
 
     <div class="banner-p">
         <label for="title-home-2">Eventos por ...</label>
-        <div class="banner-container-p" id="banner-cat">
+        <div class="banner-container-p" id="banner-cat" onmousedown="startDragP(event)">
             <div class="banner-cat"></div>
             <div class="banner-cat"></div>
             <div class="banner-cat"></div>
@@ -51,4 +51,5 @@
         </div>
     </div>
 
+    <script src="{% static 'home/js/home.js' %}"></script>
 {% endblock %}

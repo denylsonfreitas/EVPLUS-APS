@@ -12,16 +12,6 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="profile-picture-container">
-                    <div class="profile-picture">
-                        <img src="{% static 'images/ppf.png' %}" alt="Profile Picture">
-                        <div class="change-photo-overlay">
-                            <span class="change-photo-text">Mudar Foto</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-md form-conta">
                 <form action="{% url 'conta' %}" method="POST" onsubmit="exibirPopup()">
                     {% csrf_token %}
@@ -64,5 +54,6 @@
             </div>
         </form>
     </div>
+    
     <script src="{% static 'conta/js/conta.js' %}"></script>
 {% endblock %}

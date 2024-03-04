@@ -130,19 +130,20 @@
   border-radius: 12px;
   transition: all 0.5s ease;
   background: var(--main-color);
+  margin: -50px;
 }
 .sidebar.open input{
   padding: 0 20px 0 50px;
   width: 100%;
 }
 .sidebar .bx-search{
-  position: absolute;
-  top: 50%;
-  left: 0;
+  position: relative;
   transform: translateY(-50%);
   font-size: 22px;
   background: var(--main-color);
   color: #FFF;
+  margin-top: 25px;
+  margin-bottom: -25px;
 }
 .sidebar.open .bx-search:hover{
   background: var(--main-color);

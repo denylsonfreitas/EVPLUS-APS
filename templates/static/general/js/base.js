@@ -7,7 +7,8 @@ closeBtn.addEventListener("click", ()=>{
     menuBtnChange();
 });
 
-searchBtn.addEventListener("click", ()=>{ 
+searchBtn.addEventListener("click", (event)=>{ 
+    event.preventDefault(); // Evita que o link seja seguido
     sidebar.classList.toggle("open");
     menuBtnChange();
 });

@@ -8,6 +8,42 @@
 {% block 'title' %}Meus Eventos{% endblock %}
 
 {% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Local</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in eventos %}
+                            <tr>
+                                <td>{{ evento.nome }}</td>
+                                <td>{{ evento.local }}</td>
+                                <td>{{ evento.data }}</td>
+                                <td>{{ evento.horario }}</td>
+                                <td><a href="#">Editar</a></td>
+                                <td><a href="#">Excluir</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-primary">Criar Evento</a>
+            </div>
+        </div>
+    </div>
 
     <script src="{% static 'meuseventos/js/meuseventos.js' %}"></script>
 {% endblock %}

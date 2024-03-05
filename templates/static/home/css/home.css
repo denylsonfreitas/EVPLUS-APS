@@ -7,10 +7,12 @@
     margin-right: 225px;
     margin-bottom: 0px;
 }
+
 .banner-container-g.draggable {
     cursor: grab;
 }
-.banner{
+
+.banner {
     display: inline-block;
     width: 525px;
     height: 325px;
@@ -19,14 +21,16 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.banner-g label{
+
+.banner-g label {
     font-size: 20px;
     color: #21325E;
     margin-left: 225px;
     margin-top: 15px;
     font-weight: bold;
 }
-.banner-cat{
+
+.banner-cat {
     display: inline-block; 
     width: 150px; 
     height: 100px; 
@@ -35,6 +39,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
 .banner-container-p {
     width: 71%;
     height: 125px;
@@ -45,13 +50,15 @@
     margin-right: 225px;
     margin-bottom: 0px;
 }
-.banner-p label{
+
+.banner-p label {
     font-size: 20px;
     color: #21325E;
     margin-left: 225px;
     margin-top: 10px;
     font-weight: bold;
 }
+
 .banner-container-p.draggable {
     cursor: grab;
 }

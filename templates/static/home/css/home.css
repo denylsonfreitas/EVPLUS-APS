@@ -1,10 +1,14 @@
+.main-title {
+    font-size: 175%;
+}
+
 .banner-container-g {
     width: 71%;
-    height: 350px;
+    height: 340px;
     overflow-x: hidden;
     white-space: nowrap;
-    margin-left: 225px;
-    margin-right: 225px;
+    margin-left: 15%;
+    margin-right: 15%;
     margin-bottom: 0px;
 }
 
@@ -25,7 +29,7 @@
 .banner-g label {
     font-size: 20px;
     color: #21325E;
-    margin-left: 225px;
+    margin-left: 15%;
     margin-top: 15px;
     font-weight: bold;
 }
@@ -46,15 +50,15 @@
     overflow-x: hidden;
     white-space: nowrap;
     right: 98px;
-    margin-left: 225px;
-    margin-right: 225px;
+    margin-left: 15%;
+    margin-right: 15%;
     margin-bottom: 0px;
 }
 
 .banner-p label {
     font-size: 20px;
     color: #21325E;
-    margin-left: 225px;
+    margin-left: 15%;
     margin-top: 10px;
     font-weight: bold;
 }

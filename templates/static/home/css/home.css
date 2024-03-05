@@ -4,7 +4,7 @@
     overflow-x: hidden;
     white-space: nowrap;
     margin-left: 185px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .banner-container-g.draggable {
     cursor: grab;
@@ -22,7 +22,7 @@
     font-size: 20px;
     color: #21325E;
     margin-left: 185px;
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
 }
 .banner-cat{
@@ -41,13 +41,13 @@
     white-space: nowrap;
     right: 98px;
     margin-left: 185px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .banner-p label{
     font-size: 20px;
     color: #21325E;
-    margin-left: 180px;
-    margin-top: 20px;
+    margin-left: 185px;
+    margin-top: 10px;
     font-weight: bold;
 }
 .banner-container-p.draggable {

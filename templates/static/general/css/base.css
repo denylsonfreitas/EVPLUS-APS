@@ -179,6 +179,11 @@
   opacity: 1;
   pointer-events: auto;
 }
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i{
+  transition: all 0.5s ease;
+  color: var(--main-color);
+}
 .sidebar li i{
   height: 50px;
   line-height: 50px;

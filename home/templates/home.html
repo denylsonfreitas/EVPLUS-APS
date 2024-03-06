@@ -11,11 +11,26 @@
     <div class="banner-g">
         <label for="title-home-1">Eventos em destaque</label>
         <div class="banner-container-g" id="banner-img" onmousedown="startDrag(event)">
-            <div class="banner"></div>
-            <div class="banner"></div>
-            <div class="banner"></div>
-            <div class="banner"></div>
-            <div class="banner"></div>
+            <div class="banner">
+                <div class="banner-image">
+                    <img src="{% static 'images/placeholder2.jpg' %}" alt="Banner 1">
+                <label for="name">Banner 1</label>
+                <label for="date">01/01/2021</label>
+                <label for="local">Local 1</label>
+                </div>
+            </div>            
+            <div class="banner">
+
+            </div>
+            <div class="banner">
+
+            </div>
+            <div class="banner">
+
+            </div>
+            <div class="banner">
+
+            </div>
         </div>
     </div>
 
@@ -50,6 +65,5 @@
             <div class="banner-cat"></div>
         </div>
     </div>
-
     <script src="{% static 'home/js/home.js' %}"></script>
 {% endblock %}

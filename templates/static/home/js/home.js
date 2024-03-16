@@ -51,4 +51,3 @@ function stopDragP() {
   document.removeEventListener('mouseup', stopDragP);
   document.querySelector('.banner-container-p').classList.remove('draggable');
 }
-

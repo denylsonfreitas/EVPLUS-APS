@@ -20,7 +20,7 @@
   position: relative;
   width: 100%;
   height: 100px;
-  background-image: linear-gradient(to bottom, #E4B615, white); 
+  background-image: linear-gradient(to bottom, var(--main-color), white); 
   z-index: 2;
 }
 
@@ -119,12 +119,8 @@
   display: none;
 }
 .sidebar input{
-  font-size: 15px;
-  color: #FFF;
-  font-weight: 400;
   outline: none;
   height: 50px;
-  width: 100%;
   width: 50px;
   border: none;
   border-radius: 12px;

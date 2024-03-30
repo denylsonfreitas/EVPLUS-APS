@@ -51,3 +51,30 @@ function stopDragP() {
   document.removeEventListener('mouseup', stopDragP);
   document.querySelector('.banner-container-p').classList.remove('draggable');
 }
+
+let startX_S;
+let startScrollLeft_S;
+let isDragging_S = false;
+
+function startDragS(event) {
+  isDragging_S = true;
+  startX_S = event.pageX - document.querySelector('.banner-container-s').offsetLeft;
+  startScrollLeft_S = document.querySelector('.banner-container-s').scrollLeft;
+  document.addEventListener('mousemove', dragS);
+  document.addEventListener('mouseup', stopDragS);
+  document.querySelector('.banner-container-s').classList.add('draggable');
+}
+
+function dragS(event) {
+  if (!isDragging_S) return;
+  const x_S = event.pageX - document.querySelector('.banner-container-s').offsetLeft;
+  const walk_S = (x_S - startX_S) * 2;
+  document.querySelector('.banner-container-s').scrollLeft = startScrollLeft_S - walk_S;
+}
+
+function stopDragS() {
+  isDragging_S = false;
+  document.removeEventListener('mousemove', dragS);
+  document.removeEventListener('mouseup', stopDragS);
+  document.querySelector('.banner-container-s').classList.remove('draggable');
+}

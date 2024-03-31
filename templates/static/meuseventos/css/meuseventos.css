@@ -1,0 +1,8 @@
+.btn-primary {
+    height: 45px;
+    width: 140px;
+    background-color: var(--dark-color);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}

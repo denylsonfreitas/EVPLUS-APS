@@ -34,18 +34,13 @@
 }
 
 .btn-criar-evento{
-    height: 50px;
-    width: 45%;
+    height: 45px;
+    width: 140px;
     background-color: var(--dark-color);
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 5px;
     border-radius: 5px;
     color: white;
-    margin-top: 10px;
     margin-left: 18px;
-    margin-right: 18px;
-    margin-bottom: 10px;
 }
 
 .btn-criar-evento:hover {

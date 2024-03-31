@@ -16,18 +16,13 @@
 }
 
 .btn-salvar-alt{
-    height: 50px;
-    width: 46%;
+    height: 45px;
+    width: 140px;
     background-color: var(--dark-color);
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 5px;
     border-radius: 5px;
     color: white;
-    margin-top: 10px;
     margin-left: 3px;
-    margin-right: 18px;
-    margin-bottom: 40px;
 }
 
 .btn-salvar-alt:hover {

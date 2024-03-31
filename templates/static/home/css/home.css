@@ -36,10 +36,6 @@
     user-select: none;
 }
 
-.banner-container-g.draggable {
-    cursor: grab;
-}
-
 .banner {
     position: relative;
     display: inline-block;

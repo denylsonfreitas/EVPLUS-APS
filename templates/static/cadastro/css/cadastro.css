@@ -6,6 +6,9 @@
     z-index: 999;
 }
 
+.main-title {
+    margin-right: 15px;
+}
 
 .card {
     margin: 5%;

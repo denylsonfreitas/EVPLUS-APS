@@ -14,6 +14,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.main-title {
+    margin-right: 10px;
+}
+
 .form-control {
     border: 2px solid #21325E;
     background: #fcf8f8;

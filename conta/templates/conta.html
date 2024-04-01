@@ -5,41 +5,39 @@
     <link rel="stylesheet" href="{% static 'conta/css/conta.css' %}">
 {% endblock %}
 
-{% block 'title' %}
-    Minha Conta
-{% endblock %}
+{% block 'title' %}Minha Conta{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
             <div class="col-md form-conta">
-                <form action="{% url 'conta' %}" method="POST" onsubmit="exibirPopup()">
+                <form action="{% url 'conta' %}" method="POST" onsubmit="return validarDados()">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Alterar Usuário</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Usuário" name="username">
+                        <input type="text" class="form-control" id="username" placeholder="Usuário" name="username" value="{{ usuario.username }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput3">Alterar E-mail</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="@email.com" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="@email.com" name="email" value="{{ usuario.email }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput4">Alterar Senha</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput4" placeholder="********" name="password">
+                        <input type="password" class="form-control" id="password" placeholder="********" name="password">
                     </div>
                 </div>
                 <div class="col-md form-conta">
                     <div class="form-group">
                         <label for="exampleFormControlInput2">Alterar Nome</label>
-                        <input type="name" class="form-control" id="exampleFormControlInput2" placeholder="Nome" name="name">
+                        <input type="name" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.name }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput5">Telefone</label>
-                        <input type="phone" class="form-control" id="exampleFormControlInput5" placeholder="(xx)xxxxx-xxxx" name="phone">
+                        <input type="phone" class="form-control" id="phone" placeholder="(xx)xxxxx-xxxx" name="phone" value="{{ usuario.phone }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput6">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="exampleFormControlInput6" placeholder="Data de Nascimento" name="date">
+                        <input type="date" class="form-control" id="date" placeholder="Data de Nascimento" name="date" value="{{ usuario.date_of_birth }}">
                     </div>
                 </div>
             </div>
@@ -50,4 +48,20 @@
     </div>
     
     <script src="{% static 'conta/js/conta.js' %}"></script>
+    <script>
+        function validarDados() {
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var date = document.getElementById("date").value;
+
+            if (username === "{{ usuario.username }}" && email === "{{ usuario.email }}" && name === "{{ usuario.name }}" && phone === "{{ usuario.phone }}" && date === "{{ usuario.date_of_birth }}") {
+                alert("Nenhum dado alterado. Por favor, faça alterações antes de salvar.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 {% endblock %}

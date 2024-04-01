@@ -5,58 +5,56 @@
     <link rel="stylesheet" href="{% static 'eventos/css/eventos.css' %}">
 {% endblock %}
 
-{% block 'title' %}
-    Crie seu evento
-{% endblock %}
+{% block 'title' %}Crie seu evento{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
             <div class="col-md form-evento">
-                <form action="{% url 'eventos' %}" method="POST">
+                <form action="{% url 'eventos' %}" method="POST" id="eventoForm">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Nome</label>
-                        <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Nome do evento" name="name">
+                        <label for="nomeEvento">Nome</label>
+                        <input type="text" class="form-control" id="nomeEvento" placeholder="Nome do evento" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Descrição</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descrição do evento" name="discription">
+                        <label for="descricaoEvento">Descrição</label>
+                        <input type="text" class="form-control" id="descricaoEvento" placeholder="Descrição do evento" name="description" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Local</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Local do evento" name="local">
+                        <label for="localEvento">Local</label>
+                        <input type="text" class="form-control" id="localEvento" placeholder="Local do evento" name="local" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Data</label>
-                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Data do evento" name="date">
+                        <label for="dataEvento">Data</label>
+                        <input type="date" class="form-control" id="dataEvento" placeholder="Data do evento" name="date" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Horário</label>
-                        <input type="time" class="form-control" id="exampleFormControlInput1" placeholder="Horário do evento" name="time">
+                        <label for="horarioEvento">Horário</label>
+                        <input type="time" class="form-control" id="horarioEvento" placeholder="Horário do evento" name="time" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Categoria</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="category">
-                            <option>Escolha uma categoria</option>
-                            <option>Tecnologia</option>
-                            <option>Saúde</option>
-                            <option>Educação</option>
-                            <option>Esportes</option>
-                            <option>Cultura</option>
-                            <option>Gastronomia</option>
-                            <option>Negócios</option>
-                            <option>Moda</option>
-                            <option>Artes</option>
-                            <option>Outros</option>
+                        <label for="categoriaEvento">Categoria</label>
+                        <select class="form-control" id="categoriaEvento" name="category" required>
+                            <option value="" disabled selected hidden>Escolha uma categoria</option>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Educação">Educação</option>
+                            <option value="Esportes">Esportes</option>
+                            <option value="Cultura">Cultura</option>
+                            <option value="Gastronomia">Gastronomia</option>
+                            <option value="Negócios">Negócios</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Artes">Artes</option>
+                            <option value="Outros">Outros</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md title-banner-evento">
                     <div class="banner-form">
                         <i class='bx bxs-camera-plus'></i>
-                        <label for="exampleFormControlInput1">Insira seu banner</label>
-                        <input type="file" class="form-control" id="banner-evento" name="banner">
+                        <label for="bannerEvento">Insira seu banner</label>
+                        <input type="file" class="form-control" id="bannerEvento" name="banner">
                     </div>
                 </div>
             </div>
@@ -69,4 +67,20 @@
     </div>
     
     <script src="{% static 'eventos/js/eventos.js' %}"></script>
+    <script>
+
+        document.getElementById("eventoForm").addEventListener("submit", function(event) {
+            var nomeEvento = document.getElementById("nomeEvento").value;
+            var descricaoEvento = document.getElementById("descricaoEvento").value;
+            var localEvento = document.getElementById("localEvento").value;
+            var dataEvento = document.getElementById("dataEvento").value;
+            var horarioEvento = document.getElementById("horarioEvento").value;
+            var categoriaEvento = document.getElementById("categoriaEvento").value;
+            
+            if (!nomeEvento || !descricaoEvento || !localEvento || !dataEvento || !horarioEvento || !categoriaEvento) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                event.preventDefault();
+            }
+        });
+    </script>
 {% endblock %}

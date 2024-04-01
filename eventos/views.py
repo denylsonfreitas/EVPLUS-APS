@@ -26,4 +26,4 @@ def eventos(request):
 
         evento.save()
 
-        return render(request, 'home.html')
+        return render(request, 'meuseventos.html', {'exibir_sidebar': exibir_sidebar})

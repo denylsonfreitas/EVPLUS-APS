@@ -14,29 +14,29 @@
                 <form action="{% url 'conta' %}" method="POST" onsubmit="return validarDados()">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Alterar Usuário</label>
+                        <label for="userConta">Alterar Usuário</label>
                         <input type="text" class="form-control" id="username" placeholder="Usuário" name="username" value="{{ usuario.username }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput3">Alterar E-mail</label>
+                        <label for="emailConta">Alterar E-mail</label>
                         <input type="email" class="form-control" id="email" placeholder="@email.com" name="email" value="{{ usuario.email }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput4">Alterar Senha</label>
+                        <label for="senhaConta">Alterar Senha</label>
                         <input type="password" class="form-control" id="password" placeholder="********" name="password">
                     </div>
                 </div>
                 <div class="col-md form-conta">
                     <div class="form-group">
-                        <label for="exampleFormControlInput2">Alterar Nome</label>
+                        <label for="nomeConta">Alterar Nome</label>
                         <input type="name" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.name }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput5">Telefone</label>
+                        <label for="telConta">Telefone</label>
                         <input type="phone" class="form-control" id="phone" placeholder="(xx)xxxxx-xxxx" name="phone" value="{{ usuario.phone }}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlInput6">Data de Nascimento</label>
+                        <label for="dataConta">Data de Nascimento</label>
                         <input type="date" class="form-control" id="date" placeholder="Data de Nascimento" name="date" value="{{ usuario.date_of_birth }}">
                     </div>
                 </div>

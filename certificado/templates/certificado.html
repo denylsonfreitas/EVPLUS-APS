@@ -17,6 +17,7 @@
                             <th>Nome</th>
                             <th>Evento</th>
                             <th>Data</th>
+                            <th>Horário</th>
                             <th>Download</th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                                 <td>{{ certificado.nome }}</td>
                                 <td>{{ certificado.evento }}</td>
                                 <td>{{ certificado.data }}</td>
+                                <td>{{ certificado.horario }}</td>
                                 <td><a href="{% url 'download' certificado.id %}">Download</a></td>
                             </tr>
                         {% endfor %}

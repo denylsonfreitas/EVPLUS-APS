@@ -24,9 +24,9 @@
                     <tbody>
                         {% for evento in eventos %}
                             <tr>
-                                <td>{{ evento.nome }}</td>
-                                <td>{{ evento.data }}</td>
-                                <td>{{ evento.horario }}</td>
+                                <td>{{ evento.name }}</td>
+                                <td>{{ evento.date }}</td>
+                                <td>{{ evento.time }}</td>
                                 <td><a href="{% url 'editar_evento' evento.id %}">Editar</a></td>
                                 <td><a href="{% url 'deletar_evento' evento.id %}">Deletar</a></td>
                             </tr>

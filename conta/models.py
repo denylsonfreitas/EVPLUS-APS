@@ -1,12 +1,11 @@
 from django.db import models
+from django.utils import timezone
 
 class Conta(models.Model):
-    username = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True, default=timezone.now)
     email = models.EmailField()
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
-    date = models.DateField()
-    
-    def __str__(self) -> str:
+
+    def __str__(self):
         return self.username

@@ -11,26 +11,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Local</th>
                             <th>Data</th>
                             <th>Horário</th>
                             <th>Editar</th>
-                            <th>Excluir</th>
+                            <th>Deletar</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for evento in eventos %}
                             <tr>
                                 <td>{{ evento.nome }}</td>
-                                <td>{{ evento.local }}</td>
                                 <td>{{ evento.data }}</td>
                                 <td>{{ evento.horario }}</td>
-                                <td><a href="#">Editar</a></td>
-                                <td><a href="#">Excluir</a></td>
+                                <td><a href="{% url 'editar_evento' evento.id %}">Editar</a></td>
+                                <td><a href="{% url 'deletar_evento' evento.id %}">Deletar</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

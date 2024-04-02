@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from eventos.models import Evento
 
-def meus_eventos(request):
-    return render(request, 'meuseventos/meus_eventos.html')
+def meuseventos(request):
+    eventos = Evento.objects.all()
+    return render(request, 'meuseventos.html', {'eventos': eventos})

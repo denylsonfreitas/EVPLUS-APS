@@ -7,7 +7,7 @@ def eventos(request):
         return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
         name = request.POST.get('name')
-        discription = request.POST.get('discription')
+        description = request.POST.get('description')
         local = request.POST.get('local')
         date = request.POST.get('date')
         time = request.POST.get('time')
@@ -16,7 +16,7 @@ def eventos(request):
 
         evento = Evento(
             name=name,
-            discription=discription,
+            description=description,
             local=local,
             date=date,
             time=time,

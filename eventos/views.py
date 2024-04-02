@@ -1,29 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Evento
+from .forms import EventoForm
 
 def eventos(request):
     exibir_sidebar = True
     if request.method == 'GET':
-        return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
+        eventos = Evento.objects.all()
+        return render(request, 'eventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
-        local = request.POST.get('local')
-        date = request.POST.get('date')
-        time = request.POST.get('time')
-        category = request.POST.get('category')
-        banner = request.FILES.get('banner')
-
-        evento = Evento(
-            name=name,
-            description=description,
-            local=local,
-            date=date,
-            time=time,
-            category=category,
-            banner=banner
-        )
-
-        evento.save()
-
-        return render(request, 'meuseventos.html', {'exibir_sidebar': exibir_sidebar})
+        form = EventoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('meuseventos')
+        else:
+            return render(request, 'eventos.html', {'form': form, 'exibir_sidebar': exibir_sidebar})

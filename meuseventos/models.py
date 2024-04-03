@@ -1,9 +1,9 @@
 from django.db import models
 
-class Eventos(models.Model):
+class Evento(models.Model):
     name = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     time = models.TimeField()
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name

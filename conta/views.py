@@ -1,4 +1,5 @@
-from django.shortcuts import render
+# views.py na aplicação 'conta'
+from django.shortcuts import render, redirect
 from .models import Conta
 
 def conta(request):
@@ -22,11 +23,21 @@ def conta(request):
 
         conta.save()
 
-        return render(request, 'home.html')
-
+        return redirect('home')  # Redirecionamento para a página inicial
 
 def certificado(request):
     return render(request, 'certificado.html', {'exibir_sidebar': True})
 
 def meuseventos(request):
     return render(request, 'meuseventos.html', {'exibir_sidebar': True})
+
+# Importações para as views de login e cadastro
+from django.shortcuts import render
+
+def login(request):
+    exibir_sidebar = False
+    return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar})
+
+def cadastro(request):
+    exibir_sidebar = False
+    return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar})

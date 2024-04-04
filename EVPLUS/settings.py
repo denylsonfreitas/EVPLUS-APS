@@ -29,8 +29,6 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'home',
-    'login',
-    'cadastro',
     'eventos',
     'conta',
     'meuseventos',

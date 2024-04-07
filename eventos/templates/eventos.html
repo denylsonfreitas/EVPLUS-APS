@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md form-evento">
-                <form action="{% url 'eventos' %}" method="POST" id="eventoForm">
+                <form action="{% url 'eventos' %}" method="POST" id="eventoForm" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nomeEvento">Nome</label>

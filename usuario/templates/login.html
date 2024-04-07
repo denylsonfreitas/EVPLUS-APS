@@ -18,6 +18,11 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
+                        {% if error_message %}
+                            <div class="alert alert-danger">
+                                {{ error_message }}
+                            </div>
+                        {% endif %}
                         <form method="POST">
                             {% csrf_token %}
                             <div class="form-group">

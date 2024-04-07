@@ -18,15 +18,22 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
+                        {% if messages %}
+                            <div class="alert alert-danger">
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <form action="{% url 'cadastro' %}" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="username">Nome de usuário*</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ username }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">E-mail*</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ email }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="password1">Senha*</label>
@@ -35,7 +42,7 @@
                             <div class="form-group">
                                 <label for="password2">Confirme a senha*</label>
                                 <input type="password" class="form-control" id="password2" name="confirm_password" required>
-                            </div>
+                            </div>                            
                             <div class="form-group">
                                 <label class="form-group-nc">* Campos obrigatórios</label>
                             </div>
@@ -51,6 +58,5 @@
             </div>
         </div>
     </div>
-
     <script src="{% static 'cadastro/js/cadastro.js' %}"></script>
 {% endblock %}

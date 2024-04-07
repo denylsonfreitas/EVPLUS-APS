@@ -6,17 +6,17 @@ from django.contrib import messages
 
 @login_required
 def home(request):
-    exibir_sidebar = True
+    exibir_sidebar = False
     return render(request, 'home.html', {'exibir_sidebar': exibir_sidebar})
 
 @login_required
 def meuseventos(request):
-    exibir_sidebar = True
+    exibir_sidebar = False
     return render(request, 'meuseventos.html', {'exibir_sidebar': exibir_sidebar})
 
 @login_required
 def certificado(request):
-    exibir_sidebar = True
+    exibir_sidebar = False
     return render(request, 'certificado.html', {'exibir_sidebar': exibir_sidebar})
 
 def login(request):
@@ -34,11 +34,11 @@ def login(request):
             return redirect('home')
         else:
             messages.error(request, 'Usuário ou senha inválidos!')
-            return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar, 'error_message': 'Usuário ou senha inválidos!'})
+            return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'error_message': 'Usuário ou senha inválidos!'})
 
 @login_required
 def eventos(request):
-    exibir_sidebar = True
+    exibir_sidebar = False
     return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
 
 @login_required

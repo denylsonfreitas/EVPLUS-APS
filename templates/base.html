@@ -55,6 +55,7 @@
         </a>
         <span class="tooltip">Minha Conta</span>
       </li>
+      {% if user.is_authenticated %}
       <li>
         <a href="{% url 'meuseventos' %}">
           <i class='bx bxs-calendar'></i>
@@ -69,6 +70,7 @@
         </a>
         <span class="tooltip">Certificados</span>
       </li>
+      {% endif %}
     </ul>
   </div>
   {% endif %}

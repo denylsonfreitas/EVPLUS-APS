@@ -8,6 +8,7 @@
 {% block 'title' %}Minha Conta{% endblock %}
 
 {% block 'dashboard' %}
+{% if user.is_authenticated %}
     <div class="container">
         <div class="row">
             <div class="col-md form-conta">
@@ -45,6 +46,9 @@
                 <input type="submit" class="btn-salvar-alt" value="Salvar alterações">
             </div>
         </form>
+    {% else %}
+    <script>window.location.href = "{% url 'login' %}";</script>
+{% endif %}
     </div>
     
     <script src="{% static 'conta/js/conta.js' %}"></script>

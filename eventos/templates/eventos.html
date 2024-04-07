@@ -8,6 +8,7 @@
 {% block 'title' %}Crie seu evento{% endblock %}
 
 {% block 'dashboard' %}
+{% if user.is_authenticated %}
     <div class="container">
         <div class="row">
             <div class="col-md form-evento">
@@ -64,6 +65,9 @@
                 </div>
             </div>
         </form>
+    {% else %}
+    <script>window.location.href = "{% url 'login' %}";</script>
+{% endif %}
     </div>
     
     <script src="{% static 'eventos/js/eventos.js' %}"></script>

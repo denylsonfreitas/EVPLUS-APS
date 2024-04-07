@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'meuseventos/css/meuseventos.css' %}">
+{% endblock %}
+
 {% block 'title' %}Meus Eventos{% endblock %}
 
 {% block 'dashboard' %}
@@ -12,6 +16,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Data</th>
+                            <th>Horário</th>
                             <th>Editar</th>
                             <th>Deletar</th>
                         </tr>
@@ -19,20 +24,24 @@
                     <tbody>
                         {% for evento in eventos %}
                             <tr>
-                                <td>{{ evento.nome }}</td>
-                                <td>{{ evento.data }}</td>
-                                <td><a href="{% url 'editar_evento' evento.id %}" class="btn btn-primary">Editar</a></td>
-                                <td><a href="{% url 'deletar_evento' evento.id %}" class="btn btn-danger">Deletar</a></td>
+                                <td>{{ evento.name }}</td>
+                                <td>{{ evento.date }}</td>
+                                <td>{{ evento.time }}</td>
+                                <td><a href="{% url 'editar_evento' evento.id %}">Editar</a></td>
+                                <td><a href="{% url 'deletar_evento' evento.id %}">Deletar</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <a href="{% url 'eventos' %}" class="btn btn-primary">Criar Evento</a>
             </div>
         </div>
     </div>
+
+    <script src="{% static 'meuseventos/js/meuseventos.js' %}"></script>
 {% endblock %}

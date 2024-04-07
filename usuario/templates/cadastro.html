@@ -18,7 +18,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST">
+                        <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="username">Nome de usuário*</label>
@@ -30,11 +30,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="password1">Senha*</label>
-                                <input type="password" class="form-control" id="password1" name="password1" required>
+                                <input type="password" class="form-control" id="password1" name="password" required>
                             </div>
                             <div class="form-group">
                                 <label for="password2">Confirme a senha*</label>
-                                <input type="password" class="form-control" id="password2" name="password2" required>
+                                <input type="password" class="form-control" id="password2" name="confirm_password" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-group-nc">* Campos obrigatórios</label>

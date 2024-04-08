@@ -22,5 +22,5 @@ def eventos(request):
 @login_required(login_url='/auth/login/')
 def listar_eventos(request):
     exibir_sidebar = True
-    eventos = Evento.objects.filter(user=request.user)
-    return render(request, 'meuseventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+    eventos = Evento.objects.all()
+    return render(request, 'listar_eventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})

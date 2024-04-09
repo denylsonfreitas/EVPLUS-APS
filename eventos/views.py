@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from eventos.models import Evento
+from .models import Evento
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required
 

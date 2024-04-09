@@ -29,3 +29,25 @@
 .btn-salvar-alt:hover {
     background-color: var(--contrast-color);
 }
+
+#alert-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.alert {
+    position: relative;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    animation: fadeOut 7s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}

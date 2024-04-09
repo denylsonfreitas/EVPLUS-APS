@@ -15,8 +15,12 @@
                 <form action="{% url 'conta' %}" method="POST" onsubmit="return validarDados()">
                     {% csrf_token %}
                     <div class="form-group">
+                        <label for="nomeConta">Alterar Nome</label>
+                        <input type="name" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.name }}">
+                    </div>
+                    <div class="form-group">
                         <label for="userConta">Alterar Usuário</label>
-                        <input type="text" class="form-control" id="username" placeholder="Usuário" name="username" value="{{ usuario.username }}">
+                        <input type="text" class="form-control" id="username" placeholder="Usuário" name="user" value="{{ usuario.user }}">
                     </div>
                     <div class="form-group">
                         <label for="emailConta">Alterar E-mail</label>
@@ -25,20 +29,6 @@
                     <div class="form-group">
                         <label for="senhaConta">Alterar Senha</label>
                         <input type="password" class="form-control" id="password" placeholder="********" name="password">
-                    </div>
-                </div>
-                <div class="col-md form-conta">
-                    <div class="form-group">
-                        <label for="nomeConta">Alterar Nome</label>
-                        <input type="name" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="telConta">Telefone</label>
-                        <input type="phone" class="form-control" id="phone" placeholder="(xx)xxxxx-xxxx" name="phone" value="{{ usuario.phone }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="dataConta">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="date" placeholder="Data de Nascimento" name="date" value="{{ usuario.date_of_birth }}">
                     </div>
                 </div>
             </div>
@@ -54,13 +44,11 @@
     <script src="{% static 'conta/js/conta.js' %}"></script>
     <script>
         function validarDados() {
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
             var name = document.getElementById("name").value;
-            var phone = document.getElementById("phone").value;
-            var date = document.getElementById("date").value;
+            var user = document.getElementById("user").value;
+            var email = document.getElementById("email").value;
 
-            if (username === "{{ usuario.username }}" && email === "{{ usuario.email }}" && name === "{{ usuario.name }}" && phone === "{{ usuario.phone }}" && date === "{{ usuario.date_of_birth }}") {
+            if (name === "{{ usuario.name }}" && username === "{{ usuario.user }}" && email === "{{ usuario.email }}") {
                 alert("Nenhum dado alterado. Por favor, faça alterações antes de salvar.");
                 return false;
             }

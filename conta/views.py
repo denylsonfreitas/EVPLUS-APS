@@ -33,7 +33,3 @@ def conta(request):
         
         messages.success(request, 'Alterações salvas com sucesso!')
         return  render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar, 'usuario': usuario})
-
-@login_required(login_url='/auth/login/')
-def certificado(request):
-    return render(request, 'certificado.html', {'exibir_sidebar': True})

@@ -59,8 +59,3 @@ def inscricaoEvento(request, id):
 def listarCertificados(request, id):
     evento = Evento.objects.get(id=id)
     return render(request, 'certificado.html', {'evento': evento})
-
-@login_required(login_url='/auth/login/')
-def gerarCertificado(request, id):
-    evento = Evento.objects.get(id=id)
-    return render(request, 'gerar_certificado.html', {'evento': evento})

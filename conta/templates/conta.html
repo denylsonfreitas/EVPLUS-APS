@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group">
                         <label for="userConta">Alterar Usuário</label>
-                        <input type="text" class="form-control" id="username" placeholder="Usuário" name="user" value="{{ usuario.user }}">
+                        <input type="text" class="form-control" id="username" placeholder="Usuário" name="username" value="{{ usuario.username }}">
                     </div>
                     <div class="form-group">
                         <label for="emailConta">Alterar E-mail</label>
@@ -45,10 +45,10 @@
     <script>
         function validarDados() {
             var name = document.getElementById("name").value;
-            var user = document.getElementById("user").value;
+            var username = document.getElementById("username").value;
             var email = document.getElementById("email").value;
 
-            if (name === "{{ usuario.name }}" && username === "{{ usuario.user }}" && email === "{{ usuario.email }}") {
+            if (name === "{{ usuario.name }}" && username === "{{ usuario.username }}" && email === "{{ usuario.email }}") {
                 alert("Nenhum dado alterado. Por favor, faça alterações antes de salvar.");
                 return false;
             }

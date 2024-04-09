@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Evento
+from eventos.models import Evento
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required
 
@@ -18,9 +18,9 @@ def eventos(request):
             return redirect('meuseventos')
         else:
             return render(request, 'eventos.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
-
+        
 @login_required(login_url='/auth/login/')
-def listar_eventos(request):
+def listarEventos(request):
     exibir_sidebar = True
-    eventos = Evento.objects.all()
-    return render(request, 'listar_eventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+    eventos = Evento.objects.filter(user=request.user)
+    return render(request, 'meuseventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})

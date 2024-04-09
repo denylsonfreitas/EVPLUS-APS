@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'meuseventos/css/meuseventos.css' %}">
+    <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
 {% endblock %}
 
 {% block 'title' %}Meus Eventos{% endblock %}
@@ -16,7 +16,6 @@
                         <tr>
                             <th>Nome</th>
                             <th>Data</th>
-                            <th>Horário</th>
                             <th>Editar</th>
                             <th>Deletar</th>
                         </tr>
@@ -26,7 +25,6 @@
                             <tr>
                                 <td>{{ evento.name }}</td>
                                 <td>{{ evento.date }}</td>
-                                <td>{{ evento.time }}</td>
                                 <td><a href="{% url 'editar_evento' evento.id %}">Editar</a></td>
                                 <td><a href="{% url 'deletar_evento' evento.id %}">Deletar</a></td>
                             </tr>
@@ -43,5 +41,5 @@
         </div>
     </div>
 
-    <script src="{% static 'meuseventos/js/meuseventos.js' %}"></script>
+    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
 {% endblock %}

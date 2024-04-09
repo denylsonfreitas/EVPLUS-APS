@@ -7,6 +7,5 @@ urlpatterns = [
     path('auth/', include('usuario.urls')),
     path('eventos/', include('eventos.urls')),
     path('conta/', include('conta.urls')),
-    path('conta/meuseventos/', include('meuseventos.urls')),
     path('conta/certificado/', include('certificado.urls')),
 ]

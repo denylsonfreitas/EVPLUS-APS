@@ -9,10 +9,9 @@ def conta(request):
     if request.method == 'GET':
         return render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar, 'usuario': usuario})
     elif request.method == 'POST':
-        usuario.name = request.POST.get('name')
+        usuario.first_name = request.POST.get('name')
         usuario.username = request.POST.get('username')
         usuario.email = request.POST.get('email')
-        usuario.password = request.POST.get('password')
         usuario.save()
         return redirect('home')
 

@@ -8,7 +8,7 @@ def eventos(request):
     exibir_sidebar = True
     if request.method == 'GET':
         eventos = Evento.objects.filter(user=request.user)
-        return render(request, 'eventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+        return render(request, 'criarEvento.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
         form = EventoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -17,13 +17,13 @@ def eventos(request):
             evento.save()
             return redirect('meuseventos')
         else:
-            return render(request, 'eventos.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
+            return render(request, 'criarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
         
 @login_required(login_url='/auth/login/')
 def listarEventos(request):
     exibir_sidebar = True
     eventos = Evento.objects.filter(user=request.user)
-    return render(request, 'meuseventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+    return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
 
 @login_required(login_url='/auth/login/')
 def deletarEvento(request, id):

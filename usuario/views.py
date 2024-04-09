@@ -12,7 +12,7 @@ def home(request):
 @login_required
 def meuseventos(request):
     exibir_sidebar = False
-    return render(request, 'meuseventos.html', {'exibir_sidebar': exibir_sidebar})
+    return render(request, 'meusEventos.html', {'exibir_sidebar': exibir_sidebar})
 
 @login_required
 def certificado(request):

@@ -16,7 +16,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nomeConta">Alterar Nome</label>
-                        <input type="name" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.name }}">
+                        <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.first_name }}">
                     </div>
                     <div class="form-group">
                         <label for="userConta">Alterar Usuário</label>
@@ -26,29 +26,22 @@
                         <label for="emailConta">Alterar E-mail</label>
                         <input type="email" class="form-control" id="email" placeholder="@email.com" name="email" value="{{ usuario.email }}">
                     </div>
-                    <div class="form-group">
-                        <label for="senhaConta">Alterar Senha</label>
-                        <input type="password" class="form-control" id="password" placeholder="********" name="password">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn-salvar-alt" value="Salvar alterações">
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="col-md-12">
-                <input type="submit" class="btn-salvar-alt" value="Salvar alterações">
-            </div>
-        </form>
-    {% else %}
-    <script>window.location.href = "{% url 'login' %}";</script>
-{% endif %}
+        </div>
     </div>
     
     <script src="{% static 'conta/js/conta.js' %}"></script>
     <script>
         function validarDados() {
-            var name = document.getElementById("name").value;
+            var name = document.getElementById("first_name").value;
             var username = document.getElementById("username").value;
             var email = document.getElementById("email").value;
 
-            if (name === "{{ usuario.name }}" && username === "{{ usuario.username }}" && email === "{{ usuario.email }}") {
+            if (name === "{{ usuario.first_name }}" && username === "{{ usuario.username }}" && email === "{{ usuario.email }}") {
                 alert("Nenhum dado alterado. Por favor, faça alterações antes de salvar.");
                 return false;
             }
@@ -56,4 +49,7 @@
             return true;
         }
     </script>
+{% else %}
+    <script>window.location.href = "{% url 'login' %}";</script>
+{% endif %}
 {% endblock %}

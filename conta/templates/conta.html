@@ -19,6 +19,10 @@
                         <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="{{ usuario.first_name }}">
                     </div>
                     <div class="form-group">
+                        <label for="sobrenomeConta">Alterar Sobrenome</label>
+                        <input type="text" class="form-control" id="lastname" placeholder="Sobrenome" name="lastname" value="{{ usuario.last_name }}">
+                    </div>
+                    <div class="form-group">
                         <label for="userConta">Alterar Usuário</label>
                         <input type="text" class="form-control" id="username" placeholder="Usuário" name="username" value="{{ usuario.username }}">
                     </div>
@@ -38,10 +42,11 @@
     <script>
         function validarDados() {
             var name = document.getElementById("first_name").value;
+            var lastname = document.getElementById("last_name").value;
             var username = document.getElementById("username").value;
             var email = document.getElementById("email").value;
 
-            if (name === "{{ usuario.first_name }}" && username === "{{ usuario.username }}" && email === "{{ usuario.email }}") {
+            if (name === "{{ usuario.first_name }}" && "{{ usuario.last_name }}" && && username === "{{ usuario.username }}" && email === "{{ usuario.email }}") {
                 alert("Nenhum dado alterado. Por favor, faça alterações antes de salvar.");
                 return false;
             }

@@ -20,3 +20,10 @@ if(sidebar.classList.contains("open")){
     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
 }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        var alertContainer = document.getElementById('alert-container');
+        alertContainer.innerHTML = '';
+    }, 7000);
+});

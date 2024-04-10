@@ -51,6 +51,7 @@ def cadastro(request):
         return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
         name = request.POST.get('name')
+        lastname = request.POST.get('lastname')
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -69,6 +70,7 @@ def cadastro(request):
         # Cria o usuário
         user = User.objects.create_user(username=username, email=email, password=password)
         user.first_name = name
+        user.last_name = lastname
         user.save()
         
         messages.success(request, 'Cadastro realizado com sucesso! Faça o login para continuar.')

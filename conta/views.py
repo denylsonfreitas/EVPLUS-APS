@@ -13,6 +13,7 @@ def conta(request):
     
     elif request.method == 'POST':
         new_name = request.POST.get('name')
+        new_lastname = request.POST.get('lastname')
         new_username = request.POST.get('username')
         new_email = request.POST.get('email')
         
@@ -27,6 +28,7 @@ def conta(request):
             return render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar, 'usuario': usuario})
 
         usuario.first_name = new_name
+        usuario.last_name = new_lastname
         usuario.username = new_username
         usuario.email = new_email
         usuario.save()

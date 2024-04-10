@@ -15,7 +15,4 @@ urlpatterns = [
     path('todos-eventos/', views.listarTodosEventos, name='todos_eventos'),
     path('inscricao/<int:evento_id>/', views.inscricaoEvento, name='inscricao_evento'),
     path('cancelar-inscricao/<int:evento_id>/', views.cancelarInscricao, name='cancelar_inscricao'),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

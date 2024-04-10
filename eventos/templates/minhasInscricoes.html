@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
 {% endblock %}
 
-{% block 'title' %}Meus Eventos{% endblock %}
+{% block 'title' %}Minhas Inscrições{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
@@ -26,9 +26,12 @@
                                 <td>{{ evento.date }}</td>
                                 <td>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
-                                    {% if perms.eventos.change_evento %}
-                                        <a href="{% url 'eventos:editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
-                                        <a href="#" onclick="confirmarDeletar('{{ evento.id }}')" class="btn btn-danger">Deletar</a>
+                                    {% if perms.eventos.view_evento %}
+                                        {% if request.user not in evento.clients.all %}
+                                            <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+                                        {% else %}
+                                            <a href="{% url 'eventos:remover_inscricao' evento.id %}" class="btn btn-danger">Remover Inscrição</a>
+                                        {% endif %}
                                     {% endif %}
                                 </td>
                             </tr>
@@ -40,9 +43,9 @@
     </div>
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
     <script>
-        function confirmarDeletar(eventoId) {
-            if (confirm("Tem certeza de que deseja deletar este evento?")) {
-                window.location.href = "{% url 'eventos:deletar_evento' id=0 %}".replace('0', eventoId);
+        function confirmarRemocao(eventoId) {
+            if (confirm("Tem certeza de que deseja remover sua inscrição neste evento?")) {
+                window.location.href = "{% url 'eventos:remover_inscricao' evento_id=0 %}".replace('0', eventoId);
             }
         }
     </script>

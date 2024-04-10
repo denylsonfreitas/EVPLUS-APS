@@ -27,13 +27,6 @@ def listarEventos(request):
     eventos = Evento.objects.filter(user=request.user)
     return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
 
-@login_required
-@permission_required('eventos.view_evento', raise_exception=True)
-def listarEventosInscritos(request):
-    exibir_sidebar = True
-    eventos_inscritos = Evento.objects.filter(clients=request.user)
-    return render(request, 'meusEventos.html', {'eventos': eventos_inscritos, 'exibir_sidebar': exibir_sidebar})
-
 @permission_required('eventos.delete_evento', login_url='/auth/login/')
 def deletarEvento(request, id):
     evento = Evento.objects.get(id=id)
@@ -78,13 +71,20 @@ def listarTodosEventos(request):
         eventosDisponiveis = Evento.objects.all()
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
 
+@login_required
+@permission_required('eventos.view_evento', raise_exception=True)
+def listarEventosInscritos(request):
+    exibir_sidebar = True
+    eventos_inscritos = Evento.objects.filter(clients=request.user)
+    return render(request, 'minhasInscricoes.html', {'eventos': eventos_inscritos, 'exibir_sidebar': exibir_sidebar})
+
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def inscricaoEvento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     if request.user not in evento.clients.all():
         evento.clients.add(request.user)
         evento.save()
-        return redirect('eventos:detalhes_evento', id=evento_id)
+        return redirect('eventos:minhasinscricoes')
     else:
         return redirect('eventos:detalhes_evento', id=evento_id)
 
@@ -93,7 +93,7 @@ def removerInscricao(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     if request.user in evento.clients.all():
         evento.clients.remove(request.user)
-    return redirect('eventos:meuseventos')
+    return redirect('eventos:minhasinscricoes')
 
 @permission_required('eventos.view_certificado', login_url='/auth/login/')
 def listarCertificados(request, id):

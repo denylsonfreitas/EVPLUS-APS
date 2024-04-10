@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento
 from .forms import EventoForm
 from django.http import HttpResponse
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 @permission_required('eventos.add_evento', login_url='/auth/login/')
 def eventos(request):
@@ -20,11 +20,19 @@ def eventos(request):
         else:
             return render(request, 'criarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
         
-@permission_required('eventos.view_evento', login_url='/auth/login/')
+@login_required
+@permission_required('eventos.add_evento', raise_exception=True)
 def listarEventos(request):
     exibir_sidebar = True
     eventos = Evento.objects.filter(user=request.user)
     return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+
+@login_required
+@permission_required('eventos.view_evento', raise_exception=True)
+def listarEventosInscritos(request):
+    exibir_sidebar = True
+    eventos_inscritos = Evento.objects.filter(clients=request.user)
+    return render(request, 'meusEventos.html', {'eventos': eventos_inscritos, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')
 def deletarEvento(request, id):
@@ -54,11 +62,11 @@ def editarEvento(request, id):
     else:
         return HttpResponse("O evento não foi encontrado.", status=404)
 
-        
-@permission_required('eventos.view_evento', login_url='/auth/login/')
 def detalhesEvento(request, id):
     exibir_sidebar = True
     evento = Evento.objects.get(id=id)
+    usuario = request.user
+    ja_inscrito = evento.clients.filter(pk=usuario.pk).exists()
     return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar})
 
 def listarTodosEventos(request):
@@ -73,12 +81,19 @@ def listarTodosEventos(request):
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def inscricaoEvento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
-    if request.user not in evento.participantes.all():
-        evento.participantes.add(request.user)
+    if request.user not in evento.clients.all():
+        evento.clients.add(request.user)
         evento.save()
-        return redirect('detalhes_evento', id=evento_id)
+        return redirect('eventos:detalhes_evento', id=evento_id)
     else:
-        return redirect('detalhes_evento', id=evento_id)
+        return redirect('eventos:detalhes_evento', id=evento_id)
+
+@permission_required('eventos.view_evento', login_url='/auth/login/')   
+def removerInscricao(request, evento_id):
+    evento = get_object_or_404(Evento, pk=evento_id)
+    if request.user in evento.clients.all():
+        evento.clients.remove(request.user)
+    return redirect('eventos:meuseventos')
 
 @permission_required('eventos.view_certificado', login_url='/auth/login/')
 def listarCertificados(request, id):

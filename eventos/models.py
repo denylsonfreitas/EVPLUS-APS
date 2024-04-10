@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Evento(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    clients = models.ManyToManyField(User, through='Inscricao', related_name='eventos')
     name = models.CharField(max_length=100)
     description = models.TextField()
     local = models.CharField(max_length=100)

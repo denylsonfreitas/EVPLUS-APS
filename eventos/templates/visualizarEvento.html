@@ -20,32 +20,19 @@
             </div>
         </div>
     </div>
+    {% if perms.eventos.add_inscricao %}
+        {% if not ja_inscrito %}
+        <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Inscrever-se</button>
+        </form>
+    {% endif %}
+{% endif %}
+
 {% endblock %}
 
 {% block 'scripts' %}
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#btn-delete').click(function() {
-                var id = $(this).data('id');
-                var url = '/eventos/' + id + '/delete/';
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        csrfmiddlewaretoken: '{{ csrf_token }}'
-                    },
-                    success: function(data) {
-                        window.location.href = '/eventos/';
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            });
-        });
-    </script>
 
 {% endblock %}
 

@@ -58,7 +58,11 @@
                                             <td>{{ evento.description }}</td>
                                             <td>
                                                 <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
-                                                <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+                                                {% if perms.eventos.add_inscricao %}
+                                                    {% if request.user not in evento.clients.all %}
+                                                    <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+                                                    {% endif %}
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}

@@ -30,7 +30,7 @@
                                         {% if request.user not in evento.clients.all %}
                                             <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
                                         {% else %}
-                                            <a href="{% url 'eventos:remover_inscricao' evento.id %}" class="btn btn-danger">Remover Inscrição</a>
+                                            <a href="#" onclick="confirmarRemocao('{{ evento.id }}')" class="btn btn-danger">Remover Inscrição</a>
                                         {% endif %}
                                     {% endif %}
                                 </td>

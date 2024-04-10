@@ -10,11 +10,31 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
+            <div class="col-md-4">
+                <form method="GET" action="{% url 'eventos:todos_eventos' %}">
+                    <div class="form-group">
+                        <label for="categoria">Filtrar por Categoria:</label>
+                        <select class="form-control" id="categoria" name="categoria">
+                            <option value="">Todas as categorias</option>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Educação">Educação</option>
+                            <option value="Esporte">Esporte</option>
+                            <option value="Cultura">Cultura</option>
+                            <option value="Gastronomia">Gastronomia</option>
+                            <option value="Negócios">Negócios</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Artes">Artes</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-filter">Filtrar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Eventos</h3>
-                    </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -46,40 +66,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modal-inscricao" tabindex="-1" role="dialog" aria-labelledby="modal-inscricao-label">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modal-inscricao-label">Inscrição</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Você está inscrito no evento!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modal-erro-inscricao" tabindex="-1" role="dialog" aria-labelledby="modal-erro-inscricao-label">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modal-erro-inscricao-label">Erro</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Você já está inscrito no evento!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

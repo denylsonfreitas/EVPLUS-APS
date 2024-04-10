@@ -63,7 +63,11 @@ def detalhesEvento(request, id):
 
 def listarTodosEventos(request):
     exibir_sidebar = True
-    eventosDisponiveis = Evento.objects.all()
+    categoria = request.GET.get('categoria')
+    if categoria:
+        eventosDisponiveis = Evento.objects.filter(category=categoria)
+    else:
+        eventosDisponiveis = Evento.objects.all()
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.view_evento', login_url='/auth/login/')

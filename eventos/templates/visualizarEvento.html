@@ -5,28 +5,48 @@
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
 {% endblock %}
 
-{% block 'title' %}('nome do evento'){% endblock %}
+{% block 'title' %}{{ evento.name }}{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="display-4">('nome do evento')</h1>
-                <p class="lead">('descrição do evento')</p>
-                <p class="lead">('data do evento')</p>
-                <p class="lead">('local do evento')</p>
-                <p class="lead">('endereço do evento')</p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <a href="{% url 'eventos:editar' %}" class="btn btn-primary btn-lg btn-block">Editar</a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="{% url 'eventos:excluir' %}" class="btn btn-danger btn-lg btn-block">Excluir</a>
-                    </div>
-                </div>
+                <p>{{ evento.description }}</p>
+                <p>{{ evento.date }}</p>
+                <p>{{ evento.local }}</p>
+                <p>{{ evento.price }}</p>
+                <p>{{ evento.category }}</p>
+                <p>{{ evento.user }}</p>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block 'scripts' %}
+    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#btn-delete').click(function() {
+                var id = $(this).data('id');
+                var url = '/eventos/' + id + '/delete/';
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(data) {
+                        window.location.href = '/eventos/';
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
+
 {% endblock %}
 
 {% block 'footer' %}

@@ -41,12 +41,21 @@
       <input type="text" placeholder="Pesquisar...">
       </a>
       </li>
+      {% if perms.eventos.add_evento %}
       <li>
-        <a href="{% url 'eventos' %}">
+        <a href="{% url 'eventos:eventos' %}">
           <i class='bx bx-plus-circle'></i>
           <span class="links_name">Crie seu evento</span>
         </a>
         <span class="tooltip">Crie seu evento</span>
+      </li>
+      {% endif %}
+      <li>
+        <a href="{% url 'eventos:todos_eventos' %}">
+          <i class='bx bx-list-ul'></i>
+            <span class="links_name">Todos os Eventos</span>
+        </a>
+        <span class="tooltip">Todos os Eventos</span>
       </li>
       <li>
         <a href="{% url 'conta' %}">
@@ -57,14 +66,14 @@
       </li>
       {% if user.is_authenticated %}
       <li>
-        <a href="{% url 'meuseventos' %}">
+        <a href="{% url 'eventos:meuseventos' %}">
           <i class='bx bxs-calendar'></i>
           <span class="links_name">Meus Eventos</span>
         </a>
         <span class="tooltip">Meus Eventos</span>
       </li>
       <li>
-        <a href="{% url 'certificado' %}">
+        <a href="#">
           <i class='bx bx-file-find'></i>
           <span class="links_name">Certificados</span>
         </a>

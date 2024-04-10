@@ -13,3 +13,10 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Inscricao(models.Model):
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['evento', 'user']

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
+{% endblock %}
+
+{% block 'title' %}Todos os Eventos{% endblock %}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Eventos</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Local</th>
+                                        <th>Data</th>
+                                        <th>Horário</th>
+                                        <th>Descrição</th>
+                                        <th>Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for evento in eventos %}
+                                        <tr>
+                                            <td>{{ evento.name }}</td>
+                                            <td>{{ evento.local }}</td>
+                                            <td>{{ evento.date }}</td>
+                                            <td>{{ evento.time }}</td>
+                                            <td>{{ evento.description }}</td>
+                                            <td>
+                                                <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
+                                                <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success">Inscrever-se</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-inscricao" tabindex="-1" role="dialog" aria-labelledby="modal-inscricao-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-inscricao-label">Inscrição</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Você está inscrito no evento!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-erro-inscricao" tabindex="-1" role="dialog" aria-labelledby="modal-erro-inscricao-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-erro-inscricao-label">Erro</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Você já está inscrito no evento!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block 'footer' %}
+    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+{% endblock %}

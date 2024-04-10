@@ -5,49 +5,49 @@
     <link rel="stylesheet" href="{% static 'eventos/css/eventos.css' %}">
 {% endblock %}
 
-{% block 'title' %}Crie seu evento{% endblock %}
+{% block 'title' %}Editar Evento: {{ evento.name }}{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
-            {% if perms.eventos.add_evento %}
+            {% if perms.eventos.change_evento %}
             <div class="col-md form-evento">
-                <form action="{% url 'eventos:eventos' %}" method="POST" id="eventoForm" enctype="multipart/form-data">
+                <form action="{% url 'eventos:editar_evento' evento.id %}" method="POST" id="eventoForm" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="nomeEvento">Nome</label>
-                        <input type="text" class="form-control" id="nomeEvento" placeholder="Nome do evento" name="name" required>
+                        <input type="text" class="form-control" id="nomeEvento" placeholder="Nome do evento" name="name" value="{{ evento.name }}" required>
                     </div>
                     <div class="form-group">
                         <label for="descricaoEvento">Descrição</label>
-                        <input type="text" class="form-control" id="descricaoEvento" placeholder="Descrição do evento" name="description" required>
+                        <input type="text" class="form-control" id="descricaoEvento" placeholder="Descrição do evento" name="description" value="{{ evento.description }}" required>
                     </div>
                     <div class="form-group">
                         <label for="localEvento">Local</label>
-                        <input type="text" class="form-control" id="localEvento" placeholder="Local do evento" name="local" required>
+                        <input type="text" class="form-control" id="localEvento" placeholder="Local do evento" name="local" value="{{ evento.local }}" required>
                     </div>
                     <div class="form-group">
                         <label for="dataEvento">Data</label>
-                        <input type="date" class="form-control" id="dataEvento" placeholder="Data do evento" name="date" required>
+                        <input type="date" class="form-control" id="dataEvento" placeholder="Data do evento" name="date" value="{{ evento.date }}" required>
                     </div>
                     <div class="form-group">
                         <label for="horarioEvento">Horário</label>
-                        <input type="time" class="form-control" id="horarioEvento" placeholder="Horário do evento" name="time" required>
+                        <input type="time" class="form-control" id="horarioEvento" placeholder="Horário do evento" name="time" value="{{ evento.time }}" required>
                     </div>
                     <div class="form-group">
                         <label for="categoriaEvento">Categoria</label>
                         <select class="form-control" id="categoriaEvento" name="category" required>
                             <option value="" disabled selected hidden>Escolha uma categoria</option>
-                            <option value="Tecnologia">Tecnologia</option>
-                            <option value="Saúde">Saúde</option>
-                            <option value="Educação">Educação</option>
-                            <option value="Esportes">Esportes</option>
-                            <option value="Cultura">Cultura</option>
-                            <option value="Gastronomia">Gastronomia</option>
-                            <option value="Negócios">Negócios</option>
-                            <option value="Moda">Moda</option>
-                            <option value="Artes">Artes</option>
-                            <option value="Outros">Outros</option>
+                            <option value="Tecnologia" {% if evento.category == 'Tecnologia' %} selected {% endif %}>Tecnologia</option>
+                            <option value="Saúde" {% if evento.category == 'Saúde' %} selected {% endif %}>Saúde</option>
+                            <option value="Educação" {% if evento.category == 'Educação' %} selected {% endif %}>Educação</option>
+                            <option value="Esportes" {% if evento.category == 'Esportes' %} selected {% endif %}>Esportes</option>
+                            <option value="Cultura" {% if evento.category == 'Cultura' %} selected {% endif %}>Cultura</option>
+                            <option value="Gastronomia" {% if evento.category == 'Gastronomia' %} selected {% endif %}>Gastronomia</option>
+                            <option value="Negócios" {% if evento.category == 'Negócios' %} selected {% endif %}>Negócios</option>
+                            <option value="Moda" {% if evento.category == 'Moda' %} selected {% endif %}>Moda</option>
+                            <option value="Artes" {% if evento.category == 'Artes' %} selected {% endif %}>Artes</option>
+                            <option value="Outros" {% if evento.category == 'Outros' %} selected {% endif %}>Outros</option>
                         </select>
                     </div>
                 </div>
@@ -61,13 +61,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <input type="submit" class="btn-criar-evento" value="Criar evento">
+                    <input type="submit" class="btn-criar-evento" value="Salvar Alterações">
                 </div>
             </div>
         </form>
     {% else %}
     <div class="col-md-12">
-        <p>Você não tem permissão para criar eventos.</p>
+        <p>Você não tem permissão para editar este evento.</p>
     </div>
     {% endif %}
 </div>

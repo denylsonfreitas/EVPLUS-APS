@@ -28,7 +28,7 @@ def listarEventos(request):
     return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')
-def deletarEvento(request, id):
+def cancelarEvento(request, id):
     evento = Evento.objects.get(id=id)
     evento.delete()
     return redirect('eventos:meuseventos')
@@ -89,7 +89,7 @@ def inscricaoEvento(request, evento_id):
         return redirect('eventos:detalhes_evento', id=evento_id)
 
 @permission_required('eventos.view_evento', login_url='/auth/login/')   
-def removerInscricao(request, evento_id):
+def cancelarInscricao(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     if request.user in evento.clients.all():
         evento.clients.remove(request.user)

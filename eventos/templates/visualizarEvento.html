@@ -10,11 +10,13 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
-            <!-- Coluna para o banner -->
             <div class="col-md-6">
-                <img src="{% static 'images/placeholder1.jpg' %}" alt="Banner do Evento" class="img-fluid">
+                {% if evento.banner %}
+                    <img src="{{ evento.banner.url }}" alt="Banner do Evento" class="img-fluid">
+                {% else %}
+                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="img-fluid">
+                {% endif %}
             </div>
-            <!-- Coluna para as informações do evento -->
             <div class="col-md-6">
                 <div class="row mt-4">
                     <div class="col-md-12">
@@ -31,7 +33,7 @@
                         <div class="text-center mt-4">
                             <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Inscrever-se</button>
+                            <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-primary" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
                             </form>
                         </div>
                     {% endif %}

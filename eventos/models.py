@@ -10,7 +10,7 @@ class Evento(models.Model):
     date = models.DateField()
     time = models.TimeField()
     category = models.CharField(max_length=100)
-    banner = models.ImageField(upload_to='eventos', null=True, blank=True)
+    banner = models.ImageField(upload_to='banners', null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -14,3 +16,6 @@ urlpatterns = [
     path('inscricao/<int:evento_id>/', views.inscricaoEvento, name='inscricao_evento'),
     path('cancelar-inscricao/<int:evento_id>/', views.cancelarInscricao, name='cancelar_inscricao'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

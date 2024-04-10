@@ -3,7 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
 {% endblock %}
 
 {% block 'title' %}Minhas Inscrições{% endblock %}
@@ -42,20 +41,12 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal Cancelar Inscrição -->
-    <div id="modalCancelar" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModalCancelar()">&times;</span>
-            <p>Tem certeza de que deseja cancelar sua inscrição neste evento?</p>
-            <div>
-                <button class="btn btn-danger" onclick="cancelarInscricao(eventoId)">Cancelar</button>
-                <button class="btn btn-secondary" onclick="fecharModalCancelar()">Voltar</button>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal -->
-
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
-    <script src="scripts.js"></script>
+    <script>
+        function confirmarCancelar(eventoId) {
+            if (confirm("Tem certeza de que deseja cancelar sua inscrição neste evento?")) {
+                window.location.href = "{% url 'eventos:cancelar_inscricao' evento_id=0 %}".replace('0', eventoId);
+            }
+        }
+    </script>
 {% endblock %}

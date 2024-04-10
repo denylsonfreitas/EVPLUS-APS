@@ -4,4 +4,4 @@ from .models import Evento
 class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
-        exclude = ['user']
+        exclude = ['user', 'clients']

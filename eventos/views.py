@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento
 from .forms import EventoForm
+from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 
 @permission_required('eventos.add_evento', login_url='/auth/login/')
@@ -34,17 +35,25 @@ def deletarEvento(request, id):
 @permission_required('eventos.change_evento', login_url='/auth/login/')
 def editarEvento(request, id):
     exibir_sidebar = True
-    evento = Evento.objects.get(id=id)
-    if request.method == 'GET':
-        form = EventoForm(instance=evento)
-        return render(request, 'criarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
-    elif request.method == 'POST':
-        form = EventoForm(request.POST, request.FILES, instance=evento)
-        if form.is_valid():
-            form.save()
-            return redirect('eventos:meuseventos')
-        else:
-            return render(request, 'criarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
+    try:
+        evento = Evento.objects.get(id=id, user=request.user)
+    except Evento.DoesNotExist:
+        evento = None
+    
+    if evento:
+        if request.method == 'GET':
+            form = EventoForm(instance=evento)
+            return render(request, 'editarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+        elif request.method == 'POST':
+            form = EventoForm(request.POST, request.FILES, instance=evento)
+            if form.is_valid():
+                form.save()
+                return redirect('eventos:meuseventos')
+            else:
+                return render(request, 'editarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+    else:
+        return HttpResponse("O evento não foi encontrado.", status=404)
+
         
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def detalhesEvento(request, id):

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
+    <link rel="stylesheet" href="{% static 'eventos/css/visualizarEvento.css' %}">
 {% endblock %}
 
 {% block 'title' %}{{ evento.name }}{% endblock %}
@@ -10,30 +10,35 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <p>{{ evento.description }}</p>
-                <p>{{ evento.date }}</p>
-                <p>{{ evento.local }}</p>
-                <p>{{ evento.price }}</p>
-                <p>{{ evento.category }}</p>
-                <p>{{ evento.user }}</p>
+            <!-- Coluna para o banner -->
+            <div class="col-md-6">
+                <img src="{% static 'images/placeholder1.jpg' %}" alt="Banner do Evento" class="img-fluid">
+            </div>
+            <!-- Coluna para as informações do evento -->
+            <div class="col-md-6">
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <p>{{ evento.description }}</p>
+                        <p><i class='bx bxs-calendar'></i> {{ evento.date }}</p>
+                        <p><i class='bx bxs-time'></i> {{ evento.time }}</p>
+                        <p><i class='bx bxs-map'></i> {{ evento.local }}</p>
+                        <p><i class='bx bxs-category'></i> {{ evento.category }}</p>
+                        <p><i class='bx bxs-user'></i> {{ evento.user }}</p>
+                    </div>
+                </div>
+                {% if perms.eventos.add_inscricao %}
+                    {% if not request.user in evento.clients.all %}
+                        <div class="text-center mt-4">
+                            <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Inscrever-se</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
-    {% if perms.eventos.add_inscricao %}
-        {% if not ja_inscrito %}
-        <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Inscrever-se</button>
-        </form>
-    {% endif %}
-{% endif %}
-
-{% endblock %}
-
-{% block 'scripts' %}
-    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
-
 {% endblock %}
 
 {% block 'footer' %}

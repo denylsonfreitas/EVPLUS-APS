@@ -1,8 +1,8 @@
 #views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Evento
-from .forms import EventoForm
+from .models import Evento, Inscricao
+from .forms import EventoForm, CertificadoForm
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -104,7 +104,25 @@ def cancelarInscricao(request, evento_id):
         evento.clients.remove(request.user)
     return redirect('eventos:minhasinscricoes')
 
-@permission_required('eventos.view_certificado', login_url='/auth/login/')
-def listarCertificados(request, id):
-    evento = Evento.objects.get(id=id)
-    return render(request, 'certificado.html', {'evento': evento})
+@permission_required('eventos.add_inscricao', login_url='/auth/login/')
+def listarCertificados(request):
+    exibir_sidebar = True
+    eventos_finalizados = Evento.objects.filter(finalizado=True)
+    return render(request, 'listar_certificados.html', {'eventos_finalizados': eventos_finalizados, 'exibir_sidebar': exibir_sidebar})
+
+@permission_required('eventos.add_evento', login_url='/auth/login/')
+def uploadCertificado(request):
+    exibir_sidebar = True
+    if request.method == 'GET':
+        form = CertificadoForm()
+        return render(request, 'uploadCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
+    elif request.method == 'POST':
+        form = CertificadoForm(request.POST, request.FILES)
+        if form.is_valid():
+            inscricao = form.save(commit=False)
+            inscricao.user = request.user
+            inscricao.save()
+            return redirect('eventos:enviar_certificados')
+        else:
+            return render(request, 'uploadCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
+

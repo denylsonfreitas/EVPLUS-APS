@@ -83,13 +83,26 @@
         <span class="tooltip">Meus Eventos</span>
       </li>
       {% endif %}
+      {% if perms.eventos.view_evento %}
       <li>
-        <a href="#">
+        <a href="{% url 'eventos:meus_certificados' %}">
           <i class='bx bx-file-find'></i>
           <span class="links_name">Certificados</span>
         </a>
         <span class="tooltip">Certificados</span>
       </li>
+      {% endif %}
+      {% if perms.eventos.add_evento %}
+      <li>
+      <a href="{% url 'eventos:enviar_certificados' %}">
+        <i class='bx bx-file-find'></i>
+        <span class="links_name">Enviar Certificados</span>
+      </a>
+      <span class="tooltip">Enviar Certificados</span>
+      </li>
+      {% endif %}
+      {% endif %}
+      {% if user.is_authenticated %}
       <li>
         <a href="{% url 'logout' %}">
             <i class='bx bx-log-out'></i>

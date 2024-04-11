@@ -1,40 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'head' %}
-    <link rel="stylesheet" href="{% static 'eventos/css/certificado.css' %}">
+{% block head %}
+    <link rel="stylesheet" href="{% static 'eventos/css/certificados.css' %}">
 {% endblock %}
 
-{% block 'title' %}Certificados{% endblock %}
+{% block title %}Meus Certificados{% endblock %}
 
-{% block 'dashboard' %}
+{% block dashboard %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Evento</th>
-                            <th>Data</th>
-                            <th>Horário</th>
-                            <th>Download</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for certificado in eventos %}
-                            <tr>
-                                <td>{{ certificado.nome }}</td>
-                                <td>{{ certificado.evento }}</td>
-                                <td>{{ certificado.data }}</td>
-                                <td>{{ certificado.horario }}</td>
-                                <td><a href="{% url 'download' certificado.id %}">Download</a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <h2>Meus Certificados</h2>
+                <ul>
+                    {% for certificado in certificados %}
+                        <li>
+                            <a href="{{ certificado.arquivo.url }}">{{ certificado.evento.name }}</a>
+                        </li>
+                    {% empty %}
+                        <li>Você ainda não possui certificados.</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block 'scripts' %}
     <script src="{% static 'eventos/js/certificado.js' %}"></script>
 {% endblock %}

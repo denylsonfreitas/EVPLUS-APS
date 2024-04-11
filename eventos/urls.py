@@ -17,4 +17,5 @@ urlpatterns = [
     path('todos-eventos/', views.listarTodosEventos, name='todos_eventos'),
     path('inscricao/<int:evento_id>/', views.inscricaoEvento, name='inscricao_evento'),
     path('cancelar-inscricao/<int:evento_id>/', views.cancelarInscricao, name='cancelar_inscricao'),
+    path('finalizar/<int:id>/', views.finalizarEvento, name='finalizar_evento'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

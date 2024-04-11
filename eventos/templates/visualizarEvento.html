@@ -38,9 +38,35 @@
                         </div>
                     {% endif %}
                 {% endif %}
+                {% if evento.user == request.user %}
+                    {% if perms.eventos.add_evento %}
+                        {% if not request.user in evento.clients.all %}
+                            <div class="text-center mt-4">
+                                <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
+                                {% csrf_token %}
+                                <a href="{% url 'eventos:finalizar_evento' evento.id %}" class="btn btn-success" onclick="return confirm(Tem certeza de que deseja finalizar este evento?')">Finalizar Evento</a>
+                                <a href="{% url 'eventos:cancelar_evento' evento.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja cancelar este evento?')">Cancelar Evento</a>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
+
+    {% if evento.user == request.user %}
+    {% if perms.eventos.change_evento %}
+    <div class="container mt-4">
+        <h2>Lista de Inscritos</h2>
+        <ul>
+            {% for cliente in evento.clients.all %}
+                <p>{{ cliente.username }}</p>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block 'footer' %}

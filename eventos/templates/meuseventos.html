@@ -28,6 +28,7 @@
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if perms.eventos.change_evento %}
                                         <a href="{% url 'eventos:editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
+                                        <a href="#" onclick="confirmarFinalizar('{{ evento.id }}')" class="btn btn-success">Finalizar Evento</a>
                                         <a href="#" onclick="confirmarCancelar('{{ evento.id }}')" class="btn btn-danger">Cancelar Evento</a>
                                     {% endif %}
                                 </td>
@@ -43,6 +44,11 @@
         function confirmarCancelar(eventoId) {
             if (confirm("Tem certeza de que deseja cancelar este evento?")) {
                 window.location.href = "{% url 'eventos:cancelar_evento' id=0 %}".replace('0', eventoId);
+            }
+        }
+        function confirmarFinalizar(eventoId) {
+            if (confirm("Tem certeza de que deseja finalizar este evento?")) {
+                window.location.href = "{% url 'eventos:finalizar_evento' id=0 %}".replace('0', eventoId);
             }
         }
     </script>

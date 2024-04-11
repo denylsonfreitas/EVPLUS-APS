@@ -29,12 +29,6 @@ def listarEventos(request):
     eventos = Evento.objects.filter(user=request.user)
     return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
 
-@permission_required('eventos.delete_evento', login_url='/auth/login/')
-def cancelarEvento(request, id):
-    evento = Evento.objects.get(id=id)
-    evento.delete()
-    return redirect('eventos:meuseventos')
-
 @permission_required('eventos.change_evento', login_url='/auth/login/')
 def editarEvento(request, id):
     exibir_sidebar = True
@@ -72,6 +66,19 @@ def listarTodosEventos(request):
     else:
         eventosDisponiveis = Evento.objects.all()
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
+
+@permission_required('eventos.delete_evento', login_url='/auth/login/')
+def cancelarEvento(request, id):
+    evento = Evento.objects.get(id=id)
+    evento.delete()
+    return redirect('eventos:meuseventos')
+
+@permission_required('eventos.add_evento', login_url='/auth/login/')
+def finalizarEvento(request, id):
+    evento = Evento.objects.get(id=id)
+    evento.finalizado = True
+    evento.save()
+    return redirect('eventos:meuseventos')
 
 @login_required
 @permission_required('eventos.view_evento', raise_exception=True)

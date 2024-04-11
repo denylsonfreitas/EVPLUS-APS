@@ -73,5 +73,4 @@ def cadastro(request):
         user.last_name = lastname
         user.save()
         
-        messages.success(request, 'Cadastro realizado com sucesso! Faça o login para continuar.')
         return redirect('login')

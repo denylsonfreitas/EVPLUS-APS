@@ -9,24 +9,7 @@
 }
 
 .btn-success {
-    height: 45px;
+    padding: 6px;
+    height: 38px;
     width: 140px;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.btn-filter {
-    height: 40px;
-    width: 100px;
-    background-color: var(--dark-color);
-    padding: 8px;
-    border-radius: 5px;
-    color: white;
-    margin-bottom: 15px;
-}
-
-.btn-filter:hover {
-    background-color: var(--main-color);
 }

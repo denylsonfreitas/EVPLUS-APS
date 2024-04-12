@@ -26,8 +26,9 @@ def eventos(request):
 @permission_required('eventos.add_evento', raise_exception=True)
 def listarEventos(request):
     exibir_sidebar = True
-    eventos = Evento.objects.filter(user=request.user)
-    return render(request, 'meusEventos.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+    eventos_ativos = Evento.objects.filter(user=request.user, finalizado=False)  # Filtra eventos ativos
+    eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)  # Filtra eventos finalizados
+    return render(request, 'meusEventos.html', {'eventos': eventos_ativos, 'finalizarEvento': eventos_finalizados, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.change_evento', login_url='/auth/login/')
 def editarEvento(request, id):
@@ -62,9 +63,9 @@ def listarTodosEventos(request):
     exibir_sidebar = True
     categoria = request.GET.get('categoria')
     if categoria:
-        eventosDisponiveis = Evento.objects.filter(category=categoria)
+        eventosDisponiveis = Evento.objects.filter(category=categoria, finalizado=False)  # Filtra apenas eventos ativos com a categoria especificada
     else:
-        eventosDisponiveis = Evento.objects.all()
+        eventosDisponiveis = Evento.objects.filter(finalizado=False)  # Filtra apenas eventos ativos
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')
@@ -84,8 +85,10 @@ def finalizarEvento(request, id):
 @permission_required('eventos.view_evento', raise_exception=True)
 def listarEventosInscritos(request):
     exibir_sidebar = True
-    eventos_inscritos = Evento.objects.filter(clients=request.user)
-    return render(request, 'minhasInscricoes.html', {'eventos': eventos_inscritos, 'exibir_sidebar': exibir_sidebar})
+    eventos = Evento.objects.filter(clients=request.user, finalizado=False)
+    finalizarEvento = Evento.objects.filter(clients=request.user, finalizado=True)
+    return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'exibir_sidebar': exibir_sidebar})
+
 
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def inscricaoEvento(request, evento_id):

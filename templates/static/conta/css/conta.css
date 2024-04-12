@@ -15,14 +15,14 @@
     background: #fcf8f8;
 }
 
-.btn-salvar-alt{
+.btn-primary {
     height: 45px;
-    width: 170px;
+    width: 140px;
     background-color: var(--dark-color);
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     color: white;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: -15px;
 }
 

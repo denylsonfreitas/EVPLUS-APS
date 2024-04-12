@@ -11,6 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <h5>Eventos Ativos</h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -39,6 +40,41 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'eventos:eventos' %}" class="btn btn-primary">Criar Evento</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Eventos Finalizados</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in finalizarEvento %}
+                            <tr>
+                                <td>{{ evento.name }}</td>
+                                <td>{{ evento.date }}</td>
+                                <td>
+                                    <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
     <script>
         function confirmarCancelar(eventoId) {

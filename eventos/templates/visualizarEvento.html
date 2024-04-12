@@ -28,26 +28,38 @@
                         <p><i class='bx bxs-user'></i> {{ evento.user }}</p>
                     </div>
                 </div>
-                {% if perms.eventos.add_inscricao %}
-                    {% if not request.user in evento.clients.all %}
-                        <div class="text-center mt-4">
-                            <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
-                            {% csrf_token %}
-                            <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-primary" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
-                            </form>
-                        </div>
-                    {% endif %}
-                {% endif %}
-                {% if evento.user == request.user %}
-                    {% if perms.eventos.add_evento %}
+                {% if evento.finalizado %}
+                    <div class="text-center mt-4">
+                        <p>Evento finalizado</p>
+                    </div>
+                {% else %}
+                    {% if perms.eventos.add_inscricao %}
                         {% if not request.user in evento.clients.all %}
                             <div class="text-center mt-4">
                                 <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
                                 {% csrf_token %}
-                                <a href="{% url 'eventos:finalizar_evento' evento.id %}" class="btn btn-success" onclick="return confirm(Tem certeza de que deseja finalizar este evento?')">Finalizar Evento</a>
-                                <a href="{% url 'eventos:cancelar_evento' evento.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja cancelar este evento?')">Cancelar Evento</a>
+                                <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-primary" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
                                 </form>
                             </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if evento.user == request.user %}
+                        {% if perms.eventos.add_evento %}
+                            {% if not evento.finalizado %}
+                                {% if not request.user in evento.clients.all %}
+                                    <div class="text-center mt-4">
+                                        <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'eventos:finalizar_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja finalizar este evento?')">Finalizar Evento</a>
+                                        <a href="{% url 'eventos:cancelar_evento' evento.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja cancelar este evento?')">Cancelar Evento</a>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <div class="text-center mt-4">
+                                        <p>Evento finalizado</p>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 {% endif %}

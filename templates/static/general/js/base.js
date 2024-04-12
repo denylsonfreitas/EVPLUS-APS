@@ -21,9 +21,3 @@ if(sidebar.classList.contains("open")){
 }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-        var alertContainer = document.getElementById('alert-container');
-        alertContainer.innerHTML = '';
-    }, 7000);
-});

@@ -9,9 +9,12 @@
 }
 
 .btn-success {
-    padding: 6px;
-    height: 38px;
+    height: 45px;
     width: 140px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 15px;
 }
 
 .btn-filter {

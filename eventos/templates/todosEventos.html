@@ -60,7 +60,7 @@
                                                 <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
                                                 {% if perms.eventos.add_inscricao %}
                                                     {% if request.user not in evento.clients.all %}
-                                                        <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success btn-inscrever" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
+                                                        <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
                                                     {% endif %}
                                                 {% endif %}
                                             </td>

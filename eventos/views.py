@@ -62,10 +62,16 @@ def detalhesEvento(request, id):
 def listarTodosEventos(request):
     exibir_sidebar = True
     categoria = request.GET.get('categoria')
+    nome = request.GET.get('nome')
+    
+    eventosDisponiveis = Evento.objects.all()
+    
     if categoria:
-        eventosDisponiveis = Evento.objects.filter(category=categoria, finalizado=False)  # Filtra apenas eventos ativos com a categoria especificada
-    else:
-        eventosDisponiveis = Evento.objects.filter(finalizado=False)  # Filtra apenas eventos ativos
+        eventosDisponiveis = eventosDisponiveis.filter(category=categoria)
+    
+    if nome:
+        eventosDisponiveis = eventosDisponiveis.filter(name__icontains=nome)
+    
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')

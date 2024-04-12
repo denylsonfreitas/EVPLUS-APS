@@ -10,9 +10,9 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <form method="GET" action="{% url 'eventos:todos_eventos' %}">
-                    <div class="form-group">
+            <div class="col-md-12">
+                <form method="GET" action="{% url 'eventos:todos_eventos' %}" class="form-inline">
+                    <div class="form-group mr-2">
                         <label for="categoria">Filtrar por Categoria:</label>
                         <select class="form-control" id="categoria" name="categoria">
                             <option value="">Todas as categorias</option>
@@ -28,10 +28,17 @@
                             <option value="Outros">Outros</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-filter">Filtrar</button>
+                    <button type="submit" class="btn btn-filter mr-2">Filtrar</button>
+                    
+                    <div class="form-group">
+                        <label for="nome">Buscar por Nome:</label>
+                        <input type="text" class="form-control mr-2" id="nome" name="nome">
+                    </div>
+                    <button type="submit" class="btn btn-filter">Buscar</button>
                 </form>
             </div>
-        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

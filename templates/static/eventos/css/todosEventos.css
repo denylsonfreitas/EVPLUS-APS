@@ -18,15 +18,21 @@
 }
 
 .btn-filter {
-    height: 40px;
+    height: 38px;
     width: 100px;
     background-color: var(--dark-color);
-    padding: 8px;
+    padding: 5px;
     border-radius: 5px;
     color: white;
-    margin-bottom: 15px;
+    margin-right: 10px;
 }
 
 .btn-filter:hover {
     background-color: var(--main-color);
+}
+
+.form-inline {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
 }

@@ -64,11 +64,10 @@ def listarTodosEventos(request):
     categoria = request.GET.get('categoria')
     nome = request.GET.get('nome')
     
-    eventosDisponiveis = Evento.objects.all()
+    eventosDisponiveis = Evento.objects.filter(finalizado=False) 
     
     if categoria:
         eventosDisponiveis = eventosDisponiveis.filter(category=categoria)
-    
     if nome:
         eventosDisponiveis = eventosDisponiveis.filter(name__icontains=nome)
     
@@ -113,6 +112,14 @@ def cancelarInscricao(request, evento_id):
         evento.clients.remove(request.user)
     return redirect('eventos:minhasinscricoes')
 
+@login_required
+@permission_required('eventos.view_evento', raise_exception=True)
+def apagarEventoFinalizado(request, id):
+    evento = get_object_or_404(Evento, id=id)
+    if request.user == evento.user and evento.finalizado:
+        evento.delete()
+    return redirect('eventos:minhasinscricoes')
+    
 @permission_required('eventos.add_inscricao', login_url='/auth/login/')
 def listarCertificados(request):
     exibir_sidebar = True

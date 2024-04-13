@@ -35,6 +35,10 @@
                         <input type="time" class="form-control" id="horarioEvento" placeholder="Horário do evento" name="time" value="{{ evento.time }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="limiteInscricoes">Limite de Inscrições</label>
+                        <input type="number" class="form-control" id="limiteInscricoes" placeholder="Limite de Inscrições" name="limite_inscricoes" value="{{ evento.limite_inscricoes }}">
+                    </div>
+                    <div class="form-group">
                         <label for="categoriaEvento">Categoria</label>
                         <select class="form-control" id="categoriaEvento" name="category" required>
                             <option value="" disabled selected hidden>Escolha uma categoria</option>

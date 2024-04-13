@@ -50,7 +50,6 @@
                                         <th>Nome</th>
                                         <th>Local</th>
                                         <th>Data</th>
-                                        <th>Horário</th>
                                         <th>Descrição</th>
                                         <th>Opções</th>
                                     </tr>
@@ -61,13 +60,16 @@
                                             <td>{{ evento.name }}</td>
                                             <td>{{ evento.local }}</td>
                                             <td>{{ evento.date }}</td>
-                                            <td>{{ evento.time }}</td>
                                             <td>{{ evento.description }}</td>
                                             <td>
                                                 <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
                                                 {% if perms.eventos.add_inscricao %}
                                                     {% if request.user not in evento.clients.all %}
-                                                        <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
+                                                        {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
+                                                            <span class="btn btn-secondary">Vagas Esgotadas</span>
+                                                        {% else %}
+                                                            <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
                                             </td>

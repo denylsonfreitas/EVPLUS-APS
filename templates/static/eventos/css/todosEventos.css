@@ -32,7 +32,8 @@
 }
 
 .form-inline {
-    margin: 20px;
+    margint-top: 20px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
 }

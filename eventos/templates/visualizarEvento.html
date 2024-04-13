@@ -26,6 +26,17 @@
                         <p><i class='bx bxs-map'></i> {{ evento.local }}</p>
                         <p><i class='bx bxs-category'></i> {{ evento.category }}</p>
                         <p><i class='bx bxs-user'></i> {{ evento.user }}</p>
+                        {% if evento.limite_inscricoes %}
+                            {% if evento.limite_inscricoes == -1 %}
+                                <p><i class='bx bxs-coupon'></i> Ilimitado</p>
+                            {% elif evento.clients.count >= evento.limite_inscricoes %}
+                                <p><i class='bx bxs-coupon'></i> Esgotado</p>
+                            {% else %}
+                                <p><i class='bx bxs-coupon'></i> {{ evento.clients.count }} / {{ evento.limite_inscricoes }}</p>
+                            {% endif %}
+                        {% else %}
+                            <p><i class='bx bxs-coupon'></i> Ilimitado</p>
+                        {% endif %}
                     </div>
                 </div>
                 {% if evento.finalizado %}
@@ -35,30 +46,17 @@
                 {% else %}
                     {% if perms.eventos.add_inscricao %}
                         {% if not request.user in evento.clients.all %}
-                            <div class="text-center mt-4">
-                                <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
-                                {% csrf_token %}
-                                <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-primary" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
-                                </form>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                    {% if evento.user == request.user %}
-                        {% if perms.eventos.add_evento %}
-                            {% if not evento.finalizado %}
-                                {% if not request.user in evento.clients.all %}
-                                    <div class="text-center mt-4">
-                                        <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
-                                        {% csrf_token %}
-                                        <a href="{% url 'eventos:finalizar_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja finalizar este evento?')">Finalizar Evento</a>
-                                        <a href="{% url 'eventos:cancelar_evento' evento.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza de que deseja cancelar este evento?')">Cancelar Evento</a>
-                                        </form>
-                                    </div>
-                                {% else %}
-                                    <div class="text-center mt-4">
-                                        <p>Evento finalizado</p>
-                                    </div>
-                                {% endif %}
+                            {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
+                                <div class="text-center mt-4">
+                                    <p>Não há mais vagas disponíveis para este evento.</p>
+                                </div>
+                            {% else %}
+                                <div class="text-center mt-4">
+                                    <form action="{% url 'eventos:inscricao_evento' evento.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-primary" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
+                                    </form>
+                                </div>
                             {% endif %}
                         {% endif %}
                     {% endif %}
@@ -68,16 +66,16 @@
     </div>
 
     {% if evento.user == request.user %}
-    {% if perms.eventos.change_evento %}
-    <div class="container mt-4">
-        <h2>Lista de Inscritos</h2>
-        <ul>
-            {% for cliente in evento.clients.all %}
-                <p>{{ cliente.username }}</p>
-            {% endfor %}
-            {% endif %}
-        </ul>
-    </div>
+        {% if perms.eventos.change_evento %}
+            <div class="container mt-4">
+                <h4>Lista de Inscritos</h4>
+                <ul>
+                    {% for cliente in evento.clients.all %}
+                        <p>{{ cliente.username }}</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

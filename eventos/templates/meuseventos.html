@@ -66,6 +66,7 @@
                                 <td>{{ evento.date }}</td>
                                 <td>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                    <a href="#" onclick="confirmarApagar('{{ evento.id }}')" class="btn btn-danger">Apagar</a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -85,6 +86,11 @@
         function confirmarFinalizar(eventoId) {
             if (confirm("Tem certeza de que deseja finalizar este evento?")) {
                 window.location.href = "{% url 'eventos:finalizar_evento' id=0 %}".replace('0', eventoId);
+            }
+        }
+        function confirmarApagar(eventoId) {
+            if (confirm("Tem certeza de que deseja apagar este evento?")) {
+                window.location.href = "{% url 'eventos:apagar_evento' id=0 %}".replace('0', eventoId);
             }
         }
     </script>

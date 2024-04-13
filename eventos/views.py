@@ -112,13 +112,11 @@ def cancelarInscricao(request, evento_id):
         evento.clients.remove(request.user)
     return redirect('eventos:minhasinscricoes')
 
-@login_required
-@permission_required('eventos.view_evento', raise_exception=True)
-def apagarEventoFinalizado(request, id):
-    evento = get_object_or_404(Evento, id=id)
-    if request.user == evento.user and evento.finalizado:
-        evento.delete()
-    return redirect('eventos:minhasinscricoes')
+@permission_required('eventos.delete_evento', login_url='/auth/login/')
+def apagarEvento(request, id):
+    evento = Evento.objects.get(id=id)
+    evento.delete()
+    return redirect('eventos:meuseventos')
     
 @permission_required('eventos.add_inscricao', login_url='/auth/login/')
 def listarCertificados(request):

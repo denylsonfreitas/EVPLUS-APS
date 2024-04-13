@@ -7,6 +7,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 
+def erro(request):
+    exibir_sidebar = True
+    return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar})
+
 @permission_required('eventos.add_evento', login_url='/auth/login/')
 def eventos(request):
     exibir_sidebar = True
@@ -27,8 +31,8 @@ def eventos(request):
 @permission_required('eventos.add_evento', raise_exception=True)
 def listarEventos(request):
     exibir_sidebar = True
-    eventos_ativos = Evento.objects.filter(user=request.user, finalizado=False)  # Filtra eventos ativos
-    eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)  # Filtra eventos finalizados
+    eventos_ativos = Evento.objects.filter(user=request.user, finalizado=False)
+    eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)
     return render(request, 'meusEventos.html', {'eventos': eventos_ativos, 'finalizarEvento': eventos_finalizados, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.change_evento', login_url='/auth/login/')
@@ -51,7 +55,7 @@ def editarEvento(request, id):
             else:
                 return render(request, 'editarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
     else:
-        return HttpResponse("O evento não foi encontrado.", status=404)
+        return render(request, 'erro.html')
 
 def detalhesEvento(request, id):
     exibir_sidebar = True
@@ -138,28 +142,37 @@ def enviarCertificado(request, evento_id):
             if request.POST.get('enviar_para_todos'):
                 for participante in evento.clients.all():
                     Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
-                return redirect('eventos:gerenciar_certificados')
             else:
-                participantes_selecionados = request.POST.getlist('participantes_selecionados')
-                for participante_id in participantes_selecionados:
-                    participante = get_object_or_404(User, pk=participante_id)
-                    Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
-                return redirect('eventos:gerenciar_certificados')
+                participante_id = request.POST.get('participante_selecionado')
+                print("ID do participante selecionado:", participante_id)
+                try:
+                    participante = User.objects.get(pk=participante_id)
+                    if participante in evento.clients.all():
+                        Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
+                    else:
+                        return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar})
+                except User.DoesNotExist:
+                    return render(request, 'erro.html',  {'exibir_sidebar': exibir_sidebar})
+
+            return redirect('eventos:gerenciar_certificados')
     else:
         form = CertificadoForm()
 
     return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
 
-
 @login_required
-@permission_required('eventos.add_inscricao', raise_exception=True)
+@permission_required('eventos.view_evento', raise_exception=True)
 def downloadCertificado(request, evento_id):
+    exibir_sidebar = True
     evento = get_object_or_404(Evento, pk=evento_id)
-    certificados = Certificado.objects.filter(evento=evento)
 
-    if certificados.exists():
-        certificado = certificados.first()
-        return FileResponse(open(certificado.arquivo.path, 'rb'))
+    if request.user in evento.clients.all():
+        certificados = Certificado.objects.filter(evento=evento, participante=request.user)
+        
+        if certificados.exists():
+            certificado = certificados.first()
+            return FileResponse(open(certificado.arquivo.path, 'rb'))
+        else:
+            return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar})
     else:
-        raise HttpResponse("Certificado não encontrado.", status=404)
-
+        return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar})

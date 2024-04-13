@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'eventos/css/visualizarEvento.css' %}">
+    <style>
+        .img-fluid {
+            max-width: 35%;
+            margin-left: 31%;
+        }
+    </style>
+{% endblock %}
+
+{% block 'title' %}Erro{% endblock %}
+
+{% block 'dashboard' %}
+    <img src="{% static 'images/erro.jpg' %}" alt="erro" class="img-fluid">
+    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+{% endblock %}

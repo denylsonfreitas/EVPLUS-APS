@@ -145,17 +145,12 @@ def enviarCertificado(request, evento_id):
     return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
 
 @login_required
+@permission_required('eventos.add_inscricao', raise_exception=True)
 def downloadCertificado(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
-    if request.user in evento.clients.all() and evento.finalizado:
-        certificados_path = evento.certificado.path
-        if os.path.exists(certificados_path):
-            with open(certificados_path, 'rb') as cert_file:
-                response = FileResponse(cert_file)
-                response['Content-Disposition'] = 'attachment; filename="certificado.pdf"'
-                return response
-        else:
-            return HttpResponse("Certificado não encontrado", status=404)
+    if evento.finalizado and evento.certificado:
+        certificado_path = evento.certificado.path
+        return FileResponse(open(certificado_path, 'rb'), as_attachment=True)
     else:
-        return HttpResponse("Você não tem permissão para baixar este certificado", status=403)
+        return HttpResponse("Certificado não encontrado ou evento não finalizado.", status=404)
 

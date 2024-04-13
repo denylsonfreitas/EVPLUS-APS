@@ -12,7 +12,7 @@ class Evento(models.Model):
     date = models.DateField()
     time = models.TimeField()
     category = models.CharField(max_length=100)
-    banner = models.ImageField(null=True, blank=True, upload_to='images/')
+    banner = models.ImageField(null=True, blank=True, upload_to='banners/')
     limite_inscricoes = models.PositiveIntegerField(null=True, blank=True, verbose_name="Limite de Inscrições")
     finalizado = models.BooleanField(default=False)
     certificados = models.ManyToManyField(User, through='Certificado', related_name='eventos_certificados')

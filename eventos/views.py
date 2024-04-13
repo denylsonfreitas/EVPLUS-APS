@@ -118,8 +118,6 @@ def apagarEvento(request, id):
     evento = Evento.objects.get(id=id)
     evento.delete()
     return redirect('eventos:meuseventos')
-    
-from .forms import CertificadoForm
 
 @login_required
 def gerenciarCertificados(request):
@@ -140,17 +138,18 @@ def enviarCertificado(request, evento_id):
             if request.POST.get('enviar_para_todos'):
                 for participante in evento.clients.all():
                     Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
+                return redirect('eventos:gerenciar_certificados')
             else:
                 participantes_selecionados = request.POST.getlist('participantes_selecionados')
                 for participante_id in participantes_selecionados:
                     participante = get_object_or_404(User, pk=participante_id)
                     Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
-
-            return redirect('eventos:gerenciar_certificados')
+                return redirect('eventos:gerenciar_certificados')
     else:
         form = CertificadoForm()
 
     return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+
 
 @login_required
 @permission_required('eventos.add_inscricao', raise_exception=True)

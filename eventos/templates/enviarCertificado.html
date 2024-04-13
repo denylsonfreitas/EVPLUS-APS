@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
 {% endblock %}
 
-{% block 'title' %}Enviar Certificados{% endblock %}
+{% block 'title' %}Enviar Certificado{% endblock %}
 
 {% block 'dashboard' %}
     <div class="container">
@@ -20,21 +20,28 @@
                             Enviar para todos os participantes
                         </label>
                     </div>
-                    <div class="form-group">
-                        <label for="id_participantes_selecionados">
-                            Selecione os participantes:
-                        </label>
-                        <select multiple class="form-control" id="id_participantes_selecionados" name="participantes_selecionados">
+                    <div class="form-group" id="div_participante_selecionado" style="display: none;">
+                        <label for="id_participante_selecionado">Selecione o participante:</label>
+                        <select class="form-control" id="id_participante_selecionado" name="participante_selecionado">
                             {% for participante in evento.clients.all %}
                                 <option value="{{ participante.id }}">{{ participante.username }}</option>
                             {% endfor %}
                         </select>
-                    </div>
+                    </div>                    
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+    <script>
+        document.getElementById('id_enviar_para_todos').addEventListener('change', function() {
+            var divParticipanteSelecionado = document.getElementById('div_participante_selecionado');
+            if (this.checked) {
+                divParticipanteSelecionado.style.display = 'none';
+            } else {
+                divParticipanteSelecionado.style.display = 'block';
+            }
+        });
+    </script>
 {% endblock %}

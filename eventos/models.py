@@ -15,6 +15,7 @@ class Evento(models.Model):
     banner = models.ImageField(null=True, blank=True, upload_to='images/')
     limite_inscricoes = models.PositiveIntegerField(null=True, blank=True, verbose_name="Limite de Inscrições")
     finalizado = models.BooleanField(default=False)
+    certificados = models.ManyToManyField(User, through='Certificado', related_name='eventos_certificados')
 
     def __str__(self):
         return self.name
@@ -29,8 +30,8 @@ class Inscricao(models.Model):
 from django.db import models
 
 class Certificado(models.Model):
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE, default=1) 
-    participante = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    participante = models.ForeignKey(User, on_delete=models.CASCADE)
     arquivo = models.FileField(upload_to='certificados/')
 
     def __str__(self):

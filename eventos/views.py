@@ -136,14 +136,15 @@ def enviarCertificado(request, evento_id):
     if request.method == 'POST':
         form = CertificadoForm(request.POST, request.FILES)
         if form.is_valid():
+            arquivo = form.cleaned_data['arquivo']
             if request.POST.get('enviar_para_todos'):
                 for participante in evento.clients.all():
-                    Certificado.objects.create(evento=evento, participante=participante, arquivo=form.cleaned_data['arquivo'])
+                    Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
             else:
                 participantes_selecionados = request.POST.getlist('participantes_selecionados')
                 for participante_id in participantes_selecionados:
                     participante = get_object_or_404(User, pk=participante_id)
-                    Certificado.objects.create(evento=evento, participante=participante, arquivo=form.cleaned_data['arquivo'])
+                    Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
 
             return redirect('eventos:gerenciar_certificados')
     else:
@@ -151,12 +152,15 @@ def enviarCertificado(request, evento_id):
 
     return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
 
-
 @login_required
 @permission_required('eventos.add_inscricao', raise_exception=True)
 def downloadCertificado(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
-    certificado = evento.certificado
-    if certificado:
-        return FileResponse(open(certificado.path, 'rb'))
-    return HttpResponse("O certificado não foi encontrado.", status=404)
+    certificados = Certificado.objects.filter(evento=evento)
+
+    if certificados.exists():
+        certificado = certificados.first()
+        return FileResponse(open(certificado.arquivo.path, 'rb'))
+    else:
+        raise HttpResponse("Certificado não encontrado.", status=404)
+

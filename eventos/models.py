@@ -15,6 +15,7 @@ class Evento(models.Model):
     banner = models.ImageField(null=True, blank=True, upload_to='images/')
     limite_inscricoes = models.PositiveIntegerField(null=True, blank=True, verbose_name="Limite de Inscrições")
     finalizado = models.BooleanField(default=False)
+    certificado = models.FileField(upload_to='certificados/', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -22,7 +23,6 @@ class Evento(models.Model):
 class Inscricao(models.Model):
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    certificado = models.FileField(upload_to='certificados/', null=True, blank=True)
 
     class Meta:
         unique_together = ['evento', 'user']

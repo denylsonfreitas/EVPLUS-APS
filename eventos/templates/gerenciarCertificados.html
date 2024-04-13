@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
+{% endblock %}
+
+{% block 'title' %}Gerenciar Certificados{% endblock %}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <h4>Eventos Finalizados</h4>
+                {% if eventos_finalizados %}
+                    <ul>
+                        {% for evento in eventos_finalizados %}
+                            <li>
+                                {{ evento.name }}
+                                {% if request.user == evento.user %}
+                                    | <a href="{% url 'eventos:enviar_certificado' evento.id %}">Enviar Certificado</a>
+                                {% else %}
+                                    - <a href="{% url 'eventos:download_certificado' evento.id %}">Baixar Certificado</a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Nenhum evento finalizado foi encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+{% endblock %}

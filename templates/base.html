@@ -76,6 +76,8 @@
         <span class="tooltip">Meus Eventos</span>
       </li>
       {% endif %}
+      {% endif %}
+      {% if perms.eventos.add_evento %}
       <li>
         <a href="{% url 'eventos:gerenciar_certificados' %}">
           <i class='bx bx-file'></i>

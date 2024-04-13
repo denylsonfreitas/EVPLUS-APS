@@ -56,6 +56,9 @@
                                 <td>{{ evento.date }}</td>
                                 <td>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                    {% if evento.certificado %}
+                                    <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">Baixar Certificado</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

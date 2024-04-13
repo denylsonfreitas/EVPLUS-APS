@@ -1,13 +1,11 @@
 #views.py
 
-from .models import Evento
-from .forms import EventoForm
-from django.http import HttpResponse
+from .models import Evento, Certificado
+from .forms import EventoForm, CertificadoForm
+from django.http import HttpResponse, FileResponse
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
-from django.http import FileResponse
-from .forms import CertificadoForm
-import os
 
 @permission_required('eventos.add_evento', login_url='/auth/login/')
 def eventos(request):
@@ -134,23 +132,31 @@ def gerenciarCertificados(request):
 def enviarCertificado(request, evento_id):
     exibir_sidebar = True
     evento = get_object_or_404(Evento, pk=evento_id)
+
     if request.method == 'POST':
-        form = CertificadoForm(request.POST, request.FILES, instance=evento)
+        form = CertificadoForm(request.POST, request.FILES)
         if form.is_valid():
-            evento.certificado = form.cleaned_data['certificado']
-            evento.save()
+            if request.POST.get('enviar_para_todos'):
+                for participante in evento.clients.all():
+                    Certificado.objects.create(evento=evento, participante=participante, arquivo=form.cleaned_data['arquivo'])
+            else:
+                participantes_selecionados = request.POST.getlist('participantes_selecionados')
+                for participante_id in participantes_selecionados:
+                    participante = get_object_or_404(User, pk=participante_id)
+                    Certificado.objects.create(evento=evento, participante=participante, arquivo=form.cleaned_data['arquivo'])
+
             return redirect('eventos:gerenciar_certificados')
     else:
-        form = CertificadoForm(instance=evento)
+        form = CertificadoForm()
+
     return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+
 
 @login_required
 @permission_required('eventos.add_inscricao', raise_exception=True)
 def downloadCertificado(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
-    if evento.finalizado and evento.certificado:
-        certificado_path = evento.certificado.path
-        return FileResponse(open(certificado_path, 'rb'), as_attachment=True)
-    else:
-        return HttpResponse("Certificado não encontrado ou evento não finalizado.", status=404)
-
+    certificado = evento.certificado
+    if certificado:
+        return FileResponse(open(certificado.path, 'rb'))
+    return HttpResponse("O certificado não foi encontrado.", status=404)

@@ -14,7 +14,23 @@
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Enviar</button>
+                    <div class="form-group">
+                        <label for="id_enviar_para_todos">
+                            <input type="checkbox" id="id_enviar_para_todos" name="enviar_para_todos">
+                            Enviar para todos os participantes
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_participantes_selecionados">
+                            Selecione os participantes:
+                        </label>
+                        <select multiple class="form-control" id="id_participantes_selecionados" name="participantes_selecionados">
+                            {% for participante in evento.clients.all %}
+                                <option value="{{ participante.id }}">{{ participante.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
         </div>

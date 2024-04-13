@@ -19,11 +19,6 @@
                                 {{ evento.name }}
                                 {% if request.user == evento.user %}
                                     | <a href="{% url 'eventos:enviar_certificado' evento.id %}">Enviar Certificado</a>
-                                    {% if perms.eventos.add_inscricao %}
-                                        {% if evento.certificado %}
-                                            | <a href="{% url 'eventos:download_certificado' evento.id %}">Download Certificado</a>
-                                        {% endif %}
-                                    {% endif %}
                                 {% endif %}
                             </li>
                         {% endfor %}

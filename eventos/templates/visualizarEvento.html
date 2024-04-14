@@ -3,8 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/visualizarEvento.css' %}">
-    <!-- Adicione o CSS do Bootstrap se ainda não estiver incluído -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 {% block 'title' %}{{ evento.name }}{% endblock %}
@@ -54,7 +52,7 @@
                                 </div>
                             {% else %}
                                 <div class="text-center mt-4">
-                                    <button class="btn btn-primary" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</button>
+                                    <button class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</button>
                                 </div>
                             {% endif %}
                         {% endif %}

@@ -1,7 +1,9 @@
 .btn-primary {
-    border-radius: 5px;
-    color: white;
-    margin-bottom: 20px;
+    height: 40px;
+    width: 140px;
+    background-color: var(--dark-color);
+    padding: 7px;
+    margin-bottom: 15px;
 }
 
 .btn-success {

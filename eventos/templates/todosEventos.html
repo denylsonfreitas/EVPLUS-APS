@@ -3,6 +3,8 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/todosEventos.css' %}">
+    <!-- Adicione o CSS do Bootstrap se ainda não estiver incluído -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 {% block 'title' %}Todos os Eventos{% endblock %}
@@ -28,7 +30,7 @@
                             <option value="Outros">Outros</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-filter mr-2">Filtrar</button>
+                    <button type="submit" class="btn btn-filter">Filtrar</button>
                     
                     <div class="form-group">
                         <label for="nome">Buscar por Nome:</label>
@@ -68,7 +70,7 @@
                                                         {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
                                                             <span class="btn btn-secondary">Vagas Esgotadas</span>
                                                         {% else %}
-                                                            <a href="{% url 'eventos:inscricao_evento' evento.id %}" class="btn btn-success" onclick="return confirm('Tem certeza de que deseja se inscrever neste evento?')">Inscrever-se</a>
+                                                            <a href="#" class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</a>
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endif %}
@@ -83,8 +85,43 @@
             </div>
         </div>
     </div>
-{% endblock %}
 
-{% block 'footer' %}
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="confirmarBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+    <!-- Inclua a biblioteca jQuery e o JavaScript do Bootstrap se ainda não estiverem incluídos -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var eventoIdParaInscricao;
+
+        function confirmarInscricao(eventoId) {
+            eventoIdParaInscricao = eventoId;
+            $('#confirmarModalLabel').text('Inscrever-se no Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:inscricao_evento' evento_id=0 %}".replace('0', eventoIdParaInscricao);
+            });
+        }
+    </script>
 {% endblock %}

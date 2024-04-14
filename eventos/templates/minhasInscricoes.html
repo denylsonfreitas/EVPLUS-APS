@@ -3,6 +3,7 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 {% block 'title' %}Minhas Inscrições{% endblock %}
@@ -58,7 +59,7 @@
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if evento.certificados.all %}
                                         {% for certificado in evento.certificados.all %}
-                                            <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">Baixar Certificado</a>
+                                            <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">Certificado</a>
                                         {% endfor %}
                                     {% endif %}
                                 </td>
@@ -69,12 +70,42 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        var eventoIdParaCancelar;
+
         function confirmarCancelar(eventoId) {
-            if (confirm("Tem certeza de que deseja cancelar sua inscrição neste evento?")) {
-                window.location.href = "{% url 'eventos:cancelar_inscricao' evento_id=0 %}".replace('0', eventoId);
-            }
+            eventoIdParaCancelar = eventoId;
+            $('#confirmarModalLabel').text('Cancelar Inscrição');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:cancelar_inscricao' evento_id=0 %}".replace('0', eventoIdParaCancelar);
+            });
         }
     </script>
 {% endblock %}

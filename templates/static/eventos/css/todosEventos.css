@@ -1,18 +1,13 @@
 .btn-primary {
-    height: 45px;
+    height: 40px;
     width: 140px;
-    background-color: var(--dark-color);
-    padding: 10px;
-    border-radius: 5px;
     color: white;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .btn-success {
-    height: 45px;
+    height: 40x;
     width: 140px;
-    padding: 10px;
-    border-radius: 5px;
     color: white;
     margin-bottom: 15px;
 }
@@ -22,7 +17,6 @@
     width: 100px;
     background-color: var(--dark-color);
     padding: 5px;
-    border-radius: 5px;
     color: white;
     margin-right: 10px;
 }
@@ -36,4 +30,8 @@
     margin-bottom: 15px;
     display: flex;
     justify-content: center;
+}
+
+.modal-backdrop.show {
+    display: none;
 }

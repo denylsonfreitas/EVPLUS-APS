@@ -3,6 +3,7 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 {% block 'title' %}Meus Eventos{% endblock %}
@@ -40,6 +41,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -77,21 +100,39 @@
     </div>
 
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        var eventoIdParaCancelar;
+        var eventoIdParaFinalizar;
+        var eventoIdParaApagar;
+
         function confirmarCancelar(eventoId) {
-            if (confirm("Tem certeza de que deseja cancelar este evento?")) {
-                window.location.href = "{% url 'eventos:cancelar_evento' id=0 %}".replace('0', eventoId);
-            }
+            eventoIdParaCancelar = eventoId;
+            $('#confirmarModalLabel').text('Cancelar Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:cancelar_evento' id=0 %}".replace('0', eventoIdParaCancelar);
+            });
         }
+
         function confirmarFinalizar(eventoId) {
-            if (confirm("Tem certeza de que deseja finalizar este evento?")) {
-                window.location.href = "{% url 'eventos:finalizar_evento' id=0 %}".replace('0', eventoId);
-            }
+            eventoIdParaFinalizar = eventoId;
+            $('#confirmarModalLabel').text('Finalizar Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:finalizar_evento' id=0 %}".replace('0', eventoIdParaFinalizar);
+            });
         }
+
         function confirmarApagar(eventoId) {
-            if (confirm("Tem certeza de que deseja apagar este evento?")) {
-                window.location.href = "{% url 'eventos:apagar_evento' id=0 %}".replace('0', eventoId);
-            }
+            eventoIdParaApagar = eventoId;
+            $('#confirmarModalLabel').text('Apagar Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:apagar_evento' id=0 %}".replace('0', eventoIdParaApagar);
+            });
         }
     </script>
 {% endblock %}

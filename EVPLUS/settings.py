@@ -129,3 +129,4 @@ GRAPH_MODELS = {
 }
 
 LOGIN_URL = 'auth/login/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

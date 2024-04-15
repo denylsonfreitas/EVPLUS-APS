@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'usuario/css/login.css' %}">
+{% endblock %}
+
+{% block 'title' %}Redefinir sua senha{% endblock %}
+
+{% block 'dashboard' %}
+    <a href="{% url 'home' %}">
+        <img src="{% static 'images/LOGO-blue.png' %}" alt="Logo" class="logo">
+    </a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Olá!</p>
+                        <p>Você está recebendo este e-mail porque uma solicitação de redefinição de senha foi feita para sua conta.</p>
+                        <p>Por favor, clique no link abaixo para redefinir sua senha:</p>
+                        <a href="{{ reset_url }}">Redefinir senha</a>
+                        <p>Se você não solicitou isso, por favor, ignore este e-mail.</p>
+                        <p>Obrigado!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'usuario/js/login.js' %}"></script>
+{% endblock %}

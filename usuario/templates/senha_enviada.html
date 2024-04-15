@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'usuario/css/login.css' %}">
+{% endblock %}
+
+{% block 'title' %}
+    Senha enviada
+{% endblock %}
+
+{% block 'dashboard' %}
+    <a href="{% url 'home' %}">
+        <img src="{% static 'images/LOGO-blue.png' %}" alt="Logo" class="logo">
+    </a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <h4>Solicitação de Redefinição</h4>
+                            <p>Um e-mail com instruções para redefinir sua senha foi enviado para o endereço fornecido.</p>
+                            <p>Por favor, verifique sua caixa de entrada e siga as instruções fornecidas no e-mail.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'usuario/js/login.js' %}"></script>
+{% endblock %}

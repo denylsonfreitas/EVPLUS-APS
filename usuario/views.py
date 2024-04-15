@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes
 
 @login_required
 def home(request):
@@ -74,3 +79,28 @@ def cadastro(request):
         user.save()
         
         return redirect('login')
+
+def esqueceu_senha(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_url = request.build_absolute_uri('/') + 'resetar-senha/' + uid + '/' + token + '/'
+            email_subject = 'Redefinir sua senha'
+            email_body = render_to_string('resetar_senha_email.html', {
+                'reset_url': reset_url,
+            })
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                'denyprime@gmail.com',
+                [email],
+            )
+            email.send()
+        return redirect('senha_enviada')
+    return render(request, 'esqueceu_senha.html')
+
+def senha_enviada(request):
+    return render(request, 'senha_enviada.html')

@@ -51,20 +51,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for evento in finalizarEvento %}
-                            <tr>
-                                <td>{{ evento.name }}</td>
-                                <td>{{ evento.date }}</td>
-                                <td>
-                                    <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
-                                    {% if evento.certificados.all %}
-                                        {% for certificado in evento.certificados.all %}
-                                            <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">Certificado</a>
-                                        {% endfor %}
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        {% for evento, certificados in eventos_e_certificados.items %}
+                        <tr>
+                            <td>{{ evento.name }}</td>
+                            <td>{{ evento.date }}</td>
+                            <td>
+                                <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                {% if certificados %}
+                                    <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">Certificado</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

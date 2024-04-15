@@ -18,7 +18,7 @@
                             <li>
                                 {{ evento.name }}
                                 {% if request.user == evento.user %}
-                                    | <a href="{% url 'eventos:enviar_certificado' evento.id %}">Enviar Certificado</a>
+                                    <a href="{% url 'eventos:enviar_certificado' evento.id %}">Enviar Certificado</a>
                                 {% endif %}
                             </li>
                         {% endfor %}

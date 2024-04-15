@@ -20,7 +20,7 @@
                             Enviar para todos os participantes
                         </label>
                     </div>
-                    <div class="form-group" id="div_participante_selecionado" style="display: none;">
+                    <div class="form-group" id="div_participante_selecionado">
                         <label for="id_participante_selecionado">Selecione o participante:</label>
                         <select class="form-control" id="id_participante_selecionado" name="participante_selecionado">
                             {% for participante in evento.clients.all %}

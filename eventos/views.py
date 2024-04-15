@@ -92,13 +92,17 @@ def finalizarEvento(request, id):
     return redirect('eventos:meuseventos')
 
 @login_required
-@permission_required('eventos.view_evento', raise_exception=True)
 def listarEventosInscritos(request):
     exibir_sidebar = True
     eventos = Evento.objects.filter(clients=request.user, finalizado=False)
     finalizarEvento = Evento.objects.filter(clients=request.user, finalizado=True)
-    return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'exibir_sidebar': exibir_sidebar})
-
+    
+    eventos_e_certificados = {}
+    for evento in finalizarEvento:
+        certificados = Certificado.objects.filter(evento=evento, participante=request.user)
+        eventos_e_certificados[evento] = certificados
+    
+    return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'eventos_e_certificados': eventos_e_certificados, 'exibir_sidebar': exibir_sidebar})
 
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def inscricaoEvento(request, evento_id):

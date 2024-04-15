@@ -61,6 +61,26 @@
             </div>
         </div>
     </div>
+        <!-- Inscrições no Evento -->
+    {% if perms.eventos.add_evento %}
+    {% if request.user == evento.user %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p></p>
+            <h4>Inscritos no Evento</h4>
+            <ul>
+                {% for cliente in evento.clients.all %}
+                    <li>{{ cliente.username }}</li>
+                {% empty %}
+                    <li>Não há inscritos neste evento ainda.</li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
 
     <!-- Modal de Confirmação -->
     <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">

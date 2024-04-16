@@ -333,3 +333,11 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.user-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: var(--dark-color);
+}

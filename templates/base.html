@@ -17,6 +17,11 @@
 <body>
   <div class="page-topo" id="page-topo">
     <h1 class="main-title" id="page-topo-title"></h1>
+    {% if user.is_authenticated %}
+    <div class="user-info">
+        <p>Olá, {{ user.username }}</p>
+    </div>
+{% endif %}
   </div>
   {% if exibir_sidebar %}
   <div class="sidebar">

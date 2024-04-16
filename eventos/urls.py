@@ -19,7 +19,6 @@ urlpatterns = [
     path('cancelar-inscricao/<int:evento_id>/', views.cancelarInscricao, name='cancelar_inscricao'),
     path('finalizar/<int:id>/', views.finalizarEvento, name='finalizar_evento'),
     path('apagar/<int:id>/', views.apagarEvento, name='apagar_evento'),
-    path('certificados/', views.gerenciarCertificados, name='gerenciar_certificados'),
     path('enviar-certificado/<int:evento_id>/', views.enviarCertificado, name='enviar_certificado'),
     path('download-certificado/<int:evento_id>/', views.downloadCertificado, name='download_certificado'),
     path('erro/', views.erro, name='erro'),

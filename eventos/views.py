@@ -128,12 +128,6 @@ def apagarEvento(request, id):
     return redirect('eventos:meuseventos')
 
 @login_required
-def gerenciarCertificados(request):
-    exibir_sidebar = True
-    eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)
-    return render(request, 'gerenciarCertificados.html', {'eventos_finalizados': eventos_finalizados, 'exibir_sidebar': exibir_sidebar})
-
-@login_required
 @permission_required('eventos.add_evento', raise_exception=True)
 def enviarCertificado(request, evento_id):
     exibir_sidebar = True
@@ -162,7 +156,7 @@ def enviarCertificado(request, evento_id):
                     motivo_erro = "O participante selecionado não existe"
                     return render(request, 'erro.html',  {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
 
-            return redirect('eventos:gerenciar_certificados')
+            return redirect('eventos:meuseventos')
     else:
         form = CertificadoForm()
 

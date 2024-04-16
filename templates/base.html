@@ -82,15 +82,6 @@
       </li>
       {% endif %}
       {% endif %}
-      {% if perms.eventos.add_evento %}
-      <li>
-        <a href="{% url 'eventos:gerenciar_certificados' %}">
-          <i class='bx bx-file'></i>
-          <span class="links_name">Gerenciar Certificados</span>
-        </a>
-        <span class="tooltip">Gerenciar Certificados</span>
-      </li>
-      {% endif %}
       {% if user.is_authenticated %}
       <li>
         <a href="{% url 'logout' %}">

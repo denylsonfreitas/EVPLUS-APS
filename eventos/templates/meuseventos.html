@@ -89,6 +89,9 @@
                                 <td>{{ evento.date }}</td>
                                 <td>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                    {% if request.user == evento.user %}
+                                    <a href="{% url 'eventos:enviar_certificado' evento.id %}" class="btn btn-success">Enviar Certificado</a>
+                                    {% endif %}
                                     <a href="#" onclick="confirmarApagar('{{ evento.id }}')" class="btn btn-danger">Apagar</a>
                                 </td>
                             </tr>

@@ -148,11 +148,9 @@ def enviarCertificado(request, evento_id):
                     if participante in evento.clients.all():
                         Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
                     else:
-                        # O participante selecionado não está inscrito no evento
                         motivo_erro = "O participante selecionado não está inscrito no evento"
                         return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
                 except User.DoesNotExist:
-                    # O participante selecionado não existe
                     motivo_erro = "O participante selecionado não existe"
                     return render(request, 'erro.html',  {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
 
@@ -175,10 +173,9 @@ def downloadCertificado(request, evento_id):
             certificado = certificados.first()
             return FileResponse(open(certificado.arquivo.path, 'rb'))
         else:
-            # O certificado não pertence ao usuário
             motivo_erro = "O certificado não pertence ao usuário"
             return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
     else:
-        # O usuário não está inscrito no evento
         motivo_erro = "O usuário não está inscrito no evento"
         return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+

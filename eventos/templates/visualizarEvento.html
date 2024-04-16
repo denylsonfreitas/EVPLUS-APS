@@ -28,14 +28,14 @@
                         <p><i class='bx bxs-user'></i> {{ evento.user }}</p>
                         {% if evento.limite_inscricoes %}
                             {% if evento.limite_inscricoes == -1 %}
-                                <p><i class='bx bxs-coupon'></i> Ilimitado</p>
+                                <p><i class='bx bxs-coupon'></i> Não possui limite de inscrições</p>
                             {% elif evento.clients.count >= evento.limite_inscricoes %}
                                 <p><i class='bx bxs-coupon'></i> Esgotado</p>
                             {% else %}
                                 <p><i class='bx bxs-coupon'></i> {{ evento.clients.count }} / {{ evento.limite_inscricoes }}</p>
                             {% endif %}
                         {% else %}
-                            <p><i class='bx bxs-coupon'></i> Ilimitado</p>
+                            <p><i class='bx bxs-coupon'></i> Não possui limite de inscrições</p>
                         {% endif %}
                     </div>
                 </div>
@@ -61,7 +61,6 @@
             </div>
         </div>
     </div>
-        <!-- Inscrições no Evento -->
     {% if perms.eventos.add_evento %}
     {% if request.user == evento.user %}
     <div class="container">
@@ -80,7 +79,7 @@
         </div>
     </div>
     {% endif %}
-    {% endif %}
+    {% endif %} 
 
     <!-- Modal de Confirmação -->
     <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
@@ -104,7 +103,6 @@
     </div>
 
     <script src="{% static 'eventos/js/meuseventos.js' %}"></script>
-    <!-- Inclua a biblioteca jQuery e o JavaScript do Bootstrap se ainda não estiverem incluídos -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

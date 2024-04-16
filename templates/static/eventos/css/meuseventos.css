@@ -15,3 +15,7 @@
 .modal-backdrop.show {
     display: none;
 }
+
+.h5, h5{
+    margin-top: 20px;
+}

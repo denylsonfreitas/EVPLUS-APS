@@ -1,31 +1,7 @@
 .form-evento{
-    background-color: var(rgba(255, 255, 255, 0));
-    width: 100%;
-    margin-top: 18px;
-    margin-left: 18px;
-    margin-right: 25px;
-    margin-bottom: 10px;
+    width: 550px;
     text-align: left;
-    color: var(--dark-color);
     display: block;
-}
-
-.banner-form {
-    background-color: var(rgba(255, 255, 255, 0));
-    width: 500px;
-    height: 270px;
-    margin-top: 18px;
-    margin-left: 18px;
-    margin-right: 24px;
-    margin-bottom: 40px;
-    text-align: left;
-    color: var(--dark-color);
-    display: block;
-}
-
-.banner-form input[type="file"] {
-    height: 100%;
-    width: 100%;
 }
 
 .form-control{
@@ -40,5 +16,4 @@
     padding: 10px;
     border-radius: 5px;
     color: white;
-    margin-left: 18px;
 }

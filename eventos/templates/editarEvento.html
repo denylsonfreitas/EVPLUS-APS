@@ -30,6 +30,8 @@
                         <label for="dataEvento">Data</label>
                         <input type="date" class="form-control" id="dataEvento" placeholder="Data do evento" name="date" value="{{ evento.date }}" required>
                     </div>
+                </div>
+                <div class="col-md form-evento">
                     <div class="form-group">
                         <label for="horarioEvento">Horário</label>
                         <input type="time" class="form-control" id="horarioEvento" placeholder="Horário do evento" name="time" value="{{ evento.time }}" required>
@@ -54,10 +56,7 @@
                             <option value="Outros" {% if evento.category == 'Outros' %} selected {% endif %}>Outros</option>
                         </select>
                     </div>
-                </div>
-                <div class="col-md title-banner-evento">
                     <div class="banner-form">
-                        <i class='bx bxs-camera-plus'></i>
                         <label for="bannerEvento">Insira seu banner</label>
                         <input type="file" class="form-control" id="bannerEvento" name="banner">
                     </div>

@@ -15,12 +15,12 @@
                 {% if eventos_finalizados %}
                     <ul>
                         {% for evento in eventos_finalizados %}
-                            <li>
+                            <p>
                                 {{ evento.name }}
                                 {% if request.user == evento.user %}
-                                    <a href="{% url 'eventos:enviar_certificado' evento.id %}">Enviar Certificado</a>
+                                    <a href="{% url 'eventos:enviar_certificado' evento.id %}" class="btn btn-success">Enviar Certificado</a>
                                 {% endif %}
-                            </li>
+                            </p>
                         {% endfor %}
                     </ul>
                 {% else %}

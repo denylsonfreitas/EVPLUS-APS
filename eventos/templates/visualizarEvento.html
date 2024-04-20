@@ -87,35 +87,40 @@
                 <p></p>
                 <h4>Comentários</h4>
                 <ul>
-                    {% for comentario in comentarios %}
+                    {% for avaliacao in comentarios %}
                         <li>
-                            <p><i class='bx bxs-star'></i> {{ comentario.nota }}</p>
-                            <p><i class='bx bxs-user'></i> {{ comentario.user }}</p>
-                            <p><i class='bx bx-comment-detail'></i> {{ comentario.comentario }}</p>
+                            <p><i class='bx bxs-star'></i> {{ avaliacao.nota }}</p>
+                            <p><i class='bx bxs-user'></i> {{ avaliacao.user }}</p>
+                            <p><i class='bx bx-comment-detail'></i> {{ avaliacao.comentario }}</p>
                         </li>
                     {% empty %}
                         <p>Não há comentários neste evento ainda.</p>
                     {% endfor %}
-                </ul>                
-                {% if perms.eventos.add_inscricao %}
-                    <form action="{% url 'eventos:enviar_avaliacao' evento.id %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="id_nota">Nota:</label>
-                            <select name="nota" id="id_nota" class="form-control" required>
-                                <option value="1">1 estrela</option>
-                                <option value="2">2 estrelas</option>
-                                <option value="3">3 estrelas</option>
-                                <option value="4">4 estrelas</option>
-                                <option value="5">5 estrelas</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_comentario">Comentário:</label>
-                            <textarea class="form-control" id="id_comentario" name="comentario" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
-                    </form>
+                </ul>
+                {% if evento.finalizado %}
+                    {% if perms.eventos.add_inscricao %}
+                        {% if request.user in evento.clients.all %}
+                            <h4>Deixe seu comentário</h4>
+                        <form action="{% url 'eventos:enviar_avaliacao' evento.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_nota">Nota:</label>
+                                <select name="nota" id="id_nota" class="form-control" required>
+                                    <option value="1">1 estrela</option>
+                                    <option value="2">2 estrelas</option>
+                                    <option value="3">3 estrelas</option>
+                                    <option value="4">4 estrelas</option>
+                                    <option value="5">5 estrelas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_comentario">Comentário:</label>
+                                <textarea class="form-control" id="id_comentario" name="comentario" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+                        </form>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

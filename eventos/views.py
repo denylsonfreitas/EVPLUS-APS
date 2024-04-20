@@ -62,7 +62,7 @@ def detalhesEvento(request, id):
     evento = Evento.objects.get(id=id)
     usuario = request.user
     ja_inscrito = evento.clients.filter(pk=usuario.pk).exists()
-    comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []  # Retrieve comments
+    comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []
     return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios})
 
 def listarTodosEventos(request):

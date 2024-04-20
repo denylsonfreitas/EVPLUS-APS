@@ -21,5 +21,6 @@ urlpatterns = [
     path('apagar/<int:id>/', views.apagarEvento, name='apagar_evento'),
     path('enviar-certificado/<int:evento_id>/', views.enviarCertificado, name='enviar_certificado'),
     path('download-certificado/<int:evento_id>/', views.downloadCertificado, name='download_certificado'),
+    path('avaliar-evento/<int:evento_id>/', views.enviarAvaliacao, name='enviar_avaliacao'),
     path('erro/', views.erro, name='erro'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

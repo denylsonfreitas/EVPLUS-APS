@@ -1,7 +1,6 @@
-#models.py
-
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Evento(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -16,6 +15,7 @@ class Evento(models.Model):
     limite_inscricoes = models.PositiveIntegerField(null=True, blank=True, verbose_name="Limite de Inscrições")
     finalizado = models.BooleanField(default=False)
     certificados = models.ManyToManyField(User, through='Certificado', related_name='eventos_certificados')
+    avaliacoes = models.ManyToManyField(User, through='Avaliacao', related_name='eventos_avaliados')
 
     def __str__(self):
         return self.name
@@ -27,8 +27,6 @@ class Inscricao(models.Model):
     class Meta:
         unique_together = ['evento', 'user']
 
-from django.db import models
-
 class Certificado(models.Model):
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     participante = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -36,3 +34,13 @@ class Certificado(models.Model):
 
     def __str__(self):
         return f"Certificado de {self.participante.username} para {self.evento.name}"
+
+class Avaliacao(models.Model):
+    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    nota = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    comentario = models.TextField()
+
+    class Meta:
+        unique_together = ['evento', 'user']
+

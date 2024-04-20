@@ -3,6 +3,7 @@
 from django import forms
 from .models import Evento
 from .models import Certificado
+from .models import Avaliacao
 
 class EventoForm(forms.ModelForm):
     class Meta:
@@ -13,4 +14,9 @@ class EventoForm(forms.ModelForm):
 class CertificadoForm(forms.ModelForm):
     class Meta:
         model = Certificado
-        fields = ['arquivo'] 
+        fields = ['arquivo']
+        
+class AvaliacaoForm(forms.ModelForm):
+    class Meta:
+        model = Avaliacao
+        fields = ['nota', 'comentario']

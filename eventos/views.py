@@ -1,7 +1,7 @@
 #views.py
 
-from .models import Evento, Certificado
-from .forms import EventoForm, CertificadoForm
+from .models import Evento, Certificado, Avaliacao
+from .forms import EventoForm, CertificadoForm, AvaliacaoForm
 from django.http import HttpResponse, FileResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
@@ -62,7 +62,8 @@ def detalhesEvento(request, id):
     evento = Evento.objects.get(id=id)
     usuario = request.user
     ja_inscrito = evento.clients.filter(pk=usuario.pk).exists()
-    return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar})
+    comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []  # Retrieve comments
+    return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios})
 
 def listarTodosEventos(request):
     exibir_sidebar = True
@@ -178,4 +179,27 @@ def downloadCertificado(request, evento_id):
     else:
         motivo_erro = "O usuário não está inscrito no evento"
         return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+
+@login_required
+@permission_required('eventos.view_evento', raise_exception=True)
+def enviarAvaliacao(request, evento_id):
+    exibir_sidebar = True
+    evento = get_object_or_404(Evento, pk=evento_id)
+    avaliacao_existente = Avaliacao.objects.filter(evento=evento, user=request.user).first()
+    
+    if request.method == 'POST':
+        form = AvaliacaoForm(request.POST, instance=avaliacao_existente)
+        if form.is_valid():
+            avaliacao = form.save(commit=False)
+            avaliacao.evento = evento
+            avaliacao.user = request.user
+            avaliacao.save()
+            comentarios = evento.avaliacoes.all()
+            return render(request, 'visualizarEvento.html', {'form': form, 'evento': evento, 'comentarios': comentarios, 'exibir_sidebar': exibir_sidebar})
+    else:
+        form = AvaliacaoForm(instance=avaliacao_existente)
+    
+    comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []
+    
+    return render(request, 'visualizarEvento.html', {'form': form, 'evento': evento, 'comentarios': comentarios, 'exibir_sidebar': exibir_sidebar})
 

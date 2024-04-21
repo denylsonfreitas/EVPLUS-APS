@@ -63,7 +63,12 @@ def detalhesEvento(request, id):
     evento = get_object_or_404(Evento, id=id)
     comentarios = Avaliacao.objects.filter(evento=evento)
     media_notas = comentarios.aggregate(media=Avg('nota'))['media']
-    avaliacao_usuario = Avaliacao.objects.filter(evento=evento, user=request.user).first()
+    
+    if request.user.is_authenticated:
+        avaliacao_usuario = Avaliacao.objects.filter(evento=evento, user=request.user).first()
+    else:
+        avaliacao_usuario = None
+    
     permitir_avaliacao = True if not avaliacao_usuario else False
     
     return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios, 'media_notas': media_notas})

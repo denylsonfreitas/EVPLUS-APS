@@ -8,10 +8,30 @@
 {% block 'title' %}Minha Conta{% endblock %}
 
 {% block 'dashboard' %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated %} 
     <div class="container">
         <div class="row">
-            <div class="col-md form-conta">
+            <div class="col-md-6">
+                <div class="card-photo">
+                    <div class="card-body">
+                        <div class="profile-picture-container">
+                            <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images\erro.jpg' %}{% endif %}" alt="Foto de Perfil">
+                            <div class="profile-picture-overlay">
+                                <span class="profile-picture-overlay-text">Alterar Foto</span>
+                                <input type="file" name="profile_picture" class="form-control-file" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 1px;">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 form-conta">
                 <form action="{% url 'conta' %}" method="POST" onsubmit="return validarDados()">
                     {% csrf_token %}
                     <div class="form-group">

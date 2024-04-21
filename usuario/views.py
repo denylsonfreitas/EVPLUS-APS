@@ -62,17 +62,14 @@ def cadastro(request):
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
         
-        # Verifica se o usuário já existe
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Usuário já cadastrado!')
             return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'email': email})
 
-        # Verifica se as senhas coincidem
         if password != confirm_password:
             messages.error(request, 'As senhas não coincidem!')
             return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'email': email})
 
-        # Cria o usuário
         user = User.objects.create_user(username=username, email=email, password=password)
         user.first_name = name
         user.last_name = lastname

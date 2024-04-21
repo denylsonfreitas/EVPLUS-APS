@@ -17,12 +17,10 @@ def conta(request):
         new_username = request.POST.get('username')
         new_email = request.POST.get('email')
         
-        # Verifica se o novo nome de usuário já está cadastrado
         if new_username != usuario.username and User.objects.filter(username=new_username).exists():
             messages.error(request, 'O nome de usuário já está em uso. Escolha outro.')
             return render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar, 'usuario': usuario})
         
-        # Verifica se o novo email já está cadastrado
         if new_email != usuario.email and User.objects.filter(email=new_email).exists():
             messages.error(request, 'O email já está em uso. Escolha outro.')
             return render(request, 'conta.html', {'exibir_sidebar': exibir_sidebar, 'usuario': usuario})

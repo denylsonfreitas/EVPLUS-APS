@@ -91,8 +91,8 @@
                     {% for avaliacao in comentarios %}
                         <li id="comentario-{{ avaliacao.id }}">
                             <div id="visualizar-comentario-{{ avaliacao.id }}">
-                                <p><i class='bx bxs-star'></i> {{ avaliacao.nota }}</p>
-                                <p><i class='bx bxs-user'></i> {{ avaliacao.user.username }}</p>
+                                <p><i class='bx bxs-user'></i> {{ avaliacao.user.username }}:   <i class='bx bxs-star'></i> {{ avaliacao.nota }}</p>
+
                                 <p><i class='bx bx-comment-detail'></i> {{ avaliacao.comentario }}</p>
                                 {% if request.user == avaliacao.user %}
                                 <form action="{% url 'eventos:deletar_avaliacao' avaliacao.id %}" method="post" style="display: inline;">

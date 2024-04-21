@@ -10,7 +10,7 @@ O EV+ é um sistema projetado em - e com objetivo de organização, criação e 
 - [Não Funcionais]()
 
 ## 📉 Diagrama de Classe
-![Diagrama de Classe]()
+![Diagrama de Classe](app_models.png)
 
 ## 📈 Diagramas de Caso de Uso
 ![Diagrama de Caso de Uso]()

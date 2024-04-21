@@ -14,7 +14,7 @@
                 {% if evento.banner %}
                     <img src="{{ evento.banner.url }}" alt="Banner do Evento" class="img-fluid">
                 {% else %}
-                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="img-fluid"
+                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="img-fluid">
                 {% endif %}
             </div>
             <div class="col-md-6">
@@ -26,7 +26,9 @@
                         <p><i class='bx bxs-map'></i> {{ evento.local }}</p>
                         <p><i class='bx bxs-category'></i> {{ evento.category }}</p>
                         <p><i class='bx bxs-user'></i> {{ evento.user }}</p>
+                        {% if media_notas %}
                         <p><i class='bx bxs-star'></i> Avaliações: {{ media_notas|default:"Sem avaliações" }}</p>
+                        {% endif %}
                         {% if evento.limite_inscricoes %}
                             {% if evento.limite_inscricoes == -1 %}
                                 <p><i class='bx bxs-coupon'></i> Não possui limite de inscrições</p>

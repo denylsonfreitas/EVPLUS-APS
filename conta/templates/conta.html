@@ -15,14 +15,14 @@
                 <div class="card-photo">
                     <div class="card-body">
                         <div class="profile-picture-container">
-                            <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images\erro.jpg' %}{% endif %}" alt="Foto de Perfil">
+                            <img src="{% static 'images\WIP.png' %}" alt="Foto de Perfil">
                             <div class="profile-picture-overlay">
                                 <span class="profile-picture-overlay-text">Alterar Foto</span>
                                 <input type="file" name="profile_picture" class="form-control-file" accept="image/*" style="display: none;">
                             </div>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary" style="margin-left: 1px;">Salvar</button>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 5px;">Salvar</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 # EV+: Sistema para Gerenciamento de Eventos
 
-O EV+ é um sistema projetado em - e com objetivo de organização, criação e divulgação de eventos.
+O EV+ é um sistema projetado em Django (python + html) e com objetivo de organização, criação e divulgação de eventos.
 
 ## 📜 Documentação
 - [PDF]()

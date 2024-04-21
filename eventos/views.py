@@ -1,5 +1,6 @@
 #views.py
 
+from django.db.models import Avg
 from .models import Evento, Certificado, Avaliacao
 from .forms import EventoForm, CertificadoForm, AvaliacaoForm
 from django.http import HttpResponse, FileResponse
@@ -59,11 +60,13 @@ def editarEvento(request, id):
 
 def detalhesEvento(request, id):
     exibir_sidebar = True
-    evento = Evento.objects.get(id=id)
-    usuario = request.user
-    ja_inscrito = evento.clients.filter(pk=usuario.pk).exists()
-    comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []
-    return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios})
+    evento = get_object_or_404(Evento, id=id)
+    comentarios = Avaliacao.objects.filter(evento=evento)
+    media_notas = comentarios.aggregate(media=Avg('nota'))['media']
+    avaliacao_usuario = Avaliacao.objects.filter(evento=evento, user=request.user).first()
+    permitir_avaliacao = True if not avaliacao_usuario else False
+    
+    return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios, 'media_notas': media_notas})
 
 def listarTodosEventos(request):
     exibir_sidebar = True
@@ -195,11 +198,18 @@ def enviarAvaliacao(request, evento_id):
             avaliacao.user = request.user
             avaliacao.save()
             comentarios = evento.avaliacoes.all()
-            return render(request, 'visualizarEvento.html', {'form': form, 'evento': evento, 'comentarios': comentarios, 'exibir_sidebar': exibir_sidebar})
+            return redirect('eventos:detalhes_evento', id=avaliacao.evento.id)
     else:
         form = AvaliacaoForm(instance=avaliacao_existente)
     
     comentarios = evento.avaliacoes.all() if evento.avaliacoes.exists() else []
     
-    return render(request, 'visualizarEvento.html', {'form': form, 'evento': evento, 'comentarios': comentarios, 'exibir_sidebar': exibir_sidebar})
+    return redirect('eventos:detalhes_evento', id=avaliacao.evento.id)
 
+@login_required
+@permission_required('eventos.view_evento', login_url='/auth/login/')
+def deletarAvaliacao(request, avaliacao_id):
+    avaliacao = get_object_or_404(Avaliacao, id=avaliacao_id)
+    if request.user == avaliacao.user:
+        avaliacao.delete()
+    return redirect('eventos:detalhes_evento', id=avaliacao.evento.id)

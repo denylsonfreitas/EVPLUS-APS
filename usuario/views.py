@@ -10,9 +10,8 @@ from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 
 def login(request):
-    exibir_sidebar = True
     if request.method == 'GET':
-        return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar})
+        return render(request, 'login.html')
     elif request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -24,12 +23,11 @@ def login(request):
             return redirect('home')
         else:
             messages.error(request, 'Usuário ou senha inválidos!')
-            return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'error_message': 'Usuário ou senha inválidos!'})
+            return render(request, 'login.html', {'username': username, 'error_message': 'Usuário ou senha inválidos!'})
         
 def cadastro(request):
-    exibir_sidebar = True
     if request.method == 'GET':
-        return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar})
+        return render(request, 'cadastro.html')
     elif request.method == 'POST':
         name = request.POST.get('name')
         lastname = request.POST.get('lastname')
@@ -40,11 +38,11 @@ def cadastro(request):
         
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Usuário já cadastrado!')
-            return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'email': email})
+            return render(request, 'cadastro.html', {'username': username, 'email': email})
 
         if password != confirm_password:
             messages.error(request, 'As senhas não coincidem!')
-            return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'email': email})
+            return render(request, 'cadastro.html', {'username': username, 'email': email})
 
         user = User.objects.create_user(username=username, email=email, password=password)
         user.first_name = name
@@ -80,23 +78,22 @@ def senha_enviada(request):
 
 @login_required
 def home(request):
-    exibir_sidebar = False
-    return render(request, 'home.html', {'exibir_sidebar': exibir_sidebar})
+    return render(request, 'home.html')
 
 @login_required
 def meuseventos(request):
     exibir_sidebar = False
-    return render(request, 'meusEventos.html', {'exibir_sidebar': exibir_sidebar})
+    return render(request, 'meusEventos.html')
 
 @login_required
 def certificado(request):
     exibir_sidebar = False
-    return render(request, 'certificado.html', {'exibir_sidebar': exibir_sidebar})
+    return render(request, 'certificado.html')
 
 @login_required
 def eventos(request):
     exibir_sidebar = False
-    return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
+    return render(request, 'eventos.html')
 
 @login_required
 def conta(request):

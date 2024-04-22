@@ -10,92 +10,69 @@
   <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="icon" href="{% static 'images/LOGO_16x16.png' %}" type="image/png">
+  <style>
+    .navbar {
+      --dark-color: #0b2545;
+      background-color: var(--dark-color);
+    }
+  </style>  
   {% block 'head' %}{% endblock %}
 
   <title>{% block 'title' %}{% endblock %}</title>
 </head>
+
 <body>
-  <div class="page-topo" id="page-topo">
-    <h1 class="main-title" id="page-topo-title"></h1>
-    {% if user.is_authenticated %}
-    <div class="user-info">
-        <p>Olá, {{ user.username }}</p>
-    </div>
-{% endif %}
-  </div>
   {% if not exibir_sidebar %}
-  <div class="sidebar">
-    <a href="{% url 'home' %}">	
-      <div class="logo-details">	
-          <img src="{% static 'images/LOGO.png' %}" alt="Logo" class="logo">	
-        </a>	
-          <i class='bx bx-menu' id="btn" ></i>	
-      </div>	
-      <ul class="nav-list">
-      <li>
-        <a href="{% url 'home' %}">
-          <i class='bx bx-home'></i>
-          <span class="links_name">Página inicial</span>
-        </a>
-        <span class="tooltip">Página inicial</span>
-      </li>
-      {% if perms.eventos.add_evento %}
-      <li>
-        <a href="{% url 'eventos:eventos' %}">
-          <i class='bx bx-plus-circle'></i>
-          <span class="links_name">Crie seu evento</span>
-        </a>
-        <span class="tooltip">Crie seu evento</span>
-      </li>
-      {% endif %}
-      <li>
-        <a href="{% url 'eventos:todos_eventos' %}">
-          <i class='bx bx-list-ul'></i>
-            <span class="links_name">Todos os Eventos</span>
-        </a>
-        <span class="tooltip">Todos os Eventos</span>
-      </li>
-      <li>
-        <a href="{% url 'conta' %}">
-          <i class='bx bx-user'></i>
-          <span class="links_name">Minha Conta</span>
-        </a>
-        <span class="tooltip">Minha Conta</span>
-      </li>
-      {% if user.is_authenticated %}
-      {% if perms.eventos.view_evento %}
-      <li>
-        <a href="{% url 'eventos:minhasinscricoes' %}">
-          <i class='bx bxs-calendar'></i>
-          <span class="links_name">Minhas Inscrições</span>
-        </a>
-        <span class="tooltip">Minhas Inscrições</span>
-      </li>
-      {% endif %}
-      {% if perms.eventos.add_evento %}
-      <li>
-        <a href="{% url 'eventos:meuseventos' %}">
-          <i class='bx bxs-calendar'></i>
-          <span class="links_name">Meus Eventos</span>
-        </a>
-        <span class="tooltip">Meus Eventos</span>
-      </li>
-      {% endif %}
-      {% endif %}
-      {% if user.is_authenticated %}
-      <li>
-        <a href="{% url 'logout' %}">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Sair</span>
-        </a>
-        <span class="tooltip">Sair</span>
-      </li>    
-      {% endif %}
-    </ul>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark p-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'images/LOGO.png' %}" alt="Logo" class="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'home' %}">Página inicial</a>
+          </li>
+          {% if perms.eventos.add_evento %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'eventos:eventos' %}">Crie seu evento</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'eventos:todos_eventos' %}">Todos os Eventos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'conta' %}">Minha Conta</a>
+          </li>
+          {% if user.is_authenticated %}
+          {% if perms.eventos.view_evento %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'eventos:minhasinscricoes' %}">Minhas Inscrições</a>
+          </li>
+          {% endif %}
+          {% if perms.eventos.add_evento %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'eventos:meuseventos' %}">Meus Eventos</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'logout' %}">Sair</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>  
   {% endif %}
 
   <section class="home-section">
+    <div class="page-topo" id="page-topo">
+      <h1 class="main-title" id="page-topo-title"></h1>
+    </div>
     {% block 'dashboard' %}
     {% endblock %}
   </section>

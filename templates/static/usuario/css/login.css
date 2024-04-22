@@ -1,10 +1,4 @@
-.logo {
-    max-height: 28px;
-    position: absolute;
-    top: -70px;
-    left: -50px;
-    z-index: 999;
-}
+
 
 .card {
     margin: 5%;
@@ -12,10 +6,6 @@
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.main-title {
-    margin-right: 10px;
 }
 
 .form-control {
@@ -44,4 +34,9 @@
     padding: 10px;
     border-radius: 5px;
     color: white;
+}
+
+.row {
+    margin-left: 45px;
+    justify-content: center;
 }

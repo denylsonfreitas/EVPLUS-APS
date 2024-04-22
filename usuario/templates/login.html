@@ -5,18 +5,13 @@
     <link rel="stylesheet" href="{% static 'usuario/css/login.css' %}">
 {% endblock %}
 
-{% block 'title' %}
-    Entre na sua conta
-{% endblock %}
+{% block 'title' %}Entre na sua conta{% endblock %}
 
 {% block 'dashboard' %}
-    <a href="{% url 'home' %}">
-        <img src="{% static 'images/LOGO-blue.png' %}" alt="Logo" class="logo">
-    </a>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" style="margin-bottom: 51px;">
                     <div class="card-body">
                         {% if error_message %}
                             <div class="alert alert-danger">

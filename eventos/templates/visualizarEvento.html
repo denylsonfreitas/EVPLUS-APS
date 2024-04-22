@@ -99,7 +99,7 @@
                                 {% if request.user == avaliacao.user %}
                                 <form action="{% url 'eventos:deletar_avaliacao' avaliacao.id %}" method="post" style="display: inline;">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" style="margin-bottom: 15px;">Deletar</button>
                                 </form>
                             {% endif %}
                             </div>

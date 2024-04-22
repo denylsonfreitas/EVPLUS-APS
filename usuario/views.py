@@ -9,23 +9,8 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 
-@login_required
-def home(request):
-    exibir_sidebar = False
-    return render(request, 'home.html', {'exibir_sidebar': exibir_sidebar})
-
-@login_required
-def meuseventos(request):
-    exibir_sidebar = False
-    return render(request, 'meusEventos.html', {'exibir_sidebar': exibir_sidebar})
-
-@login_required
-def certificado(request):
-    exibir_sidebar = False
-    return render(request, 'certificado.html', {'exibir_sidebar': exibir_sidebar})
-
 def login(request):
-    exibir_sidebar = False
+    exibir_sidebar = True
     if request.method == 'GET':
         return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
@@ -40,18 +25,9 @@ def login(request):
         else:
             messages.error(request, 'Usuário ou senha inválidos!')
             return render(request, 'login.html', {'exibir_sidebar': exibir_sidebar, 'username': username, 'error_message': 'Usuário ou senha inválidos!'})
-
-@login_required
-def eventos(request):
-    exibir_sidebar = False
-    return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
-
-@login_required
-def conta(request):
-    return redirect('login')
-
+        
 def cadastro(request):
-    exibir_sidebar = False
+    exibir_sidebar = True
     if request.method == 'GET':
         return render(request, 'cadastro.html', {'exibir_sidebar': exibir_sidebar})
     elif request.method == 'POST':
@@ -101,3 +77,27 @@ def esqueceu_senha(request):
 
 def senha_enviada(request):
     return render(request, 'senha_enviada.html')
+
+@login_required
+def home(request):
+    exibir_sidebar = False
+    return render(request, 'home.html', {'exibir_sidebar': exibir_sidebar})
+
+@login_required
+def meuseventos(request):
+    exibir_sidebar = False
+    return render(request, 'meusEventos.html', {'exibir_sidebar': exibir_sidebar})
+
+@login_required
+def certificado(request):
+    exibir_sidebar = False
+    return render(request, 'certificado.html', {'exibir_sidebar': exibir_sidebar})
+
+@login_required
+def eventos(request):
+    exibir_sidebar = False
+    return render(request, 'eventos.html', {'exibir_sidebar': exibir_sidebar})
+
+@login_required
+def conta(request):
+    return redirect('login')

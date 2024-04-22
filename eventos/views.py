@@ -14,10 +14,10 @@ def erro(request):
 
 @permission_required('eventos.add_evento', login_url='/auth/login/')
 def eventos(request):
-    exibir_sidebar = True
+
     if request.method == 'GET':
         eventos = Evento.objects.filter(user=request.user)
-        return render(request, 'criarEvento.html', {'eventos': eventos, 'exibir_sidebar': exibir_sidebar})
+        return render(request, 'criarEvento.html', {'eventos': eventos})
     elif request.method == 'POST':
         form = EventoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -26,19 +26,17 @@ def eventos(request):
             evento.save()
             return redirect('eventos:meuseventos')
         else:
-            return render(request, 'criarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar})
+            return render(request, 'criarEvento.html', {'form': form})
         
 @login_required
 @permission_required('eventos.add_evento', raise_exception=True)
 def listarEventos(request):
-    exibir_sidebar = True
     eventos_ativos = Evento.objects.filter(user=request.user, finalizado=False)
     eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)
-    return render(request, 'meusEventos.html', {'eventos': eventos_ativos, 'finalizarEvento': eventos_finalizados, 'exibir_sidebar': exibir_sidebar})
+    return render(request, 'meusEventos.html', {'eventos': eventos_ativos, 'finalizarEvento': eventos_finalizados})
 
 @permission_required('eventos.change_evento', login_url='/auth/login/')
 def editarEvento(request, id):
-    exibir_sidebar = True
     try:
         evento = Evento.objects.get(id=id, user=request.user)
     except Evento.DoesNotExist:
@@ -47,19 +45,18 @@ def editarEvento(request, id):
     if evento:
         if request.method == 'GET':
             form = EventoForm(instance=evento)
-            return render(request, 'editarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+            return render(request, 'editarEvento.html', {'form': form, 'evento': evento})
         elif request.method == 'POST':
             form = EventoForm(request.POST, request.FILES, instance=evento)
             if form.is_valid():
                 form.save()
                 return redirect('eventos:meuseventos')
             else:
-                return render(request, 'editarEvento.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+                return render(request, 'editarEvento.html', {'form': form, 'evento': evento})
     else:
         return render(request, 'erro.html')
 
 def detalhesEvento(request, id):
-    exibir_sidebar = True
     evento = get_object_or_404(Evento, id=id)
     comentarios = Avaliacao.objects.filter(evento=evento)
     media_notas = comentarios.aggregate(media=Avg('nota'))['media']
@@ -71,10 +68,9 @@ def detalhesEvento(request, id):
     
     permitir_avaliacao = True if not avaliacao_usuario else False
     
-    return render(request, 'visualizarEvento.html', {'evento': evento, 'exibir_sidebar': exibir_sidebar, 'comentarios': comentarios, 'media_notas': media_notas})
+    return render(request, 'visualizarEvento.html', {'evento': evento, 'comentarios': comentarios, 'media_notas': media_notas})
 
 def listarTodosEventos(request):
-    exibir_sidebar = True
     categoria = request.GET.get('categoria')
     nome = request.GET.get('nome')
     
@@ -85,7 +81,7 @@ def listarTodosEventos(request):
     if nome:
         eventosDisponiveis = eventosDisponiveis.filter(name__icontains=nome)
     
-    return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis, 'exibir_sidebar': exibir_sidebar})
+    return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')
 def cancelarEvento(request, id):
@@ -102,7 +98,6 @@ def finalizarEvento(request, id):
 
 @login_required
 def listarEventosInscritos(request):
-    exibir_sidebar = True
     eventos = Evento.objects.filter(clients=request.user, finalizado=False)
     finalizarEvento = Evento.objects.filter(clients=request.user, finalizado=True)
     
@@ -111,7 +106,7 @@ def listarEventosInscritos(request):
         certificados = Certificado.objects.filter(evento=evento, participante=request.user)
         eventos_e_certificados[evento] = certificados
     
-    return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'eventos_e_certificados': eventos_e_certificados, 'exibir_sidebar': exibir_sidebar})
+    return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'eventos_e_certificados': eventos_e_certificados})
 
 @permission_required('eventos.view_evento', login_url='/auth/login/')
 def inscricaoEvento(request, evento_id):
@@ -139,7 +134,6 @@ def apagarEvento(request, id):
 @login_required
 @permission_required('eventos.add_evento', raise_exception=True)
 def enviarCertificado(request, evento_id):
-    exibir_sidebar = True
     evento = get_object_or_404(Evento, pk=evento_id)
 
     if request.method == 'POST':
@@ -157,21 +151,20 @@ def enviarCertificado(request, evento_id):
                         Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
                     else:
                         motivo_erro = "O participante selecionado não está inscrito no evento"
-                        return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+                        return render(request, 'erro.html', {'motivo_erro': motivo_erro})
                 except User.DoesNotExist:
                     motivo_erro = "O participante selecionado não existe"
-                    return render(request, 'erro.html',  {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+                    return render(request, 'erro.html',  {'motivo_erro': motivo_erro})
 
             return redirect('eventos:meuseventos')
     else:
         form = CertificadoForm()
 
-    return render(request, 'enviarCertificado.html', {'form': form, 'exibir_sidebar': exibir_sidebar, 'evento': evento})
+    return render(request, 'enviarCertificado.html', {'form': form, 'evento': evento})
 
 @login_required
 @permission_required('eventos.view_evento', raise_exception=True)
 def downloadCertificado(request, evento_id):
-    exibir_sidebar = True
     evento = get_object_or_404(Evento, pk=evento_id)
 
     if request.user in evento.clients.all():
@@ -182,15 +175,14 @@ def downloadCertificado(request, evento_id):
             return FileResponse(open(certificado.arquivo.path, 'rb'))
         else:
             motivo_erro = "O certificado não pertence ao usuário"
-            return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+            return render(request, 'erro.html', {'motivo_erro': motivo_erro})
     else:
         motivo_erro = "O usuário não está inscrito no evento"
-        return render(request, 'erro.html', {'exibir_sidebar': exibir_sidebar, 'motivo_erro': motivo_erro})
+        return render(request, 'erro.html', {'motivo_erro': motivo_erro})
 
 @login_required
 @permission_required('eventos.view_evento', raise_exception=True)
 def enviarAvaliacao(request, evento_id):
-    exibir_sidebar = True
     evento = get_object_or_404(Evento, pk=evento_id)
     avaliacao_existente = Avaliacao.objects.filter(evento=evento, user=request.user).first()
     

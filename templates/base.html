@@ -10,19 +10,13 @@
   <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="icon" href="{% static 'images/LOGO_16x16.png' %}" type="image/png">
-  <style>
-    .navbar {
-      --dark-color: #0b2545;
-      background-color: var(--dark-color);
-    }
-  </style>  
+  
   {% block 'head' %}{% endblock %}
 
   <title>{% block 'title' %}{% endblock %}</title>
 </head>
 
 <body>
-  {% if not exibir_sidebar %}
   <nav class="navbar navbar-expand-lg navbar-dark p-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">
@@ -33,41 +27,37 @@
       </button>
   
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'home' %}">Página inicial</a>
+            <a class="nav-link mx-2" href="{% url 'home' %}">Página Inicial</a>
           </li>
-          {% if perms.eventos.add_evento %}
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'eventos:eventos' %}">Crie seu evento</a>
-          </li>
-          {% endif %}
           <li class="nav-item">
             <a class="nav-link mx-2" href="{% url 'eventos:todos_eventos' %}">Todos os Eventos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'conta' %}">Minha Conta</a>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class='bx bx-user'></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'conta' %}">Minha Conta</a>
+                {% if user.is_authenticated %}
+                {% if perms.eventos.view_evento %}
+                  <a class="dropdown-item" href="{% url 'eventos:minhasinscricoes' %}">Minhas Inscrições</a>
+                {% endif %}
+                {% if perms.eventos.add_evento %}
+                  <a class="dropdown-item" href="{% url 'eventos:meuseventos' %}">Meus Eventos</a>
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+              {% endif %}
+            </div>
           </li>
-          {% if user.is_authenticated %}
-          {% if perms.eventos.view_evento %}
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'eventos:minhasinscricoes' %}">Minhas Inscrições</a>
-          </li>
-          {% endif %}
-          {% if perms.eventos.add_evento %}
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'eventos:meuseventos' %}">Meus Eventos</a>
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'logout' %}">Sair</a>
-          </li>
-          {% endif %}
         </ul>
       </div>
     </div>
-  </nav>  
-  {% endif %}
+  </nav>
 
   <section class="home-section">
     <div class="page-topo" id="page-topo">
@@ -104,6 +94,11 @@
     var pageTitle = document.title;
     var bannerTitle = document.getElementById("page-topo-title");
     bannerTitle.textContent = pageTitle;
+  </script>
+  <script>
+    $(document).ready(function(){
+      $('.dropdown-toggle').dropdown();
+    });
   </script>
 </body>
 </html>

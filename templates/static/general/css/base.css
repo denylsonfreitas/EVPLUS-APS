@@ -86,3 +86,8 @@
   padding: 10px;
   color: var(--dark-color);
 }
+
+.navbar {
+  --dark-color: #0b2545;
+  background-color: var(--dark-color);
+}

@@ -151,7 +151,6 @@ def enviarCertificado(request, evento_id):
                     Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
             else:
                 participante_id = request.POST.get('participante_selecionado')
-                print("ID do participante selecionado:", participante_id)
                 try:
                     participante = User.objects.get(pk=participante_id)
                     if participante in evento.clients.all():

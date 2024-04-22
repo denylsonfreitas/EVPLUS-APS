@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="icon" href="{% static 'images/LOGO_16x16.png' %}" type="image/png">
-  
+
   {% block 'head' %}{% endblock %}
 
   <title>{% block 'title' %}{% endblock %}</title>
@@ -39,6 +39,11 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class='bx bx-user'></i>
+              {% if user.is_authenticated %}
+                {{ user.username }}
+              {% else %}
+                <span class="logged-out-indicator">Você não está logado</span>
+              {% endif %}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'conta' %}">Minha Conta</a>
@@ -75,13 +80,6 @@
         <div class="row">
             <div class="col-md-6">
                 <p>&copy; 2024 EVPLUS. Todos os direitos reservados.</p>
-            </div>
-            <div class="col-md-6 text-md-right">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#">Política de Privacidade</a></li>
-                    <li class="list-inline-item"><a href="#">Termos de Serviço</a></li>
-                    <li class="list-inline-item"><a href="#">Contato</a></li>
-                </ul>
             </div>
         </div>
     </div>

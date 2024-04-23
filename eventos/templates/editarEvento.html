@@ -74,21 +74,23 @@
     </div>
     {% endif %}
 </div>
+
+    <script src="{% static 'eventos/js/eventos.js' %}"></script>
+    <script>
+        document.getElementById("eventoForm").addEventListener("submit", function(event) {
+            var nomeEvento = document.getElementById("nomeEvento").value;
+            var descricaoEvento = document.getElementById("descricaoEvento").value;
+            var localEvento = document.getElementById("localEvento").value;
+            var dataEvento = document.getElementById("dataEvento").value;
+            var horarioEvento = document.getElementById("horarioEvento").value;
+            var categoriaEvento = document.getElementById("categoriaEvento").value;
+            
+            if (!nomeEvento || !descricaoEvento || !localEvento || !dataEvento || !horarioEvento || !categoriaEvento) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                event.preventDefault();
+            }
+        });
+    </script>
+    
 {% endblock %}
 
-<script src="{% static 'eventos/js/eventos.js' %}"></script>
-<script>
-    document.getElementById("eventoForm").addEventListener("submit", function(event) {
-        var nomeEvento = document.getElementById("nomeEvento").value;
-        var descricaoEvento = document.getElementById("descricaoEvento").value;
-        var localEvento = document.getElementById("localEvento").value;
-        var dataEvento = document.getElementById("dataEvento").value;
-        var horarioEvento = document.getElementById("horarioEvento").value;
-        var categoriaEvento = document.getElementById("categoriaEvento").value;
-        
-        if (!nomeEvento || !descricaoEvento || !localEvento || !dataEvento || !horarioEvento || !categoriaEvento) {
-            alert("Por favor, preencha todos os campos obrigatórios.");
-            event.preventDefault();
-        }
-    });
-</script>

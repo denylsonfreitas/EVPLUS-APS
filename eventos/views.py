@@ -3,7 +3,7 @@
 from django.db.models import Avg
 from .models import Evento, Certificado, Avaliacao
 from .forms import EventoForm, CertificadoForm, AvaliacaoForm
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
@@ -142,13 +142,17 @@ def enviarCertificado(request, evento_id):
             arquivo = form.cleaned_data['arquivo']
             if request.POST.get('enviar_para_todos'):
                 for participante in evento.clients.all():
-                    Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
+                    certificado, created = Certificado.objects.get_or_create(evento=evento, participante=participante)
+                    certificado.arquivo = arquivo
+                    certificado.save()
             else:
                 participante_id = request.POST.get('participante_selecionado')
                 try:
                     participante = User.objects.get(pk=participante_id)
                     if participante in evento.clients.all():
-                        Certificado.objects.create(evento=evento, participante=participante, arquivo=arquivo)
+                        certificado, created = Certificado.objects.get_or_create(evento=evento, participante=participante)
+                        certificado.arquivo = arquivo
+                        certificado.save()
                     else:
                         motivo_erro = "O participante selecionado não está inscrito no evento"
                         return render(request, 'erro.html', {'motivo_erro': motivo_erro})

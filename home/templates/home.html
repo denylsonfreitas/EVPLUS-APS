@@ -13,32 +13,34 @@
         <div class="banner-container-g" id="banner-img" onmousedown="startDrag(event)">
             <div class="banner">
                 <div class="banner-image">
-                    <img src="{% static 'images/placeholder11.jpg' %}" alt="Banner 1">
-                <label for="name">Banner 1</label>
+                    <img src="{% get_media_prefix %}banners/exemplo5.jpg" alt="Banner 1" style="transform: scale(1.3);">
+                    <a href="{% url 'eventos:detalhes_evento' 54 %}">
+                        <label for="name">Reunião Universitaria</label>
+                    </a>
                 </div>
             </div>            
             <div class="banner">
                 <div class="banner-image">
-                    <img src="{% static 'images/placeholder12.jpg' %}" alt="Banner 2">
-                <label for="name">Banner 2</label>
+                    <img src="{% get_media_prefix %}banners/exemplo6.jpg" alt="Banner 2" style="transform: scale(1.3);">
+                <label for="name">Campeonato de Jogos</label>
                 </div>
             </div>
             <div class="banner">
                 <div class="banner-image">
-                    <img src="{% static 'images/placeholder13.jpg' %}" alt="Banner 3">
-                <label for="name">Banner 3</label>
+                    <img src="{% get_media_prefix %}banners/exemplo8.jpg" alt="Banner 3" style="transform: scale(1.3);">
+                <label for="name">Interclasse</label>
                 </div>
             </div>
             <div class="banner">
                 <div class="banner-image">
-                    <img src="{% static 'images/placeholder14.jpg' %}" alt="Banner 4">
-                <label for="name">Banner 4</label>
+                    <img src="{% get_media_prefix %}banners/exemplo9.jpg" alt="Banner 3" style="transform: scale(1.3);">
+                <label for="name">Roda de Capoeira</label>
                 </div>
             </div>
             <div class="banner">
                 <div class="banner-image">
-                    <img src="{% static 'images/placeholder15.jpg' %}" alt="Banner 5">
-                <label for="name">Banner 5</label>
+                    <img src="{% get_media_prefix %}banners/exemplo10.jpg" alt="Banner 3" style="transform: scale(1.3);">
+                <label for="name">Discussão sobre BITCOIN (Online)</label>
                 </div>
             </div>
         </div>
@@ -49,80 +51,80 @@
         <div class="banner-container-p" id="banner-cat" onmousedown="startDragP(event)">
             <div class="banner-cat">
                 <div class="banner-cat1">
-                <a href="{% url 'eventos:todos_eventos' %}?categoria=Tecnologia">
                 <img src="{% static 'images/placeholder1.jpg' %}" alt="Categoria 1">
+                <a href="{% url 'eventos:todos_eventos' %}?categoria=Tecnologia">
                 <label for="name">Tecnologia</label>
                 </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat2">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Saúde">
                     <img src="{% static 'images/placeholder2.jpg' %}" alt="Categoria 2">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Saúde">
                     <label for="name">Saúde</label>
                     </a>
                     </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat3">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Educação">
                     <img src="{% static 'images/placeholder3.jpg' %}" alt="Categoria 3">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Educação">
                     <label for="name">Educação</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat4">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Esporte">
                     <img src="{% static 'images/placeholder4.jpg' %}" alt="Categoria 4">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Esporte">
                     <label for="name">Esportes</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat5">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Cultura">
                     <img src="{% static 'images/placeholder5.jpg' %}" alt="Categoria 5">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Cultura">
                     <label for="name">Cultura</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat6">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Gastronomia">
                     <img src="{% static 'images/placeholder6.jpg' %}" alt="Categoria 6">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Gastronomia">
                     <label for="name">Gastronomia</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat7">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Negócios">
                     <img src="{% static 'images/placeholder7.jpg' %}" alt="Categoria 7">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Negócios">
                     <label for="name">Negócios</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat8">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Comemoração">
                     <img src="{% static 'images/placeholder8.jpg' %}" alt="Categoria 8">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Comemoração">
                     <label for="name">Comemoração</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat9">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Artes">
                     <img src="{% static 'images/placeholder9.jpg' %}" alt="Categoria 9">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Artes">
                     <label for="name">Arte</label>
                     </a>
                 </div>
             </div>
             <div class="banner-cat">
                 <div class="banner-cat10">
-                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Outros">
                     <img src="{% static 'images/placeholder10.jpg' %}" alt="Categoria 10">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Outros">
                     <label for="name">Outros</label>
                     </a>
                 </div>
@@ -135,8 +137,8 @@
         <div class="banner-container-p" id="banner-cat" onmousedown="startDragP(event)">       
             <div class="banner-cat">
                 <div class="banner-cat10">
-                    <a href="{% url 'home' %}">
                     <img src="{% static 'images/placeholder10.jpg' %}" alt="Categoria 10">
+                    <a href="{% url 'eventos:todos_eventos' %}?categoria=Outros">
                     <label for="name">Outros</label>
                     </a>
                 </div>
@@ -151,7 +153,7 @@
                 <div class="banner-s1">
                     <a href="{% url 'home' %}">
                     <img src="{% static 'images/placeholder11.jpg' %}" alt="Categoria 1">
-                    <label for="name">Vaqueijada - 31/02</label>
+                    <label for="name">Vaqueijada - 31/04</label>
                     </a>
                 </div>
             </div>
@@ -159,85 +161,7 @@
                 <div class="banner-s2">
                     <a href="{% url 'home' %}">
                     <img src="{% static 'images/placeholder14.jpg' %}" alt="Categoria 2">
-                    <label for="name">Evento de Nerd - 11/11</label>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="banner-p">
-        <label for="title-home-5">Eventos sobre ?</label>
-        <div class="banner-container-p" id="banner-cat" onmousedown="startDragP(event)">
-            <div class="banner-cat">
-                <div class="banner-cat1">
-                <a href="{% url 'home' %}">
-                <img src="{% static 'images/placeholder1.jpg' %}" alt="Categoria 1">
-                <label for="name">Tecnologia</label>
-                </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat2">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder2.jpg' %}" alt="Categoria 2">
-                    <label for="name">Saúde</label>
-                    </a>
-                    </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat3">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder3.jpg' %}" alt="Categoria 3">
-                    <label for="name">Educação</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat4">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder4.jpg' %}" alt="Categoria 4">
-                    <label for="name">Esportes</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat5">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder5.jpg' %}" alt="Categoria 5">
-                    <label for="name">Cultura</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat6">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder6.jpg' %}" alt="Categoria 6">
-                    <label for="name">Gastronomia</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat7">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder7.jpg' %}" alt="Categoria 7">
-                    <label for="name">Negócios</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat8">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder8.jpg' %}" alt="Categoria 8">
-                    <label for="name">Comemoração</label>
-                    </a>
-                </div>
-            </div>
-            <div class="banner-cat">
-                <div class="banner-cat9">
-                    <a href="{% url 'home' %}">
-                    <img src="{% static 'images/placeholder9.jpg' %}" alt="Categoria 9">
-                    <label for="name">Arte</label>
+                    <label for="name">Evento de Nerd - 11/05</label>
                     </a>
                 </div>
             </div>

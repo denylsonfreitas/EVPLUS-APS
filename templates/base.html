@@ -19,7 +19,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark p-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">
+      <a class="navbar-brand" href="{% url 'home' %}" style="margin-left: 205px;">
         <img src="{% static 'images/LOGO.png' %}" alt="Logo" class="logo">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
             <a class="nav-link mx-2" href="{% url 'eventos:todos_eventos' %}">Todos os Eventos</a>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" style="margin-right: 205px;">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class='bx bx-user'></i>

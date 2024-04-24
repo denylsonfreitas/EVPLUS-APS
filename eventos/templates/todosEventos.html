@@ -3,7 +3,6 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/todosEventos.css' %}">
-
 {% endblock %}
 
 {% block 'title' %}Todos os Eventos{% endblock %}
@@ -38,8 +37,7 @@
                     <button type="submit" class="btn btn-filter">Buscar</button>
                 </form>
             </div>
-
-
+        </div>
         <div class="row" style="margin-bottom: 200px;">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -49,8 +47,6 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Local</th>
-                                        <th>Data</th>
                                         <th>Descrição</th>
                                         <th>Opções</th>
                                     </tr>
@@ -59,8 +55,6 @@
                                     {% for evento in eventos %}
                                         <tr>
                                             <td>{{ evento.name }}</td>
-                                            <td>{{ evento.local }}</td>
-                                            <td>{{ evento.date }}</td>
                                             <td>{{ evento.description }}</td>
                                             <td>
                                                 <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>

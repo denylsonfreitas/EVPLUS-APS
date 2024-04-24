@@ -81,6 +81,10 @@ def listarTodosEventos(request):
     if nome:
         eventosDisponiveis = eventosDisponiveis.filter(name__icontains=nome)
     
+    for evento in eventosDisponiveis:
+        if len(evento.description) > 50:
+            evento.description = evento.description[:50] + '...'
+    
     return render(request, 'todosEventos.html', {'eventos': eventosDisponiveis})
 
 @permission_required('eventos.delete_evento', login_url='/auth/login/')

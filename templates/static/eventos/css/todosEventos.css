@@ -1,17 +1,14 @@
 .btn-primary {
-    height: 40px;
     width: 140px;
     background-color: var(--dark-color);
-    padding: 7px;
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
 .btn-success {
-    height: 40x;
+    margin-top: -10px;
     width: 140px;
     color: white;
-
 }
 
 .btn-filter {

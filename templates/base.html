@@ -64,6 +64,23 @@
     </div>
   </nav>
 
+  <div id="sidebar-container">
+    <div class="sidebar">
+      <a href="{% url 'home' %}" class="custom-link">Página Inicial</a>
+      <a href="{% url 'eventos:todos_eventos' %}" class="custom-link">Todos os Eventos</a>
+      <a href="{% url 'conta' %}" class="custom-link">Minha Conta</a>
+    {% if user.is_authenticated %}
+    {% if perms.eventos.view_evento %}
+      <a href="{% url 'eventos:minhasinscricoes' %}" class="custom-link">Minhas Inscrições</a>
+    {% endif %}
+    {% if perms.eventos.add_evento %}
+      <a href="{% url 'eventos:meuseventos' %}" class="custom-link">Meus Eventos</a>
+    {% endif %}
+      <a href="{% url 'logout' %}" class="custom-link">Sair</a>
+    {% endif %}
+    </div>
+  </div>
+
   <section class="home-section">
     <div class="page-topo" id="page-topo">
       <h1 class="main-title" id="page-topo-title"></h1>
@@ -92,10 +109,13 @@
     var pageTitle = document.title;
     var bannerTitle = document.getElementById("page-topo-title");
     bannerTitle.textContent = pageTitle;
-  </script>
-  <script>
+
     $(document).ready(function(){
       $('.dropdown-toggle').dropdown();
+
+      $('.navbar-toggler').click(function(){
+        $('#sidebar-container').toggleClass('show-sidebar');
+      });
     });
   </script>
 </body>

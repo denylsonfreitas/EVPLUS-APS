@@ -91,3 +91,24 @@
   --dark-color: #0b2545;
   background-color: var(--dark-color);
 }
+
+.sidebar {
+  display: none;
+  justify-content: center;
+  background-color: var(--dark-color);
+}
+
+#sidebar-container.show-sidebar .sidebar {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  #sidebar-container.show-sidebar .sidebar {
+    display: flex;
+  }
+}
+
+.custom-link {
+  color: white;
+  margin-right: 7px;
+}

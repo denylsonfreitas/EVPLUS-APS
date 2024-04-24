@@ -73,7 +73,8 @@
             <h4>Inscritos no Evento</h4>
             <ul>
                 {% for cliente in evento.clients.all %}
-                    <p>{{ cliente.username }}</p>
+                    <p>{{ cliente.username }} - {{ cliente.email }}</p>
+                    
                 {% empty %}
                     <p>Não há inscritos neste evento ainda.</p>
                 {% endfor %}

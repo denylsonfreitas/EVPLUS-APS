@@ -34,6 +34,13 @@
           <li class="nav-item">
             <a class="nav-link mx-2" href="{% url 'eventos:todos_eventos' %}">Todos os Eventos</a>
           </li>
+          {% if user.is_authenticated %}
+          {% if perms.eventos.add_evento %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'eventos:eventos' %}">Criar Evento</a>
+          </li>
+          {% endif %}
+          {% endif %}
         </ul>
         <ul class="navbar-nav ml-auto" style="margin-right: 205px;">
           <li class="nav-item dropdown">

@@ -61,7 +61,7 @@
                                                 {% if perms.eventos.add_inscricao %}
                                                     {% if request.user not in evento.clients.all %}
                                                         {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
-                                                            <span class="btn btn-secondary">Vagas Esgotadas</span>
+                                                            <span class="btn btn-secondary" style="margin-top: -10px;">Vagas Esgotadas</span>
                                                         {% else %}
                                                             <a href="#" class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</a>
                                                         {% endif %}
@@ -94,7 +94,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" id="confirmarBtn">Confirmar</button>
+                    <button type="button" class="btn btn-success" id="confirmarBtn" style="margin-top: 4px;">Confirmar</button>
                 </div>
             </div>
         </div>

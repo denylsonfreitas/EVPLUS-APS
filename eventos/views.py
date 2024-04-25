@@ -7,6 +7,7 @@ from django.http import HttpResponse, FileResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
+from django.utils import timezone
 
 def erro(request):
     exibir_sidebar = True
@@ -27,12 +28,27 @@ def eventos(request):
             return redirect('eventos:meuseventos')
         else:
             return render(request, 'criarEvento.html', {'form': form})
+
+def finalizarEventosVencidos():
+    eventos_vencidos = Evento.objects.filter(finalizado=False, date__lt=timezone.now())
+    for evento in eventos_vencidos:
+        evento.finalizado = True
+        evento.save()
         
 @login_required
 @permission_required('eventos.add_evento', raise_exception=True)
 def listarEventos(request):
+    finalizarEventosVencidos()
     eventos_ativos = Evento.objects.filter(user=request.user, finalizado=False)
     eventos_finalizados = Evento.objects.filter(user=request.user, finalizado=True)
+    
+    for evento in eventos_ativos:
+        if len(evento.name) > 15:
+            evento.name = evento.name[:15] + '...'        
+    for evento in eventos_finalizados:
+        if len(evento.name) > 15:
+            evento.name = evento.name[:15] + '...'
+    
     return render(request, 'meusEventos.html', {'eventos': eventos_ativos, 'finalizarEvento': eventos_finalizados})
 
 @permission_required('eventos.change_evento', login_url='/auth/login/')
@@ -71,6 +87,7 @@ def detalhesEvento(request, id):
     return render(request, 'visualizarEvento.html', {'evento': evento, 'comentarios': comentarios, 'media_notas': media_notas})
 
 def listarTodosEventos(request):
+    finalizarEventosVencidos()
     categoria = request.GET.get('categoria')
     nome = request.GET.get('nome')
     
@@ -104,6 +121,7 @@ def finalizarEvento(request, id):
 
 @login_required
 def listarEventosInscritos(request):
+    finalizarEventosVencidos()
     eventos = Evento.objects.filter(clients=request.user, finalizado=False)
     finalizarEvento = Evento.objects.filter(clients=request.user, finalizado=True)
     
@@ -111,6 +129,13 @@ def listarEventosInscritos(request):
     for evento in finalizarEvento:
         certificados = Certificado.objects.filter(evento=evento, participante=request.user)
         eventos_e_certificados[evento] = certificados
+        
+    for evento in eventos:
+        if len(evento.name) > 15:
+            evento.name = evento.name[:15] + '...' 
+    for evento in finalizarEvento:
+        if len(evento.name) > 15:
+            evento.name = evento.name[:15] + '...' 
     
     return render(request, 'minhasInscricoes.html', {'eventos': eventos, 'finalizarEvento': finalizarEvento, 'eventos_e_certificados': eventos_e_certificados})
 

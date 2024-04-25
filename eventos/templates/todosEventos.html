@@ -77,7 +77,7 @@
                             {% if perms.eventos.add_inscricao %}
                                 {% if request.user not in evento.clients.all %}
                                     {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
-                                        <span class="btn btn-secondary" style="margin-top: -10px;">Vagas Esgotadas</span>
+                                        <span class="btn btn-secondary" style="margin-top: -10px; width: 119px;">Esgotado</span>
                                     {% else %}
                                         <a href="#" class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</a>
                                     {% endif %}

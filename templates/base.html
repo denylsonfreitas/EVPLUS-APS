@@ -29,9 +29,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'home' %}">Página Inicial</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link mx-2" href="{% url 'eventos:todos_eventos' %}">Todos os Eventos</a>
           </li>
           {% if user.is_authenticated %}
@@ -73,7 +70,6 @@
 
   <div id="sidebar-container">
     <div class="sidebar">
-      <a href="{% url 'home' %}" class="custom-link">Página Inicial</a>
       <a href="{% url 'eventos:todos_eventos' %}" class="custom-link">Todos os Eventos</a>
       <a href="{% url 'conta' %}" class="custom-link">Minha Conta</a>
     {% if user.is_authenticated %}

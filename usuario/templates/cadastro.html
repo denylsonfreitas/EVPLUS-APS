@@ -10,7 +10,7 @@
 {% block 'dashboard' %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-top: -20px;">
                 <div class="card">
                     <div class="card-body">
                         {% if messages %}
@@ -40,11 +40,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="password1">Senha*</label>
-                                <input type="password" class="form-control" id="password1" name="password" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password1" name="password" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword1">Mostrar</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password2">Confirme a senha*</label>
-                                <input type="password" class="form-control" id="password2" name="confirm_password" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password2" name="confirm_password" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword2">Mostrar</button>
+                                    </div>
+                                </div>
                             </div>                            
                             <div class="form-group">
                                 <label class="form-group-nc">* Campos obrigatórios</label>
@@ -64,35 +74,22 @@
     <script src="{% static 'usuario/js/cadastro.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.querySelector('form');
+            const togglePassword1 = document.getElementById('togglePassword1');
+            const togglePassword2 = document.getElementById('togglePassword2');
+            const password1 = document.getElementById('password1');
+            const password2 = document.getElementById('password2');
     
-            form.addEventListener('submit', function (event) {
-                const password = document.getElementById('password1').value;
-                const existingError = document.querySelector('.alert-danger');
-                
-                if (existingError) {
-                    existingError.remove();
-                }
-    
-                if (!containsSpecialCharacter(password) || !containsNumber(password)) {
-                    event.preventDefault();
-                    const errorElement = document.createElement('div');
-                    errorElement.classList.add('alert', 'alert-danger');
-                    errorElement.textContent = 'A senha deve conter pelo menos um caractere especial e um número.';
-                    form.prepend(errorElement);
-                }
+            togglePassword1.addEventListener('click', function () {
+                const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+                password1.setAttribute('type', type);
+                this.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
             });
     
-            function containsSpecialCharacter(str) {
-                const specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-                return specialCharacters.test(str);
-            }
-    
-            function containsNumber(str) {
-                const numbers = /\d/;
-                return numbers.test(str);
-            }
+            togglePassword2.addEventListener('click', function () {
+                const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+                password2.setAttribute('type', type);
+                this.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
+            });
         });
     </script>
-    
 {% endblock %}

@@ -40,7 +40,11 @@
                     {% for evento in eventos %}
                         <div class="col-md-4">
                             <div class="evento-card">
-                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% if evento.banner %}
+                                    <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% else %}
+                                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="evento-thumbnail">
+                                {% endif %}
                                 <div class="evento-info">
                                     <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
@@ -62,12 +66,16 @@
                     {% for evento, certificados in eventos_e_certificados.items %}
                         <div class="col-md-4">
                             <div class="evento-card">
-                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% if evento.banner %}
+                                    <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% else %}
+                                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="evento-thumbnail">
+                                {% endif %}
                                 <div class="evento-info">
                                     <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if certificados %}
-                                        <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">
+                                        <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success" style="width: 150px;">
                                             <i class="bx bxs-download"></i> Certificado
                                         </a>
                                     {% endif %}

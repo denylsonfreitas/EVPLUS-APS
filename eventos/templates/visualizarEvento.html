@@ -61,6 +61,15 @@
                         {% endif %}
                     {% endif %}
                 {% endif %}
+                {% if perms.eventos.change_evento and request.user == evento.user %}
+                    <div class="text-center mt-4">
+                        {% if not evento.finalizado %}
+                        <a href="{% url 'eventos:editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
+                        <a href="#" onclick="confirmarFinalizar('{{ evento.id }}')" class="btn btn-success">Finalizar</a>
+                        <a href="#" onclick="confirmarCancelar('{{ evento.id }}')" class="btn btn-danger">Cancelar</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -165,6 +174,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         var eventoIdParaInscricao;
+        var eventoIdParaCancelar;
+        var eventoIdParaFinalizar;
 
         function confirmarInscricao(eventoId) {
             eventoIdParaInscricao = eventoId;
@@ -172,6 +183,24 @@
             $('#confirmarModal').modal('show');
             $('#confirmarBtn').off('click').on('click', function () {
                 window.location.href = "{% url 'eventos:inscricao_evento' evento_id=0 %}".replace('0', eventoIdParaInscricao);
+            });
+        }
+
+        function confirmarCancelar(eventoId) {
+            eventoIdParaCancelar = eventoId;
+            $('#confirmarModalLabel').text('Cancelar Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:cancelar_evento' id=0 %}".replace('0', eventoIdParaCancelar);
+            });
+        }
+
+        function confirmarFinalizar(eventoId) {
+            eventoIdParaFinalizar = eventoId;
+            $('#confirmarModalLabel').text('Finalizar Evento');
+            $('#confirmarModal').modal('show');
+            $('#confirmarBtn').off('click').on('click', function () {
+                window.location.href = "{% url 'eventos:finalizar_evento' id=0 %}".replace('0', eventoIdParaFinalizar);
             });
         }
     </script>

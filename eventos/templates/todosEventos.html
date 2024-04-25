@@ -68,7 +68,7 @@
                         {% if evento.banner %}
                             <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
                         {% else %}
-                            <div class="evento-thumbnail" style="background-color: #ccc;"></div>
+                            <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="evento-thumbnail">
                         {% endif %}
                         <div class="evento-info">
                             <h4>{{ evento.name }}</h4>

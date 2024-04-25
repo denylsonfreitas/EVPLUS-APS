@@ -38,7 +38,11 @@
                     {% for evento in eventos %}
                         <div class="col-md-4">
                             <div class="evento-card">
-                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% if evento.banner %}
+                                    <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% else %}
+                                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="evento-thumbnail">
+                                {% endif %}
                                 <div class="evento-info">
                                     <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
@@ -92,7 +96,11 @@
                     {% for evento in finalizarEvento %}
                         <div class="col-md-4">
                             <div class="evento-card">
-                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% if evento.banner %}
+                                    <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                {% else %}
+                                    <img src="{% static 'images/placeholder10.jpg' %}" alt="Banner do Evento" class="evento-thumbnail">
+                                {% endif %}
                                 <div class="evento-info">
                                     <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>

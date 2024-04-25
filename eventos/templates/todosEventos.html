@@ -3,6 +3,29 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/todosEventos.css' %}">
+    <style>
+        .evento-card {
+            display: inline-block;
+            width: 263px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .evento-thumbnail {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+        .evento-info {
+            padding: 10px;
+        }
+        .col-md-4 {
+            margin-right: -90px;
+            margin-left: -10px;
+        }
+    </style>
 {% endblock %}
 
 {% block 'title' %}Todos os Eventos{% endblock %}
@@ -38,44 +61,32 @@
                 </form>
             </div>
         </div>
-        <div class="row" style="margin-bottom: 300px;">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Descrição</th>
-                                        <th>Opções</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for evento in eventos %}
-                                        <tr>
-                                            <td>{{ evento.name }}</td>
-                                            <td>{{ evento.description }}</td>
-                                            <td>
-                                                <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
-                                                {% if perms.eventos.add_inscricao %}
-                                                    {% if request.user not in evento.clients.all %}
-                                                        {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
-                                                            <span class="btn btn-secondary" style="margin-top: -10px;">Vagas Esgotadas</span>
-                                                        {% else %}
-                                                            <a href="#" class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</a>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+        <div class="row" style="margin-bottom: 200px;">
+            {% for evento in eventos %}
+                <div class="col-md-4">
+                    <div class="evento-card">
+                        {% if evento.banner %}
+                            <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                        {% else %}
+                            <div class="evento-thumbnail" style="background-color: #ccc;"></div>
+                        {% endif %}
+                        <div class="evento-info">
+                            <h4>{{ evento.name }}</h4>
+                            <p>{{ evento.description }}</p>
+                            <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-primary">Detalhes</a>
+                            {% if perms.eventos.add_inscricao %}
+                                {% if request.user not in evento.clients.all %}
+                                    {% if evento.limite_inscricoes is not None and evento.clients.count >= evento.limite_inscricoes %}
+                                        <span class="btn btn-secondary" style="margin-top: -10px;">Vagas Esgotadas</span>
+                                    {% else %}
+                                        <a href="#" class="btn btn-success" onclick="confirmarInscricao('{{ evento.id }}')">Inscrever-se</a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

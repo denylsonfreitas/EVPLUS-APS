@@ -1,13 +1,13 @@
 .btn-primary {
-    width: 140px;
+    width: 117px;
     background-color: var(--dark-color);
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
 .btn-success {
+    width: 117px;
     margin-top: -10px;
-    width: 140px;
     color: white;
 }
 

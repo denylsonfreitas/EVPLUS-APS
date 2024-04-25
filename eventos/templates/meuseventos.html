@@ -3,7 +3,28 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
-
+    <style>
+        .evento-card {
+            display: inline-block;
+            width: 350px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .evento-thumbnail {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+        .evento-info {
+            padding: 10px;
+        }
+        .col-md-4 {
+            margin-left: -10px;
+        }
+    </style>
 {% endblock %}
 
 {% block 'title' %}Meus Eventos{% endblock %}
@@ -13,31 +34,24 @@
         <div class="row">
             <div class="col-md-12">
                 <h5>Eventos Ativos</h5>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Data</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for evento in eventos %}
-                            <tr>
-                                <td>{{ evento.name }}</td>
-                                <td>{{ evento.date }}</td>
-                                <td>
+                <div class="row">
+                    {% for evento in eventos %}
+                        <div class="col-md-4">
+                            <div class="evento-card">
+                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                <div class="evento-info">
+                                    <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if perms.eventos.change_evento %}
                                         <a href="{% url 'eventos:editar_evento' evento.id %}" class="btn btn-warning">Editar</a>
-                                        <a href="#" onclick="confirmarFinalizar('{{ evento.id }}')" class="btn btn-success">Finalizar Evento</a>
-                                        <a href="#" onclick="confirmarCancelar('{{ evento.id }}')" class="btn btn-danger">Cancelar Evento</a>
+                                        <a href="#" onclick="confirmarFinalizar('{{ evento.id }}')" class="btn btn-success">Finalizar</a>
+                                        <a href="#" onclick="confirmarCancelar('{{ evento.id }}')" class="btn btn-danger">Cancelar</a>
                                     {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
@@ -74,30 +88,23 @@
         <div class="row">
             <div class="col-md-12">
                 <h5>Eventos Finalizados</h5>
-                <table class="table" style="margin-bottom: 100px;">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Data</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for evento in finalizarEvento %}
-                            <tr>
-                                <td>{{ evento.name }}</td>
-                                <td>{{ evento.date }}</td>
-                                <td>
+                <div class="row">
+                    {% for evento in finalizarEvento %}
+                        <div class="col-md-4">
+                            <div class="evento-card">
+                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                <div class="evento-info">
+                                    <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if request.user == evento.user %}
-                                    <a href="{% url 'eventos:enviar_certificado' evento.id %}" class="btn btn-success">Enviar Certificado</a>
+                                        <a href="{% url 'eventos:enviar_certificado' evento.id %}" class="btn btn-success" style="width: 159px;">Enviar Certificados</a>
                                     {% endif %}
                                     <a href="#" onclick="confirmarApagar('{{ evento.id }}')" class="btn btn-danger">Apagar</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

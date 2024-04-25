@@ -4,6 +4,29 @@
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'eventos/css/meuseventos.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .evento-card {
+            display: inline-block;
+            width: 263px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .evento-thumbnail {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+        }
+        .evento-info {
+            padding: 10px;
+        }
+        .col-md-4 {
+            margin-right: -90px;
+            margin-left: -10px;
+        }
+    </style>
 {% endblock %}
 
 {% block 'title' %}Minhas Inscrições{% endblock %}
@@ -13,20 +36,13 @@
         <div class="row">
             <div class="col-md-12">
                 <h5>Eventos Ativos</h5>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Data</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for evento in eventos %}
-                            <tr>
-                                <td>{{ evento.name }}</td>
-                                <td>{{ evento.date }}</td>
-                                <td>
+                <div class="row">
+                    {% for evento in eventos %}
+                        <div class="col-md-4">
+                            <div class="evento-card">
+                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                <div class="evento-info">
+                                    <h4>{{ evento.name }}</h4>
                                     <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
                                     {% if perms.eventos.view_evento %}
                                         {% if request.user not in evento.clients.all %}
@@ -35,38 +51,31 @@
                                             <a href="#" onclick="confirmarCancelar('{{ evento.id }}')" class="btn btn-danger">Cancelar Inscrição</a>
                                         {% endif %}
                                     {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
                 <h5>Eventos Finalizados</h5>
-                <table class="table" style="margin-bottom: 200px;">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Data</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for evento, certificados in eventos_e_certificados.items %}
-                        <tr>
-                            <td>{{ evento.name }}</td>
-                            <td>{{ evento.date }}</td>
-                            <td>
-                                <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
-                                {% if certificados %}
-                                <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">
-                                    <i class="bx bxs-download"></i> Certificado
-                                </a>
-                                {% endif %}
-                            </td>
-                        </tr>
+                <div class="row" style="margin-bottom: 200px;">
+                    {% for evento, certificados in eventos_e_certificados.items %}
+                        <div class="col-md-4">
+                            <div class="evento-card">
+                                <div class="evento-thumbnail" style="background-image: url('{{ evento.banner.url }}')"></div>
+                                <div class="evento-info">
+                                    <h4>{{ evento.name }}</h4>
+                                    <a href="{% url 'eventos:detalhes_evento' evento.id %}" class="btn btn-info">Detalhes</a>
+                                    {% if certificados %}
+                                        <a href="{% url 'eventos:download_certificado' evento.id %}" class="btn btn-success">
+                                            <i class="bx bxs-download"></i> Certificado
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     </div>

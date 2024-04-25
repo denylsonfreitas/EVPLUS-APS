@@ -82,6 +82,8 @@ def listarTodosEventos(request):
         eventosDisponiveis = eventosDisponiveis.filter(name__icontains=nome)
     
     for evento in eventosDisponiveis:
+        if len(evento.name) > 15:
+            evento.name = evento.name[:15] + '...'
         if len(evento.description) > 50:
             evento.description = evento.description[:50] + '...'
     
